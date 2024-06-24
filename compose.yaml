@@ -1,0 +1,16 @@
+name: balancer
+
+services:
+  api:
+    build: ../api
+    image: jesusgraterol/balancer-api:latest
+    ports:
+      - 5075:5075
+    environment:
+      NODE_ENV: "development"
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+        max-file: "10"
+        compress: "true"
