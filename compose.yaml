@@ -1,6 +1,8 @@
 name: balancer
-
 services:
+  #################################################################################################
+  #                                              API                                              #
+  #################################################################################################
   api:
     build: ../api
     image: jesusgraterol/balancer-api:latest
@@ -14,3 +16,28 @@ services:
         max-size: 10m
         max-file: "10"
         compress: "true"
+
+
+
+  #################################################################################################
+  #                                              GUI                                              #
+  #################################################################################################
+  gui:
+    build:
+      context: ../gui
+      args:
+        NODE_ENV: "development"
+    image: jesusgraterol/balancer-gui:latest
+    ports:
+      - 8090:8090
+    environment:
+      NODE_ENV: "development"
+    depends_on:
+      - api
+    logging:
+      driver: local
+      options:
+        max-size: 10m
+        max-file: "10"
+        compress: "true"
+  
