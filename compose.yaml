@@ -1,15 +1,25 @@
 name: balancer
+
+###################################################################################################
+#                                             SERVICES                                            #
+###################################################################################################
 services:
+
   #################################################################################################
   #                                              API                                              #
   #################################################################################################
   api:
+    container_name: balancer-api
     build: ../api
     image: jesusgraterol/balancer-api:latest
     ports:
       - 5075:5075
     environment:
       NODE_ENV: "development"
+      testMode: "false"
+      restoreMode: "false"
+      serverPort: "5075"
+    profiles: [platform, backend]
     logging:
       driver: local
       options:
@@ -19,10 +29,13 @@ services:
 
 
 
+
+
   #################################################################################################
   #                                              GUI                                              #
   #################################################################################################
   gui:
+    container_name: balancer-gui
     build:
       context: ../gui
       args:
@@ -34,6 +47,7 @@ services:
       NODE_ENV: "development"
     depends_on:
       - api
+    profiles: [platform]
     logging:
       driver: local
       options:
@@ -41,3 +55,13 @@ services:
         max-file: "10"
         compress: "true"
   
+
+
+
+
+###################################################################################################
+#                                             VOLUMES                                             #
+###################################################################################################
+volumes:
+    pgdata:
+    pgdata-management:
