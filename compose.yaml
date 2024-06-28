@@ -16,7 +16,7 @@ services:
       - 5075:5075
     environment:
       NODE_ENV: "development"
-      testMode: "false"
+      testMode: "true"
       restoreMode: "false"
       serverPort: "5075"
     profiles: [platform, backend]
