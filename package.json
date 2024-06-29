@@ -1,6 +1,6 @@
 {
   "name": "cli",
-  "description": "Balancer CLI is a command-line interface responsible for managing the project's infrastructure and internal actions like running tests, database backup/restoration, and interacting with the production server through the SSH Protocol.",
+  "description": "The CLI is a robust command-line interface designed to streamline the management of Balancer's infrastructure and internal operations.",
   "private": false,
   "version": "1.0.0",
   "type": "module",

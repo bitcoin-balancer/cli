@@ -1,6 +1,20 @@
 # Balancer CLI
 
-Balancer CLI is a command-line interface responsible for managing the project's infrastructure and internal actions like running tests, database backup/restoration, and interacting with the production server through the SSH Protocol.
+The CLI is a robust command-line interface designed to streamline the management of Balancer's infrastructure and internal operations.  It empowers you to:
+
+* **Automate Infrastructure Tasks:** effortlessly manage the project's infrastructure, including provisioning, scaling, and monitoring
+* **Execute Development Actions:**  run tests, deploy updates, and manage code dependencies with ease
+* **Database Administration:**  back up, restore, and maintain your database efficiently
+* **Secure Remote Access:** interact with the production server through secure SSH connections
+* **And more!**
+
+With its intuitive syntax and comprehensive functionality, the Balancer CLI simplifies complex tasks, saves valuable time, and ensures consistent project management practices. 
+
+
+
+
+
+<br/>
 
 ## Requirements
 
