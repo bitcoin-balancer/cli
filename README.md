@@ -8,7 +8,23 @@ The CLI is a robust command-line interface designed to streamline the management
 * **Secure Remote Access:** interact with the production server through secure SSH connections
 * **And more!**
 
-With its intuitive syntax and comprehensive functionality, the Balancer CLI simplifies complex tasks, saves valuable time, and ensures consistent project management practices. 
+With its intuitive syntax and comprehensive functionality, the Balancer CLI simplifies complex tasks, saves valuable time, and ensures consistent project management practices.
+
+
+
+
+
+<br/>
+
+## Guides
+
+- [CLI Configuration](./docs/CLI_CONFIG.md)
+
+- [Environment Variables](./docs/ENV_VARS.md)
+
+- [Telegram Integration (Optional)](./docs/TELEGRAM.md)
+
+- [Cloudflare Tunnel Integration (Optional)](./docs/CLOUDFLARE_TUNNEL.md)
 
 
 
@@ -362,6 +378,16 @@ npm start
 
 <br/>
 
+## @TODO
+
+- [ ] ...
+
+
+
+
+
+<br/>
+
 ## Run the CLI's Tests
 
 ```bash
@@ -378,27 +404,6 @@ npm run test:unit
 
 <br/>
 
-## @TODO
-
-- [ ] ...
-
-
-
-
-
-<br/>
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
-
-
-
-
-<br/>
-
-## Acknowledgments
-
-- ...
