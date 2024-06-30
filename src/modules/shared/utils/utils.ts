@@ -5,7 +5,6 @@ import { PackageFileSchema, IPackageFile, IDecodedMenuAction } from './types.js'
  *                                           FS HELPERS                                           *
  ************************************************************************************************ */
 
-
 /**
  * Retrieves the contents from the package.json file.
  * @returns IPackageFile
@@ -22,8 +21,8 @@ const readPackageFile = (): IPackageFile => PackageFileSchema.parse(readJSONFile
 
 /**
  * Decodes a chosen menu action by splitting it into an id and variation. For example:
- * decodeMenuAction('up') -> { id: 'up', variation: '' }
- * decodeMenuAction('up:test-mode') -> { id: 'up', variation: 'test-mode' }
+ * - decodeMenuAction('up') -> { id: 'up' }
+ * - decodeMenuAction('up:test-mode') -> { id: 'up', variation: 'test-mode' }
  * @param action
  * @returns IDecodedMenuAction
  */
@@ -34,6 +33,8 @@ const decodeMenuAction = (action: string): IDecodedMenuAction => {
   }
   return { id: action };
 };
+
+
 
 
 

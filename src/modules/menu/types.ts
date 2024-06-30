@@ -1,19 +1,36 @@
-
+import { Separator } from '@inquirer/prompts';
 
 /* ************************************************************************************************
  *                                             TYPES                                              *
  ************************************************************************************************ */
 
-type IActionID =
-  'connect' | 'landscape-sysinfo' | 'top' | 'copy-ssh-public-key' | 'reboot' | 'shutdown' |
+/**
+ * Action Menu Item
+ * ...
+ */
+type IActionMenuItem = {
+  // the action(:variation)? that will be executed when chosen.
+  value: string;
 
+  // a short description of what the action does
+  description: string;
+};
 
-  'up' | 'up:test-mode' | 'up:restore-mode' |
+/**
+ * Category Menu Item
+ * ...
+ */
+type ICategoryMenuItem = {
+  // the name of the actions container
+  name: string;
 
-  'build' | 'build-up' | 'build-up:test-mode' | 'build-up:restore-mode' |
+  // a short description of category's contents
+  description: string;
 
+  // the list of actions in the category
+  value: (IActionMenuItem | Separator)[]
+};
 
-  'generate-env-vars' | 'deploy-env-vars';
 
 
 
@@ -22,5 +39,6 @@ type IActionID =
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
-  type IActionID,
+  type IActionMenuItem,
+  type ICategoryMenuItem,
 };

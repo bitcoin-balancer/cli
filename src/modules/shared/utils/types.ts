@@ -32,14 +32,13 @@ type IPackageFile = z.infer<typeof PackageFileSchema>;
  * The menu displays encoded actions to simplify the choosing process. The actions need to be
  * decoded into id and variation so they can be properly interacted with.
  */
-const DecodedMenuSchema = z.object({
+type IDecodedMenuAction = {
   // the id of the action that will be executed
-  id: z.string(),
+  id: string,
 
   // optional variation of a action
-  variation: z.optional(z.string()),
-});
-type IDecodedMenuAction = z.infer<typeof DecodedMenuSchema>;
+  variation?: string,
+};
 
 
 
@@ -52,6 +51,5 @@ export {
   // types
   PackageFileSchema,
   type IPackageFile,
-  DecodedMenuSchema,
   type IDecodedMenuAction,
 };
