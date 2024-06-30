@@ -18,13 +18,13 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 ## Guides
 
-- [CLI Configuration](./docs/CLI_CONFIG.md)
+- [Environment Variables](./docs/environment-variables/index.md)
 
-- [Environment Variables](./docs/ENV_VARS.md)
+- [Remote Host Configuration (Optional)](./docs/remote-host/index.md)
 
-- [Telegram Integration (Optional)](./docs/TELEGRAM.md)
+- [Telegram Integration (Optional)](./docs/telegram/index.md)
 
-- [Cloudflare Tunnel Integration (Optional)](./docs/CLOUDFLARE_TUNNEL.md)
+- [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
 
 
 
@@ -62,11 +62,12 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 # download the source code
 git clone git@github.com:bitcoin-balancer/cli.git
 
-# install dependencies
+# install the dependencies
 cd ./cli
 npm install
 
-# start the CLI
+# build & start the CLI
+npm run build
 npm start
 ```
 
