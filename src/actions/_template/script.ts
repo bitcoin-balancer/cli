@@ -1,9 +1,9 @@
 
 
 /**
- * Up
+ * Template
  * ...
  */
 export default async (variation: string | undefined) => {
-  console.log(`In up:${variation}`);
+  console.log(`In template:${variation}`);
 };

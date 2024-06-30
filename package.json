@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "ts-lib-builder --tsconfig=tsconfig.build.json",
-    "build-start": "ts-lib-builder --tsconfig=tsconfig.build.json && node dist/index.js",
+    "build-start": "npm run build && node dist/index.js",
     "test": "echo \"Error: tests are executed with  npm run test:(integration|unit|bench)\" && exit 1",
     "test:e2e": "vitest run --config=vitest.test-e2e.config.ts",
     "test:integration": "vitest run --config vitest.test-integration.config.ts",

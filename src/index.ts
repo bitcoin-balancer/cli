@@ -11,10 +11,10 @@ import { displayMenu } from './modules/menu/menu.js';
     console.log(`Balancer CLI v${packageFile.version}\n`);
 
     // display the actions menu
-    const chosenAction = await displayMenu();
+    const encodedAction = await displayMenu();
 
     // execute the action
-    const { id, variation } = decodeMenuAction(chosenAction);
+    const { id, variation } = decodeMenuAction(encodedAction);
     const action = await import(`./actions/${id}/index.js`);
     await action.default(variation);
 

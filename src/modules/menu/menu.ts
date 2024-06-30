@@ -93,7 +93,7 @@ const MENU = [
  ************************************************************************************************ */
 
 /**
- * Displays the CLI menu and returns the chosen action.
+ * Displays the CLI menu and returns the chosen, encoded action.
  * @returns Promise<string>
  */
 const displayMenu = async (): Promise<string> => {
