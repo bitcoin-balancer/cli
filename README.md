@@ -381,6 +381,7 @@ npm start
 
 ## Docker Images
 
+- [postgres](https://hub.docker.com/_/postgres)
 - [jesusgraterol/balancer-api](https://hub.docker.com/r/jesusgraterol/balancer-api)
 - [jesusgraterol/balancer-gui](https://hub.docker.com/r/jesusgraterol/balancer-gui)
 

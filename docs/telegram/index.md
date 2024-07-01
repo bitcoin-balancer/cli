@@ -60,7 +60,7 @@ Now that the bot and the group are up and running, the integration can be comple
 {
   "environment": {
     ...
-    "TELEGRAPH": {
+    "TELEGRAM": {
       "token": "<YOUR_TOKEN>",
       "chatID": <YOUR_CHAT_ID>
     },
@@ -68,7 +68,7 @@ Now that the bot and the group are up and running, the integration can be comple
   },
   "secrets": [
     ...
-    "TELEGRAPH"
+    "TELEGRAM"
     ...
   ]
 }
@@ -86,10 +86,10 @@ Even if you do not wish to make use of the Telegram Integration, the environment
 {
   "environment": {
     ...
-    "TELEGRAPH": "",
+    "TELEGRAM": "",
     ...
   },
-  "secrets": [
+  "TELEGRAM": [
     ...
   ]
 }
