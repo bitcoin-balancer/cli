@@ -38,8 +38,8 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 - UNIX-like OS
 - git ^v2.43.0
-- Node.js ^v22.2.0
-- npm ^v10.7.0
+- Node.js ^v22.3.0
+- npm ^v10.8.1
 - Docker ^v27.0.2
 - Docker Compose ^v2.28.1
 
