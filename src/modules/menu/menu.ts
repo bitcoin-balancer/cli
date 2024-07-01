@@ -70,15 +70,15 @@ const MENU = [
     ],
   },
   {
-    name: 'Environment Variables',
-    description: 'Generate and deploy environment variables as well as secrets',
+    name: 'Environment Variable Assets',
+    description: 'Generate and deploy environment variables and secrets',
     value: [
       {
-        value: 'generate-env-vars',
+        value: 'generate-envvar-assets',
         description: 'Generate the environment variable assets based on a source file',
       },
       {
-        value: 'deploy-env-vars',
+        value: 'deploy-envvar-assets',
         description: 'Deploy the environment variable assets to the remote host',
       },
     ],
