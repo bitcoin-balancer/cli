@@ -77,3 +77,20 @@ Now that the bot and the group are up and running, the integration can be comple
 The final step is to generate the new environment variable assets and ensure the `.env` file and the `secrets/` directory have been updated accordingly.
 
 The next time you run any of the `build-*` actions, the Balancer API will start making use of Telegram.
+
+### Important
+
+Even if you do not wish to make use of the Telegram Integration, the environment variable property must still be provided as an empty string (`""`):
+
+```json
+{
+  "environment": {
+    ...
+    "TELEGRAPH": "",
+    ...
+  },
+  "secrets": [
+    ...
+  ]
+}
+```
