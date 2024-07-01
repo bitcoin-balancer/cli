@@ -26,7 +26,11 @@ const SourceFileSchema = z.object({
 }).strict();
 type ISourceFile = z.infer<typeof SourceFileSchema>;
 
-
+// Key Value Type Helper
+type IKeyValObj = {
+  key: string;
+  value: string;
+};
 
 
 
@@ -36,4 +40,5 @@ type ISourceFile = z.infer<typeof SourceFileSchema>;
 export {
   SourceFileSchema,
   type ISourceFile,
+  type IKeyValObj,
 };

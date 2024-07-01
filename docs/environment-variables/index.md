@@ -11,6 +11,6 @@ To view the absolute path of a file or a directory, run:
 readlink -f source.json 
 # /home/jesusgraterol/Desktop/source.json
 
-readlink -f envars-mock
-# /home/jesusgraterol/Desktop/envars-mock
+readlink -f mock
+# /home/jesusgraterol/Desktop/mock
 ```
