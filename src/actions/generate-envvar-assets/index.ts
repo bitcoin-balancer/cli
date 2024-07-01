@@ -21,7 +21,7 @@ export default async () => {
   generate(srcPath, destPath);
 
   // print the receipt
-  console.log('\nSource File:');
+  console.log('\nInput:');
   console.log(srcPath);
   console.log('\nOutput:');
   console.log(destPath);

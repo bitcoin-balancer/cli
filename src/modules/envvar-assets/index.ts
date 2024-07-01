@@ -1,11 +1,17 @@
-import { copyFile, writeTextFile } from 'fs-utils-sync';
-import { readSourceFile } from './utils.js';
+import { readJSONFile, copyFile, writeTextFile } from 'fs-utils-sync';
 import { isSrcPathValid, isDestPathValid } from './validations.js';
-import { ISourceFile, IKeyValObj } from './types.js';
+import { SourceFileSchema, ISourceFile, IKeyValObj } from './types.js';
 
 /* ************************************************************************************************
- *                                         IMPLEMENTATION                                         *
+ *                                            HELPERS                                             *
  ************************************************************************************************ */
+
+/**
+ * Reads the source file and returns its parsed contents.
+ * @param src
+ * @returns ISourceFile
+ */
+const __readSourceFile = (src: string): ISourceFile => SourceFileSchema.parse(readJSONFile(src));
 
 /**
  * Processes a source file and generates the environment variables ready to be saved.
@@ -36,6 +42,14 @@ const __processSourceFile = (source: ISourceFile): { env: string, secrets: IKeyV
 };
 
 
+
+
+
+/* ************************************************************************************************
+ *                                         IMPLEMENTATION                                         *
+ ************************************************************************************************ */
+
+
 /**
  * Generates the environment variable assets based on a source file.
  * @param srcPath
@@ -43,7 +57,7 @@ const __processSourceFile = (source: ISourceFile): { env: string, secrets: IKeyV
  */
 const generate = (srcPath: string, destPath: string): void => {
   // read the source file
-  const source = readSourceFile(srcPath); console.log(source);
+  const source = __readSourceFile(srcPath);
 
   // process the file
   const { env, secrets } = __processSourceFile(source);
