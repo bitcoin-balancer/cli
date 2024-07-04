@@ -213,7 +213,10 @@ sudo netplan apply
 ip a
 ```
 
+<br/>
+
 ### Sources
 
 - [Setting a Static IP in Ubuntu – Linux IP Address Tutorial](https://www.freecodecamp.org/news/setting-a-static-ip-in-ubuntu-linux-ip-address-tutorial/)
 - [Netplan - gateway has been deprecated](https://askubuntu.com/questions/1410750/netplan-gateway-has-been-deprecated)
+- [Very long startup time on Ubuntu Server (network configuration)](https://askubuntu.com/questions/1321443/very-long-startup-time-on-ubuntu-server-network-configuration)
