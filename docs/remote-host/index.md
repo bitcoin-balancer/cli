@@ -89,7 +89,7 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
     # add your SSH private key to the ssh-agent
     ssh-add /home/<YOUR_USER>/.ssh/id_rsa
     ```
-
+    - **Note:** if you were already making use of the `ssh-agent`, you may need to delete (`ssh-add -d /home/<YOUR_USER>/.ssh/id_rsa`) and re-add the your identity. 
 
 ### Clean Up the (Remote Host)
 
