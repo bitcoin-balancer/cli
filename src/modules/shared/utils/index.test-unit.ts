@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { decodeMenuAction } from './utils.js';
+import { decodeMenuAction } from './index.js';
 
 
 /* ************************************************************************************************
