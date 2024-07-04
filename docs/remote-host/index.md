@@ -41,6 +41,8 @@ The schema of the configuration file is as follows:
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
 
 ## Connect the CLI to the Remote Host
 
@@ -76,6 +78,8 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
     sudo systemctl restart ssh
     ```
 
+<br/>
+
 ### Copy the SSH Public Key (Local Host)
 
 1. Start the CLI, run the `Host/ssh-copy-id` action and enter the password you set earlier on `root` when the prompt shows up
@@ -90,6 +94,8 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
     ssh-add /home/<YOUR_USER>/.ssh/id_rsa
     ```
     - **Note:** if you were already making use of the `ssh-agent`, you may need to delete (`ssh-add -d /home/<YOUR_USER>/.ssh/id_rsa`) and re-add the your identity. 
+
+<br/>
 
 ### Clean Up the (Remote Host)
 
@@ -111,13 +117,13 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
     sudo systemctl restart ssh
     ```
 
-
-
-
 <br/>
 
 **Important:** Make sure to use a strong password because whoever has it, can access and manage your remote host unless you disable the `PermitRootLogin yes` as instructed earlier.
 
+
+
+<br/>
 
 ### Sources
 
@@ -128,6 +134,8 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 
 
 
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
@@ -142,12 +150,16 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
 
 ## Install `nvm` on the Remote Host
 
 [Installing & Updating nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 
 
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
@@ -180,6 +192,7 @@ network:
   renderer: networkd
   ethernets:
     enp0s25: # the adapter shown in the first step
+      optional: true
       addresses:
         - 172.16.20.254/24 # the ip you wish to set
       nameservers:
