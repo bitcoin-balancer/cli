@@ -27,6 +27,24 @@ const PackageFileSchema = z.object({
 });
 type IPackageFile = z.infer<typeof PackageFileSchema>;
 
+
+
+/**
+ * Remote Host Config
+ * The configuration that will be used to connect to and interact with the remote host.
+ */
+const RemoteHostConfigSchema = z.object({
+  sshPrivateKey: z.string(),
+  server: z.object({
+    name: z.string(),
+    ip: z.string(),
+  }),
+  sourceCode: z.array(z.string()),
+});
+type IRemoteHostConfig = z.infer<typeof RemoteHostConfigSchema>;
+
+
+
 /**
  * Decoded Menu Action
  * The menu displays encoded actions to simplify the choosing process. The actions need to be
@@ -36,7 +54,7 @@ type IDecodedMenuAction = {
   // the id of the action that will be executed
   id: string,
 
-  // optional variation of a action
+  // optional variation of an action
   variation?: string,
 };
 
@@ -48,8 +66,9 @@ type IDecodedMenuAction = {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
-  // types
   PackageFileSchema,
   type IPackageFile,
+  RemoteHostConfigSchema,
+  type IRemoteHostConfig,
   type IDecodedMenuAction,
 };

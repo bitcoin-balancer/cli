@@ -1,5 +1,11 @@
 import { readJSONFile } from 'fs-utils-sync';
-import { PackageFileSchema, IPackageFile, IDecodedMenuAction } from './types.js';
+import {
+  PackageFileSchema,
+  IPackageFile,
+  IDecodedMenuAction,
+  IRemoteHostConfig,
+  RemoteHostConfigSchema,
+} from './types.js';
 
 /* ************************************************************************************************
  *                                           FS HELPERS                                           *
@@ -8,8 +14,20 @@ import { PackageFileSchema, IPackageFile, IDecodedMenuAction } from './types.js'
 /**
  * Retrieves the contents from the package.json file.
  * @returns IPackageFile
+ * @throws
+ * - if the file's schema is invalid or the file doesn't exist
  */
 const readPackageFile = (): IPackageFile => PackageFileSchema.parse(readJSONFile('package.json'));
+
+/**
+ * Retrieves the contents from the remoet-host.config.json file.
+ * @returns IRemoteHostConfig
+ * @throws
+ * - if the file's schema is invalid or the file doesn't exist
+ */
+const readRemoteHostConfigFile = (): IRemoteHostConfig => (
+  RemoteHostConfigSchema.parse(readJSONFile('remote-host.config.json'))
+);
 
 
 
@@ -44,6 +62,7 @@ const decodeMenuAction = (action: string): IDecodedMenuAction => {
 export {
   // fs helpers
   readPackageFile,
+  readRemoteHostConfigFile,
 
   // actions helpers
   decodeMenuAction,
