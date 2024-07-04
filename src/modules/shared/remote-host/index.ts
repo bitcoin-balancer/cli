@@ -6,7 +6,15 @@ import { IRemoteHost } from './types.js';
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
-const remoteHostFactory = (): IRemoteHost => {
+
+/**
+ * Generates an instance of the Remote Host.
+ * @returns Promise<IRemoteHost>
+ * @throws
+ * - if the configuration file doesn't exist or is invalid
+ * - if the remote host is not running or is unreachable
+ */
+const remoteHostFactory = async (): Promise<IRemoteHost> => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
@@ -38,7 +46,7 @@ const remoteHostFactory = (): IRemoteHost => {
    * Checks if the server is currently turned on and connected to the Internet.
    * @returns Promise<boolean>
    */
-  const isOnline = async (): Promise<boolean> => {
+  const __isOnline = async (): Promise<boolean> => {
     try {
       await execute('ping', ['-c', '1', '-w', '1', __config.server.ip], 'pipe');
       return true;
@@ -85,12 +93,26 @@ const remoteHostFactory = (): IRemoteHost => {
 
 
   /* **********************************************************************************************
+   *                                         HEALTH CHECK                                         *
+   ********************************************************************************************** */
+
+  /**
+   * It checks if the remote host is running and connected to the Internet.
+   * @throws
+   * - if the remote host is not running or is unreachable
+   */
+  if (!await __isOnline()) {
+    throw new Error('The remote host is not running or has no access to the Internet.');
+  }
+
+
+
+
+
+  /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
    ********************************************************************************************** */
   return Object.freeze({
-    // helpers
-    isOnline,
-
     // implementation
     connect,
     getLandscapeSysInfo,

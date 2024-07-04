@@ -6,12 +6,7 @@ import { remoteHostFactory } from '../../modules/shared/remote-host/index.js';
  */
 export default async () => {
   // instantiate the remote host
-  const host = remoteHostFactory();
-
-  // ensure the host is running and has internet
-  if (!await host.isOnline()) {
-    throw new Error('The remote host is not running or has no access to the Internet.');
-  }
+  const host = await remoteHostFactory();
 
   // perform the action
   const payload = await host.connect();
