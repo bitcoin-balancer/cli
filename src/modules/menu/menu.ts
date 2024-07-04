@@ -71,7 +71,7 @@ const MENU = [
   },
   {
     name: 'Environment Variable Assets',
-    description: 'Generate and deploy environment variables and secrets',
+    description: 'Generate and deploy environment variable assets',
     value: [
       {
         value: 'generate-envvar-assets',

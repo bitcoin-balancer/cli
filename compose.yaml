@@ -25,9 +25,9 @@ services:
       - 5432:5432
     healthcheck:
       test: [ "CMD", "pg_isready" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      interval: "10s"
+      timeout: "5s"
+      retries: "5"
     logging:
       driver: local
       options:
