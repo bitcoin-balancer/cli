@@ -59,7 +59,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
   /* **********************************************************************************************
-   *                                        IMPLEMENTATION                                        *
+   *                                         HOST ACTIONS                                         *
    ********************************************************************************************** */
 
   /**
@@ -88,7 +88,15 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     'inherit',
   );
 
-
+  /**
+   * Reboots the remote host immediately.
+   * @returns Promise<string | undefined>
+   */
+  const reboot = (): Promise<string | undefined> => execute(
+    'ssh',
+    __args([__address, 'reboot']),
+    'inherit',
+  );
 
 
 
@@ -113,10 +121,11 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    *                                         MODULE BUILD                                         *
    ********************************************************************************************** */
   return Object.freeze({
-    // implementation
+    // host actions
     connect,
     getLandscapeSysInfo,
     copySSHPublicKey,
+    reboot,
   });
 };
 
