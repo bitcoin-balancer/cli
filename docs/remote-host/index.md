@@ -124,6 +124,7 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 - [What is the password for `ssh root@localhost`?](https://askubuntu.com/questions/171521/what-is-the-password-for-ssh-rootlocalhost)
 - [SSH error: Permission denied, please try again](https://askubuntu.com/questions/315377/ssh-error-permission-denied-please-try-again)
 - [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [Git keeps asking me for my ssh key passphrase](https://stackoverflow.com/questions/10032461/git-keeps-asking-me-for-my-ssh-key-passphrase)
 
 
 
