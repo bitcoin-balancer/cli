@@ -144,7 +144,7 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 
 ## Install `nvm` on the Remote Host
 
-@TODO
+[Installing & Updating nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 
 
 <br/>
