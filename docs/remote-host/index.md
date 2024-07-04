@@ -44,66 +44,72 @@ The schema of the configuration file is as follows:
 
 ## Connect the CLI to the Remote Host
 
-### Set the Password for `root`
+### Set the Password for `root` (Remote Host)
 
 For Balancer CLI to interact with the remote host via SSH, a password for `root` must be set. Follow these steps from the **remote host**:
 
 1. Log in as `root` with:
-```bash
-sudo -s
-```
+    ```bash
+    sudo -s
+    ```
 
 2. Run the password utility program and enter a strong password:
-```bash
-passwd
-```
+    ```bash
+    passwd
+    ```
 
 3. Enable `root` login:
-```bash
-vim /etc/ssh/sshd_config
+    ```bash
+    vim /etc/ssh/sshd_config
 
-# look for the following block:
+    # look for the following block:
 
-# Authentication
-# ...
-#PermitRootLogin prohibit-password
-PermitRootLogin yes # <- enable this line temporarily
-# ...
-```
+    # Authentication
+    # ...
+    #PermitRootLogin prohibit-password
+    PermitRootLogin yes # <- enable this line temporarily
+    # ...
+    ```
 
 4. Restart the service
-```bash
-sudo systemctl restart ssh
-```
+    ```bash
+    sudo systemctl restart ssh
+    ```
 
-### Copy the SSH Public Key
+### Copy the SSH Public Key (Local Host)
 
 1. Start the CLI, run the `Host/ssh-copy-id` action and enter the password you set earlier on `root` when the prompt shows up
 
-2. The SSH Public Key is now saved in the remote host. However, since your SSH keyring has a passphrase (or it should!), it will ask you for it every time you want to execute a remote action. In order to avoid this practice, follow these steps:
+2. The SSH Public Key is now saved in the remote host. However, since your SSH keyring has a passphrase (or it should!), it will ask you for it every time you want to execute a remote action. In order to avoid this practice, you can make use of `ssh-agent`:
 
-    - @TODO
+    ```bash
+    # start the ssh-agent in the background
+    eval "$(ssh-agent -s)"
+
+    # add your SSH private key to the ssh-agent
+    ssh-add /home/<YOUR_USER>/.ssh/id_rsa
+    ```
 
 
-### Clean Up the Remote Host
+### Clean Up the (Remote Host)
 
 1. Now that the SSH Public Key has been installed on the remote, update the `sshd_config` to disallow password logins:
-```bash
-vim /etc/ssh/sshd_config
+    ```bash
+    vim /etc/ssh/sshd_config
 
-# go back to the authentication block:
+    # go back to the authentication block:
 
-# Authentication
-# ...
-PermitRootLogin prohibit-password # <- uncomment this line
-# PermitRootLogin yes <- this line is no longer needed
-# ...
-```
+    # Authentication
+    # ...
+    PermitRootLogin prohibit-password # <- uncomment this line
+    # PermitRootLogin yes <- this line is no longer needed
+    # ...
+    ```
 
 2. Restart the service so the changes are applied:
-```bash
-sudo systemctl restart ssh
-```
+    ```bash
+    sudo systemctl restart ssh
+    ```
 
 
 
@@ -117,7 +123,7 @@ sudo systemctl restart ssh
 
 - [What is the password for `ssh root@localhost`?](https://askubuntu.com/questions/171521/what-is-the-password-for-ssh-rootlocalhost)
 - [SSH error: Permission denied, please try again](https://askubuntu.com/questions/315377/ssh-error-permission-denied-please-try-again)
-
+- [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 
 
