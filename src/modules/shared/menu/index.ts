@@ -17,20 +17,16 @@ const MENU = [
         description: 'Execute the monitoring tool in the remote host',
       },
       {
-        value: 'top',
-        description: 'Execute the monitoring tool in the remote host',
-      },
-      {
-        value: 'copy-ssh-public-key',
-        description: 'Transfer the local SSH Public Key to the remote host',
-      },
-      {
         value: 'reboot',
         description: 'Trigger an immediate reboot in the remote host',
       },
       {
         value: 'shutdown',
         description: 'Trigger an immediate shutdown in the remote host',
+      },
+      {
+        value: 'ssh-copy-id',
+        description: 'Transfer the local SSH Public Key to the remote host',
       },
     ],
   },
