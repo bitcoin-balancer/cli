@@ -125,7 +125,18 @@ sudo systemctl restart ssh
 <br/>
 <br/>
 
-## Install Docker on the Remote Host
+## Install `Docker` on the Remote Host
+
+[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+
+
+
+<br/>
+<br/>
+<br/>
+
+## Install `nvm` on the Remote Host
 
 @TODO
 
@@ -134,7 +145,7 @@ sudo systemctl restart ssh
 <br/>
 <br/>
 
-## Setting a Static IP on the Remote Host
+## Setting a Static IP on the Remote Host (Optional)
 
 If your remote host is within your local network, setting a static IP Address will simplify your workflow significantly. The steps to do so are:
 
