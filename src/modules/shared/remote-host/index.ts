@@ -98,6 +98,18 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     'inherit',
   );
 
+  /**
+   * Shuts down the remote host immediately.
+   * @returns Promise<string | undefined>
+   */
+  const shutdown = (): Promise<string | undefined> => execute(
+    'ssh',
+    __args([__address, 'poweroff']),
+    'inherit',
+  );
+
+
+
 
 
   /* **********************************************************************************************
@@ -126,6 +138,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     getLandscapeSysInfo,
     copySSHPublicKey,
     reboot,
+    shutdown,
   });
 };
 

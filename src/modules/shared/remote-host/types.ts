@@ -14,6 +14,7 @@ type IRemoteHost = {
   getLandscapeSysInfo: () => Promise<string | undefined>;
   copySSHPublicKey: () => Promise<string | undefined>;
   reboot: () => Promise<string | undefined>;
+  shutdown: () => Promise<string | undefined>;
 };
 
 
