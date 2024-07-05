@@ -36,32 +36,28 @@ const MENU = [
     value: [
       {
         value: 'up',
-        description: '@TODO',
+        description: 'Creates and starts the containers',
       },
       {
         value: 'up:test-mode',
-        description: '@TODO',
+        description: 'Creates and starts the containers in TEST_MODE',
       },
       {
         value: 'up:restore-mode',
-        description: '@TODO',
+        description: 'Creates and starts the containers in RESTORE_MODE',
       },
       new Separator(),
       {
-        value: 'build',
-        description: '@TODO',
-      },
-      {
         value: 'build-up',
-        description: '@TODO',
+        description: 'Builds all the images and starts the containers',
       },
       {
         value: 'build-up:test-mode',
-        description: '@TODO',
+        description: 'Builds all the images and starts the containers in TEST_MODE',
       },
       {
         value: 'build-up:restore-mode',
-        description: '@TODO',
+        description: 'Builds all the images and starts the containers in RESTORE_MODE',
       },
     ],
   },

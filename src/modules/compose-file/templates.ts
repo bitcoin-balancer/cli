@@ -9,12 +9,13 @@
  * @returns string
  */
 const __generateLogging = (): string => {
-  let _ = '\t\tlogging:';
-  _ += '\t\tdriver: local';
-  _ += '\t\toptions:';
-  _ += '\t\t\tmax-size: "10m"';
-  _ += '\t\t\tmax-file: "10"';
-  _ += '\t\t\tcompress: "true"';
+  let _ = '';
+  _ += '    logging:\n';
+  _ += '      driver: local\n';
+  _ += '      options:\n';
+  _ += '        max-size: "10m"\n';
+  _ += '        max-file: "10"\n';
+  _ += '        compress: "true"';
   return _;
 };
 
@@ -31,26 +32,27 @@ const __generateLogging = (): string => {
  * @returns string
  */
 const generatePOSTGRESService = (): string => {
-  let _ = '\tpostgres:';
-  _ += '\t\tcontainer_name: balancer-postgres';
-  _ += '\t\timage: postgres:16.3-alpine3.20';
-  _ += '\t\trestart: always';
-  _ += '\t\tuser: postgres';
-  _ += '\t\tsecrets:';
-  _ += '\t\t\t- POSTGRES_PASSWORD_FILE';
-  _ += '\t\tenvironment:';
-  _ += '\t\t\t- POSTGRES_USER=${POSTGRES_USER}';
-  _ += '\t\t\t- POSTGRES_DB=${POSTGRES_DB}';
-  _ += '\t\t\t- POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}';
-  _ += '\t\tvolumes:';
-  _ += '\t\t\t- pgdata:/var/lib/postgresql/data';
-  _ += '\t\texpose:';
-  _ += '\t\t\t- 5432:5432';
-  _ += '\t\thealthcheck:';
-  _ += '\t\t\ttest: [ "CMD", "pg_isready" ]';
-  _ += '\t\t\tinterval: "10s"';
-  _ += '\t\t\ttimeout: "5s"';
-  _ += '\t\t\tretries: "5"';
+  let _ = '';
+  _ += '  postgres:\n';
+  _ += '    container_name: balancer-postgres\n';
+  _ += '    image: postgres:16.3-alpine3.20\n';
+  _ += '    restart: always\n';
+  _ += '    user: postgres\n';
+  _ += '    secrets:\n';
+  _ += '      - POSTGRES_PASSWORD_FILE\n';
+  _ += '    environment:\n';
+  _ += '      - POSTGRES_USER=${POSTGRES_USER}\n';
+  _ += '      - POSTGRES_DB=${POSTGRES_DB}\n';
+  _ += '      - POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}\n';
+  _ += '    volumes:\n';
+  _ += '      - pgdata:/var/lib/postgresql/data\n';
+  _ += '    expose:\n';
+  _ += '      - 5432:5432\n';
+  _ += '    healthcheck:\n';
+  _ += '      test: [ "CMD", "pg_isready" ]\n';
+  _ += '      interval: "10s"\n';
+  _ += '      timeout: "5s"\n';
+  _ += '      retries: "5"\n';
   _ += __generateLogging();
   return _;
 };
@@ -62,34 +64,35 @@ const generatePOSTGRESService = (): string => {
  * @returns string
  */
 const generateAPIService = (testMode: boolean, restoreMode: boolean): string => {
-  let _ = '\tapi:';
-  _ += '\t\tcontainer_name: balancer-api';
-  _ += '\t\tbuild:';
-  _ += '\t\t\tcontext: ../api';
-  _ += '\t\t\targs:';
-  _ += '\t\t\t\t- NODE_ENV=${NODE_ENV}';
-  _ += '\t\timage: jesusgraterol/balancer-api:latest';
-  _ += '\t\tports:';
-  _ += '\t\t\t- 5075:5075';
-  _ += '\t\tsecrets:';
-  _ += '\t\t\t- POSTGRES_PASSWORD_FILE';
-  _ += '\t\t\t- ROOT_ACCOUNT';
-  _ += '\t\t\t- TELEGRAM';
-  _ += '\t\tenvironment:';
-  _ += '\t\t\t- NODE_ENV=${NODE_ENV}';
-  _ += `\t\t\t- TEST_MODE=${testMode}`;
-  _ += `\t\t\t- RESTORE_MODE=${restoreMode}`;
-  _ += '\t\t\t- API_PORT=5075';
-  _ += '\t\t\t- POSTGRES_HOST=${POSTGRES_HOST}';
-  _ += '\t\t\t- POSTGRES_USER=${POSTGRES_USER}';
-  _ += '\t\t\t- POSTGRES_DB=${POSTGRES_DB}';
-  _ += '\t\t\t- POSTGRES_PORT=5432';
-  _ += '\t\t\t- POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}';
-  _ += '\t\t\t- ROOT_ACCOUNT=${ROOT_ACCOUNT}';
-  _ += '\t\t\t- TELEGRAM=${TELEGRAM}';
-  _ += '\t\tdepends_on:';
-  _ += '\t\t\tpostgres:';
-  _ += '\t\t\t\tcondition: service_healthy';
+  let _ = '';
+  _ += '  api:\n';
+  _ += '    container_name: balancer-api\n';
+  _ += '    build:\n';
+  _ += '      context: ../api\n';
+  _ += '      args:\n';
+  _ += '        - NODE_ENV=${NODE_ENV}\n';
+  _ += '    image: jesusgraterol/balancer-api:latest\n';
+  _ += '    ports:\n';
+  _ += '      - 5075:5075\n';
+  _ += '    secrets:\n';
+  _ += '      - POSTGRES_PASSWORD_FILE\n';
+  _ += '      - ROOT_ACCOUNT\n';
+  _ += '      - TELEGRAM\n';
+  _ += '    environment:\n';
+  _ += '      - NODE_ENV=${NODE_ENV}\n';
+  _ += `      - TEST_MODE=${testMode}\n`;
+  _ += `      - RESTORE_MODE=${restoreMode}\n`;
+  _ += '      - API_PORT=5075\n';
+  _ += '      - POSTGRES_HOST=${POSTGRES_HOST}\n';
+  _ += '      - POSTGRES_USER=${POSTGRES_USER}\n';
+  _ += '      - POSTGRES_DB=${POSTGRES_DB}\n';
+  _ += '      - POSTGRES_PORT=5432\n';
+  _ += '      - POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}\n';
+  _ += '      - ROOT_ACCOUNT=${ROOT_ACCOUNT}\n';
+  _ += '      - TELEGRAM=${TELEGRAM}\n';
+  _ += '    depends_on:\n';
+  _ += '      postgres:\n';
+  _ += '        condition: service_healthy\n';
   _ += __generateLogging();
   return _;
 };
@@ -99,19 +102,20 @@ const generateAPIService = (testMode: boolean, restoreMode: boolean): string => 
  * @returns string
  */
 const generateGUIService = (): string => {
-  let _ = '\tgui:';
-  _ += '\t\tcontainer_name: balancer-gui';
-  _ += '\t\tbuild:';
-  _ += '\t\t\tcontext: ../gui';
-  _ += '\t\t\targs:';
-  _ += '\t\t\t\t- NODE_ENV=${NODE_ENV}';
-  _ += '\t\timage: jesusgraterol/balancer-gui:latest';
-  _ += '\t\tports:';
-  _ += '\t\t\t- 8090:8090';
-  _ += '\t\tenvironment:';
-  _ += '\t\t\t- NODE_ENV=${NODE_ENV}';
-  _ += '\t\tdepends_on:';
-  _ += '\t\t\t- api';
+  let _ = '';
+  _ += '  gui:\n';
+  _ += '    container_name: balancer-gui\n';
+  _ += '    build:\n';
+  _ += '      context: ../gui\n';
+  _ += '      args:\n';
+  _ += '        - NODE_ENV=${NODE_ENV}\n';
+  _ += '    image: jesusgraterol/balancer-gui:latest\n';
+  _ += '    ports:\n';
+  _ += '      - 8090:8090\n';
+  _ += '    environment:\n';
+  _ += '      - NODE_ENV=${NODE_ENV}\n';
+  _ += '    depends_on:\n';
+  _ += '      - api\n';
   _ += __generateLogging();
   return _;
 };
@@ -121,13 +125,14 @@ const generateGUIService = (): string => {
  * @returns string
  */
 const generateCLOUDFLAREDService = (): string => {
-  let _ = '\tcloudflared:';
-  _ += '\t\tcontainer_name: balancer-cloudflare-tunnel';
-  _ += '\t\timage: cloudflare/cloudflared';
-  _ += '\t\trestart: unless-stopped';
-  _ += '\t\tcommand: tunnel run';
-  _ += '\t\tenvironment:';
-  _ += '\t\t\t- TUNNEL_TOKEN=${TUNNEL_TOKEN}';
+  let _ = '';
+  _ += '  cloudflared:\n';
+  _ += '    container_name: balancer-cloudflared\n';
+  _ += '    image: cloudflare/cloudflared\n';
+  _ += '    restart: unless-stopped\n';
+  _ += '    command: tunnel run\n';
+  _ += '    environment:\n';
+  _ += '      - TUNNEL_TOKEN=${TUNNEL_TOKEN}\n';
   _ += __generateLogging();
   return _;
 };
@@ -137,9 +142,10 @@ const generateCLOUDFLAREDService = (): string => {
  * @returns string
  */
 const generateVolumes = (): string => {
-  let _ = 'volumes:';
-  _ += '\tpgdata:';
-  _ += '\tpgdata-management:';
+  let _ = '';
+  _ += 'volumes:\n';
+  _ += '  pgdata:\n';
+  _ += '  pgdata-management:';
   return _;
 };
 
@@ -148,13 +154,14 @@ const generateVolumes = (): string => {
  * @returns string
  */
 const generateSecrets = (): string => {
-  let _ = 'secrets:';
-  _ += '\tPOSTGRES_PASSWORD_FILE:';
-  _ += '\t\tfile: secrets/POSTGRES_PASSWORD_FILE.txt';
-  _ += '\tROOT_ACCOUNT:';
-  _ += '\t\tfile: secrets/ROOT_ACCOUNT.txt';
-  _ += '\tTELEGRAM:';
-  _ += '\t\tfile: secrets/TELEGRAM.txt';
+  let _ = '';
+  _ += 'secrets:\n';
+  _ += '  POSTGRES_PASSWORD_FILE:\n';
+  _ += '    file: secrets/POSTGRES_PASSWORD_FILE.txt\n';
+  _ += '  ROOT_ACCOUNT:\n';
+  _ += '    file: secrets/ROOT_ACCOUNT.txt\n';
+  _ += '  TELEGRAM:\n';
+  _ += '    file: secrets/TELEGRAM.txt';
   return _;
 };
 

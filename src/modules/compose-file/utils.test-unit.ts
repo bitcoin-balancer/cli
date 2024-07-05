@@ -1,5 +1,5 @@
 import { describe, beforeAll, afterAll, beforeEach, afterEach, test, expect, vi } from 'vitest';
-import { readTextFile } from 'fs-utils-sync';
+import { readTextFile, getDirectoryElements } from 'fs-utils-sync';
 import { getEnvironmentVariableInsights } from './utils.js';
 
 /* ************************************************************************************************
@@ -9,6 +9,7 @@ import { getEnvironmentVariableInsights } from './utils.js';
 // mocks the entire fs-utils-sync module
 vi.mock('fs-utils-sync', () => ({
   readTextFile: vi.fn(),
+  getDirectoryElements: vi.fn(),
 }));
 
 
@@ -25,6 +26,14 @@ const mockReadTextFile = (env: string) => {
   readTextFile.mockReturnValue(env);
 };
 
+// mocks the contents returned by the getDirectoryElements func
+const mockGetDirectoryElements = (files: string[]) => {
+  // @ts-ignore
+  getDirectoryElements.mockReturnValue({
+    files: files.map((file) => ({ baseName: file })),
+    directories: [],
+  });
+};
 
 
 
@@ -46,28 +55,37 @@ describe('getEnvironmentVariableInsights', () => {
 
   test('can put together the insights for a development .env file', () => {
     mockReadTextFile('NODE_ENV=development\nTUNNEL_TOKEN=');
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: false,
       hasCloudflaredToken: false,
+      secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();
+    expect(getDirectoryElements).toHaveBeenCalledOnce();
   });
 
   test('can put together the insights for a production .env file', () => {
     mockReadTextFile('NODE_ENV=production\nTUNNEL_TOKEN=');
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
       hasCloudflaredToken: false,
+      secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();
+    expect(getDirectoryElements).toHaveBeenCalledOnce();
   });
 
   test('can put together the insights for a production .env file w/ cloudflared token', () => {
     mockReadTextFile('NODE_ENV=production\nTUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN');
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM', 'TUNNEL_TOKEN']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
       hasCloudflaredToken: true,
+      secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM', 'TUNNEL_TOKEN'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();
+    expect(getDirectoryElements).toHaveBeenCalledOnce();
   });
 });

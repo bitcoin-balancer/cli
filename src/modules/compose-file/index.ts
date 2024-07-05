@@ -19,8 +19,9 @@ import {
  * Generates the compose.yaml file based on a configuration.
  * @param config
  * @throws
- * - if testMode and restoreMode are both enabled simultaneously
  * - if the .env file doesn't exist or cannot be loaded for any reason
+ * - if no secrets are found in the directory
+ * - if testMode and restoreMode are both enabled simultaneously
  * - if NODE_ENV is set to 'production' and testMode is enabled
  * - if NODE_ENV is set to 'development' and restoreMode is enabled
  * - if the cloudflared token is set but NODE_ENV is set to 'development'
@@ -30,33 +31,31 @@ const generate = ({
   restoreMode = false,
 }: Partial<IComposeFileConfig> = {}): void => {
   // extract the insights
-  const { isProduction, hasCloudflaredToken } = getEnvironmentVariableInsights();
+  const { isProduction, hasCloudflaredToken, secrets } = getEnvironmentVariableInsights();
 
   // validate the request
   canGenerateComposeFile(isProduction, hasCloudflaredToken, testMode, restoreMode);
 
   // header
-  let _ = 'name: balancer';
-  _ += '\n\n\n\n\n';
+  let _ = 'name: balancer\n\n';
+  _ += 'services:\n\n';
 
   // services
   _ += generatePOSTGRESService();
-  _ += '\n\n';
+  _ += '\n\n\n';
 
   _ += generateAPIService(testMode, restoreMode);
-  _ += '\n\n';
+  _ += testMode ? '\n\n\n\n\n' : '\n\n\n';
 
   if (!testMode && !restoreMode) {
     _ += generateGUIService();
-    if (hasCloudflaredToken) {
-      _ += '\n\n';
-    }
+    _ += hasCloudflaredToken ? '\n\n\n' : '\n\n\n\n\n';
   }
 
   if (hasCloudflaredToken) {
     _ += generateCLOUDFLAREDService();
+    _ += '\n\n\n\n\n';
   }
-  _ += '\n\n\n\n\n';
 
   // volumes
   _ += generateVolumes();
