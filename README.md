@@ -15,6 +15,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 
 <br/>
+<br/>
 
 ## Guides
 
@@ -30,6 +31,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 
 
+<br/>
 <br/>
 
 ## Requirements
@@ -53,8 +55,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 
 <br/>
-
-
+<br/>
 
 ## Getting Started
 
@@ -75,71 +76,60 @@ npm start
 
 
 <br/>
-
-## CLI Actions
-
-### General
-
-<details>
-  <summary><code>deploy-cli</code></summary>
-  <br/>
-  Builds the CLI, transfers the output to the server and performs a clean dependency install.
-
-  ```bash
-  node dist/deploy-cli.js
-  ```
-  <br/>
-</details>
-<details>
-  <summary><code>db-backup</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>db-restore</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>generate-env-vars</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-
-
-
-
-
 <br/>
 
+## CLI Actions
 
 ### Host
 
 <details>
   <summary><code>connect</code></summary>
   <br/>
-  ...
+  Establishes a SSH Connection with the remote host.
+
+  ```bash
+  ssh root@ip
+  ```
   <br/>
 </details>
 <details>
   <summary><code>landscape-sysinfo</code></summary>
   <br/>
-  ...
+  Executes the landscape-sysinfo binary and prints its results.
+
+  ```bash
+  ssh root@ip landscape-sysinfo
+  ```
   <br/>
 </details>
 <details>
   <summary><code>reboot</code></summary>
   <br/>
-  ...
+  Reboots the remote host immediately.
+
+  ```bash
+  ssh root@ip reboot
+  ```
   <br/>
 </details>
 <details>
   <summary><code>shutdown</code></summary>
   <br/>
-  ...
+  Shuts down the remote host immediately.
+
+  ```bash
+  ssh root@ip poweroff
+  ```
+  <br/>
+</details>
+<details>
+  <summary><code>ssh-copy-id</code></summary>
+  <br/>
+  Copies the SSH Public Key specified in the config file into the remote server.
+
+  ```bash
+  ssh-copy-id root@ip
+  ```
   <br/>
 </details>
 
@@ -148,235 +138,58 @@ npm start
 
 
 <br/>
-
 
 ### Docker Compose
 
-#### Up
+@TODO
 
-<details>
-  <summary><code>up</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>up:test-mode</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>up:restore-mode</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
+
+
 
 
 <br/>
 
+### CLI Management
 
-#### Build
+@TODO
 
-<details>
-  <summary><code>build</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>build-up</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>build-up:test-mode</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>build-up:restore-mode</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
+
+
 
 
 <br/>
 
+### Database Management
 
-#### Lifecycle Management
+@TODO
 
-<details>
-  <summary><code>down</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>restart</code></summary>
-  <br/>
-  Restarts all stopped and running services (specified in the <code>compose.yml</code> file).
 
-  ```bash
-  docker compose restart
-  ```
-  <br/>
-</details>
+
 
 
 <br/>
 
-
-#### Deployment
+### Environment Variable Assets
 
 <details>
-  <summary><code>push</code></summary>
+  <summary><code>generate-envvar-assets</code></summary>
+  <br/>
+  Generates the environment variable assets based on a source file and places the results in a custom path.
+  <br/>
+</details>
+<details>
+  <summary><code>deploy-envvar-assets @TODO</code></summary>
   <br/>
   ...
   <br/>
 </details>
-<details>
-  <summary><code>pull</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
+
+
+
 
 
 <br/>
-
-#### Logs
-
-<details>
-  <summary><code>logs</code></summary>
-  <br/>
-  Displays and subscribes to log output from all services.
-
-  ```bash
-  docker compose logs -f
-  ```
-  <br/>
-</details>
-<details>
-  <summary><code>logs:db</code></summary>
-  <br/>
-  Displays and subscribes to log output from the db service.
-
-  ```bash
-  docker compose logs db -f
-  ```
-  <br/>
-</details>
-<details>
-  <summary><code>logs:api</code></summary>
-  <br/>
-  Displays and subscribes to log output from the api service.
-
-  ```bash
-  docker compose logs api -f
-  ```
-  <br/>
-</details>
-<details>
-  <summary><code>logs:gui</code></summary>
-  <br/>
-  Displays and subscribes to log output from the gui service.
-
-  ```bash
-  docker compose logs gui -f
-  ```
-  <br/>
-</details>
-
-
 <br/>
-
-
-#### Monitoring
-
-<details>
-  <summary><code>ps</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>top</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>top:db</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>top:api</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-<details>
-  <summary><code>top:gui</code></summary>
-  <br/>
-  ...
-  <br/>
-</details>
-
-
-<br/>
-
-
-#### Maintenance
-
-<details>
-  <summary><code>prune</code></summary>
-  <br/>
-  Remove all unused containers, networks, images (both dangling and unused).
-
-  ```bash
-  docker system prune -a -f
-  ```
-  <br/>
-</details>
-
-
-<br/>
-
-
-#### Tests
-
-<details>
-  <summary><code>api-test:integration</code></summary>
-  <br/>
-  Runs the API's integration tests. Keep in mind that <code>testMode</code> must be enabled for this command to work.
-
-  ```bash
-  docker compose run api npm run test:integration
-  ```
-  <br/>
-</details>
-<details>
-  <summary><code>api-test:unit</code></summary>
-  <br/>
-  Runs the API's unit tests. Keep in mind that <code>testMode</code> must be enabled for this command to work.
-
-  ```bash
-  docker compose run api npm run test:unit
-  ```
-  <br/>
-</details>
-
-
-
-
-
 <br/>
 
 ## Docker Images
@@ -390,6 +203,8 @@ npm start
 
 
 <br/>
+<br/>
+<br/>
 
 ## @TODO
 
@@ -399,6 +214,8 @@ npm start
 
 
 
+<br/>
+<br/>
 <br/>
 
 ## Run the CLI's Tests
@@ -418,6 +235,8 @@ npm run test:bench
 
 
 
+<br/>
+<br/>
 <br/>
 
 ## License

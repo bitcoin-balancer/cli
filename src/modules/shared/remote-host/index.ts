@@ -78,16 +78,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   );
 
   /**
-   * Copies the SSH Public Key specified in the config file into the remote server.
-   * @returns Promise<string | undefined>
-   */
-  const copySSHPublicKey = (): Promise<string | undefined> => execute(
-    'ssh-copy-id',
-    __args([__address]),
-    'inherit',
-  );
-
-  /**
    * Reboots the remote host immediately.
    * @returns Promise<string | undefined>
    */
@@ -104,6 +94,16 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   const shutdown = (): Promise<string | undefined> => execute(
     'ssh',
     __args([__address, 'poweroff']),
+    'inherit',
+  );
+
+  /**
+   * Copies the SSH Public Key specified in the config file into the remote server.
+   * @returns Promise<string | undefined>
+   */
+  const copySSHPublicKey = (): Promise<string | undefined> => execute(
+    'ssh-copy-id',
+    __args([__address]),
     'inherit',
   );
 
@@ -135,9 +135,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // host actions
     connect,
     getLandscapeSysInfo,
-    copySSHPublicKey,
     reboot,
     shutdown,
+    copySSHPublicKey,
   });
 };
 
