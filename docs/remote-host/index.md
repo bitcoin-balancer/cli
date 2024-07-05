@@ -73,7 +73,7 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
     # ...
     ```
 
-4. Restart the service
+4. Restart the service:
     ```bash
     sudo systemctl restart ssh
     ```
@@ -97,7 +97,7 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 
 <br/>
 
-### Clean Up the (Remote Host)
+### Clean Up (Remote Host)
 
 1. Now that the SSH Public Key has been installed on the remote, update the `sshd_config` to disallow password logins:
     ```bash
