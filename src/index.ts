@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 /* eslint-disable no-console */
 import process from 'node:process';
-import { readPackageFile, decodeMenuAction } from './modules/utils/index.js';
+import { readPackageFile, decodeMenuAction } from './modules/shared/utils/index.js';
 import { displayMenu } from './modules/menu/index.js';
 
 (async () => {
