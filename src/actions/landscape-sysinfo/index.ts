@@ -1,4 +1,4 @@
-import { remoteHostFactory } from '../../modules/shared/remote-host/index.js';
+import { remoteHostFactory } from '../../modules/remote-host/index.js';
 
 /**
  * landscape-sysinfo
