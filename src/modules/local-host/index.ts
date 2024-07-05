@@ -1,16 +1,17 @@
 import { IHostName } from '../shared/types.js';
+import { ILocalHost } from './types.js';
 
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
-const localHostFactory = () => {
+const localHostFactory = (): ILocalHost => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
 
   // the name of the host
-  const __HOST_NAME: IHostName = 'remote';
+  const __HOST_NAME: IHostName = 'local';
 
 
 
@@ -49,5 +50,9 @@ const localHostFactory = () => {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
+  // types
+  type ILocalHost,
+
+  // factory
   localHostFactory,
 };

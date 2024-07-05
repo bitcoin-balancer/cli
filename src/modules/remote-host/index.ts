@@ -160,5 +160,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
+  // types
+  type IRemoteHost,
+
+  // factory
   remoteHostFactory,
 };
