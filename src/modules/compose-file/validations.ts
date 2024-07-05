@@ -37,7 +37,7 @@ const canGenerateComposeFile = (
     throw new Error('The compose.yaml file cannot be generated because RESTORE_MODE can only be enabled when running in production.');
   }
 
-  // ensure the cloudflared token is only provided in development
+  // ensure the cloudflared token is only provided in production
   if (!isProduction && hasCloudflaredToken) {
     throw new Error('The compose.yaml file cannot be generated because Cloudflare\'s TUNNEL_TOKEN can only be provided when running in production.');
   }
