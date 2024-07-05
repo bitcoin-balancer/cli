@@ -1,6 +1,7 @@
 import { readRemoteHostConfigFile } from '../shared/utils/index.js';
 import { execute } from '../shared/command/index.js';
 import { IRemoteHost } from './types.js';
+import { IHostName } from '../shared/types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -17,6 +18,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
+
+  // the name of the host
+  const __HOST_NAME: IHostName = 'remote';
 
   // the configuration object extracted from the remote-host.config.json file
   const __config = readRemoteHostConfigFile();
@@ -134,6 +138,11 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    *                                         MODULE BUILD                                         *
    ********************************************************************************************** */
   return Object.freeze({
+    // properties
+    get HOST_NAME() {
+      return __HOST_NAME;
+    },
+
     // host actions
     connect,
     getLandscapeSysInfo,

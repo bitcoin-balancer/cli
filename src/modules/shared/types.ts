@@ -1,25 +1,14 @@
-import { IHostName } from '../shared/types.js';
+
 
 /* ************************************************************************************************
  *                                             TYPES                                              *
  ************************************************************************************************ */
 
 /**
- * Remote Host
- * The module in charge of exposing the actions that can be performed on the remote host.
+ * Host Name
+ * The kinds of hosts supported by Balancer CLI.
  */
-type IRemoteHost = {
-  // properties
-  HOST_NAME: IHostName;
-
-  // host actions
-  connect: () => Promise<string | undefined>;
-  getLandscapeSysInfo: () => Promise<string | undefined>;
-  reboot: () => Promise<string | undefined>;
-  shutdown: () => Promise<string | undefined>;
-  copySSHPublicKey: () => Promise<string | undefined>;
-};
-
+type IHostName = 'local' | 'remote';
 
 
 
@@ -28,5 +17,5 @@ type IRemoteHost = {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export type {
-  IRemoteHost,
+  IHostName,
 };
