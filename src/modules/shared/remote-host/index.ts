@@ -2,7 +2,6 @@ import { readRemoteHostConfigFile } from '../utils/index.js';
 import { execute } from '../command/index.js';
 import { IRemoteHost } from './types.js';
 
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */

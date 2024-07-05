@@ -144,6 +144,22 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 
 [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
 
+Verify the installation was successful and that you have a compatible version (Docker Engine `^v27.0.3` & Docker Compose `^v2.28.1`):
+```bash
+docker version
+# Client: Docker Engine - Community
+#  Version:           27.0.3
+# ...
+# Server: Docker Engine - Community
+# Engine:
+#  Version:          27.0.3
+# ...
+
+docker compose version
+# Docker Compose version v2.28.1
+# ...
+```
+
 
 
 
@@ -156,6 +172,30 @@ For Balancer CLI to interact with the remote host via SSH, a password for `root`
 ## Install `nvm` on the Remote Host
 
 [Installing & Updating nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+
+Once `nvm`'s installation is complete, install the version required by Balancer (Node.js `^22.3.0` & npm `^10.8.1`):
+```bash
+# install the specific version
+nvm install 22.3.0
+
+# activate it
+nvm use 22.3.0
+```
+
+Finally, verify the installation was successful:
+```bash
+node --version
+# v22.3.0
+
+npm --version
+# 10.8.1
+```
+
+### Troubleshooting
+
+If you get the error `nvm: command not found` or see no feedback on the terminal, simply close the current terminal and open a new one.
+
+
 
 
 <br/>
