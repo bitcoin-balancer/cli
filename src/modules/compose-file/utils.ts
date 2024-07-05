@@ -9,6 +9,8 @@ import { IEnvironmentVariableInsights } from './types.js';
 /**
  * Extracts the .env file's insights so the compose.yaml file can be built.
  * @returns IEnvironmentVariableInsights
+ * @throws
+ * - if the .env file doesn't exist or cannot be loaded for any reason
  */
 const getEnvironmentVariableInsights = (): IEnvironmentVariableInsights => {
   const file = readTextFile('.env');

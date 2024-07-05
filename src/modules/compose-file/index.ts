@@ -1,8 +1,8 @@
 import { writeTextFile } from 'fs-utils-sync';
 import { IComposeFileConfig } from './types.js';
 import { getEnvironmentVariableInsights } from './utils.js';
-import { generateSecrets, generateVolumes } from './templates.js';
 import { canGenerateComposeFile } from './validations.js';
+import { generateSecrets, generateVolumes } from './templates.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -52,6 +52,7 @@ const generate = ({
   // finally, save the file
   writeTextFile('compose.yaml', _);
 };
+
 
 
 
