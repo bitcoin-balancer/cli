@@ -151,17 +151,16 @@ const generateVolumes = (): string => {
 
 /**
  * Generates the content for the secrets.
+ * @param secrets
  * @returns string
  */
-const generateSecrets = (): string => {
+const generateSecrets = (secrets: string[]): string => {
   let _ = '';
   _ += 'secrets:\n';
-  _ += '  POSTGRES_PASSWORD_FILE:\n';
-  _ += '    file: secrets/POSTGRES_PASSWORD_FILE.txt\n';
-  _ += '  ROOT_ACCOUNT:\n';
-  _ += '    file: secrets/ROOT_ACCOUNT.txt\n';
-  _ += '  TELEGRAM:\n';
-  _ += '    file: secrets/TELEGRAM.txt';
+  secrets.forEach((secret, index) => {
+    _ += `  ${secret}:\n`;
+    _ += `    file: secrets/${secret}.txt${index === secrets.length - 1 ? '' : '\n'}`;
+  });
   return _;
 };
 

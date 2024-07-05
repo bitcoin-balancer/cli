@@ -1,4 +1,5 @@
 
+import { basename } from 'node:path';
 import { readTextFile, getDirectoryElements } from 'fs-utils-sync';
 import { IEnvironmentVariableInsights } from './types.js';
 
@@ -17,7 +18,7 @@ const __getSecrets = (): string[] => {
   if (!files.length) {
     throw new Error('The secrets directory does not contain any secret files.');
   }
-  return files.map((file) => file.baseName);
+  return files.map((file) => basename(file.baseName, '.txt'));
 };
 
 /**

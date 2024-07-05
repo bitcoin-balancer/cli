@@ -55,7 +55,7 @@ describe('getEnvironmentVariableInsights', () => {
 
   test('can put together the insights for a development .env file', () => {
     mockReadTextFile('NODE_ENV=development\nTUNNEL_TOKEN=');
-    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT']);
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: false,
       hasCloudflaredToken: false,
@@ -67,7 +67,7 @@ describe('getEnvironmentVariableInsights', () => {
 
   test('can put together the insights for a production .env file', () => {
     mockReadTextFile('NODE_ENV=production\nTUNNEL_TOKEN=');
-    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM']);
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt', 'TELEGRAM.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
       hasCloudflaredToken: false,
@@ -79,7 +79,7 @@ describe('getEnvironmentVariableInsights', () => {
 
   test('can put together the insights for a production .env file w/ cloudflared token', () => {
     mockReadTextFile('NODE_ENV=production\nTUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN');
-    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM', 'TUNNEL_TOKEN']);
+    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt', 'TELEGRAM.txt', 'TUNNEL_TOKEN.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
       hasCloudflaredToken: true,

@@ -62,7 +62,7 @@ const generate = ({
   _ += '\n\n\n\n\n';
 
   // secrets
-  _ += generateSecrets();
+  _ += generateSecrets(secrets);
 
   // finally, save the file
   writeTextFile('compose.yaml', _);
