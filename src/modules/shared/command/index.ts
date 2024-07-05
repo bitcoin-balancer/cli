@@ -74,5 +74,9 @@ const execute = (
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
+  // types
+  type IExecutionMode,
+
+  // implementation
   execute,
 };

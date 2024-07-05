@@ -10,7 +10,7 @@ import { IHostName } from '../shared/types.js';
  */
 type IRemoteHost = {
   // properties
-  HOST_NAME: IHostName;
+  NAME: IHostName;
 
   // host actions
   connect: () => Promise<string | undefined>;

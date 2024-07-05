@@ -1,3 +1,4 @@
+import { IExecutionMode } from '../shared/command/index.js';
 import { IHostName } from '../shared/types.js';
 
 
@@ -11,8 +12,10 @@ import { IHostName } from '../shared/types.js';
  */
 type ILocalHost = {
   // properties
-  HOST_NAME: IHostName;
+  NAME: IHostName;
 
+  // command execution
+  exec: (command: string, args: string[], mode?: IExecutionMode) => Promise<string | undefined>;
 };
 
 

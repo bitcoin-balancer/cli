@@ -1,5 +1,7 @@
 import { IHostName } from '../shared/types.js';
+import { execute } from '../shared/command/index.js';
 import { ILocalHost } from './types.js';
+import { IExecutionMode } from '../shared/command/types.js';
 
 
 /* ************************************************************************************************
@@ -11,7 +13,7 @@ const localHostFactory = (): ILocalHost => {
    ********************************************************************************************** */
 
   // the name of the host
-  const __HOST_NAME: IHostName = 'local';
+  const __NAME: IHostName = 'local';
 
 
 
@@ -21,9 +23,19 @@ const localHostFactory = (): ILocalHost => {
    *                                       COMMAND EXECUTION                                      *
    ********************************************************************************************** */
 
-  const someAction = () => {
-    // ...
-  };
+  /**
+   * Executes a given command on local host.
+   * @param command
+   * @param args
+   * @param mode
+   * @returns Promise<string | undefined>
+   */
+  const exec = (
+    command: string,
+    args: string[],
+    mode: IExecutionMode = 'inherit',
+  ): Promise<string | undefined> => execute(command, args, mode);
+
 
 
 
@@ -33,12 +45,12 @@ const localHostFactory = (): ILocalHost => {
    ********************************************************************************************** */
   return Object.freeze({
     // properties
-    get HOST_NAME() {
-      return __HOST_NAME;
+    get NAME() {
+      return __NAME;
     },
 
     // command execution
-    someAction,
+    exec,
   });
 };
 

@@ -59,6 +59,19 @@ const MENU = [
         value: 'build-up:restore-mode',
         description: 'Builds all the images and starts the containers in RESTORE_MODE',
       },
+      {
+        value: 'build-push',
+        description: 'Builds all the images and pushes them to the registry (Docker Hub)',
+      },
+      new Separator(),
+      {
+        value: 'down',
+        description: 'Stops containers and removes containers, networks, volumes, and images created by up',
+      },
+      {
+        value: 'restart',
+        description: 'Restarts all stopped and running services',
+      },
     ],
   },
   {

@@ -20,7 +20,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
 
   // the name of the host
-  const __HOST_NAME: IHostName = 'remote';
+  const __NAME: IHostName = 'remote';
 
   // the configuration object extracted from the remote-host.config.json file
   const __config = readRemoteHostConfigFile();
@@ -139,8 +139,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
   return Object.freeze({
     // properties
-    get HOST_NAME() {
-      return __HOST_NAME;
+    get NAME() {
+      return __NAME;
     },
 
     // host actions
