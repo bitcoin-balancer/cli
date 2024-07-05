@@ -116,6 +116,21 @@ const generateGUIService = (): string => {
   return _;
 };
 
+/**
+ * Generates the content for the cloudflare tunnel service.
+ * @returns string
+ */
+const generateCLOUDFLAREDService = (): string => {
+  let _ = '\tcloudflared:';
+  _ += '\t\tcontainer_name: balancer-cloudflare-tunnel';
+  _ += '\t\timage: cloudflare/cloudflared';
+  _ += '\t\trestart: unless-stopped';
+  _ += '\t\tcommand: tunnel run';
+  _ += '\t\tenvironment:';
+  _ += '\t\t\t- TUNNEL_TOKEN=${TUNNEL_TOKEN}';
+  _ += __generateLogging();
+  return _;
+};
 
 /**
  * Generates the content for the volumes.
@@ -154,6 +169,7 @@ export {
   generatePOSTGRESService,
   generateAPIService,
   generateGUIService,
+  generateCLOUDFLAREDService,
   generateVolumes,
   generateSecrets,
 };
