@@ -13,6 +13,14 @@ type IComposeFileConfig = {
   restoreMode: boolean;
 };
 
+type IEnvironmentVariableInsights = {
+  // true if NODE_ENV === 'production'
+  isProduction: boolean;
+
+  // true if TUNNEL_TOKEN === '/run/secrets/TUNNEL_TOKEN'
+  hasCloudflaredToken: boolean;
+};
+
 
 
 
@@ -21,4 +29,5 @@ type IComposeFileConfig = {
  ************************************************************************************************ */
 export type {
   IComposeFileConfig,
+  IEnvironmentVariableInsights,
 };
