@@ -2,7 +2,14 @@ import { writeTextFile } from 'fs-utils-sync';
 import { IComposeFileConfig } from './types.js';
 import { getEnvironmentVariableInsights } from './utils.js';
 import { canGenerateComposeFile } from './validations.js';
-import { generateSecrets, generateVolumes } from './templates.js';
+import {
+  generatePOSTGRESService,
+  generateAPIService,
+  generateGUIService,
+  generateCLOUDFLAREDService,
+  generateSecrets,
+  generateVolumes,
+} from './templates.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -33,13 +40,22 @@ const generate = ({
   _ += '\n\n\n\n\n';
 
   // services
-
+  _ += generatePOSTGRESService();
   _ += '\n\n';
 
+  _ += generateAPIService(testMode, restoreMode);
   _ += '\n\n';
 
-  _ += '\n\n';
+  if (!testMode && !restoreMode) {
+    _ += generateGUIService();
+    if (hasCloudflaredToken) {
+      _ += '\n\n';
+    }
+  }
 
+  if (hasCloudflaredToken) {
+    _ += generateCLOUDFLAREDService();
+  }
   _ += '\n\n\n\n\n';
 
   // volumes
