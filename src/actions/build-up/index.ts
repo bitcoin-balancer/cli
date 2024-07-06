@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { generate } from '../../modules/compose-file/index.js';
 import { ILocalHost, localHostFactory } from '../../modules/local-host/index.js';
 import { IRemoteHost, remoteHostFactory } from '../../modules/remote-host/index.js';

@@ -1,11 +1,17 @@
 #! /usr/bin/env node
-
+/* eslint-disable no-console */
+import { argv } from 'node:process';
+import { parseArgs } from 'argv-utils';
 
 /**
- * Template
+ * Compose File
  * ...
  */
 (async () => {
+  // extract the args
+  const args = parseArgs(argv);
+
+  // execute the action
   try {
     // ...
 

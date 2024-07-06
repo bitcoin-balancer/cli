@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { remoteHostFactory } from '../../modules/remote-host/index.js';
 
 /**
