@@ -16,7 +16,7 @@ import {
  ************************************************************************************************ */
 
 /**
- * Generates the compose.yaml file based on a configuration.
+ * Generates the compose.yaml file based on a configuration and the .env file in the host.
  * @param config
  * @throws
  * - if the .env file doesn't exist or cannot be loaded for any reason
