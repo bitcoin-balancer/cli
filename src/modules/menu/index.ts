@@ -75,6 +75,20 @@ const MENU = [
     ],
   },
   {
+    name: 'CLI Management',
+    description: 'Generate and deploy environment variable assets',
+    value: [
+      {
+        value: 'build-cli',
+        description: 'Builds the CLI from the source code',
+      },
+      {
+        value: 'build-deploy-cli',
+        description: 'Builds and deploys the CLI\'s source code to the remote host',
+      },
+    ],
+  },
+  {
     name: 'Environment Variable Assets',
     description: 'Generate and deploy environment variable assets',
     value: [

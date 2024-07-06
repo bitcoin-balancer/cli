@@ -8,15 +8,22 @@ import { IRemoteHostFileSystem, IRemoteHostUtils } from './types.js';
 /**
  * Remote Host File System
  * The module in charge of performing all file system actions on the remote host.
+ * @param cliPath
+ * @param address
+ * @param utils
  * @returns IRemoteHostFileSystem
  */
 const remoteHostFileSystemFactory = (
+  cliPath: string,
   address: string,
   utils: IRemoteHostUtils,
 ): IRemoteHostFileSystem => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
+
+  // the path to the CLI's source code
+  const __cli = cliPath;
 
   // the SSH address
   const __address = address;

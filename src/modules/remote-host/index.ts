@@ -40,7 +40,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   const __utils = remoteHostUtilsFactory(__privateKey, __config.server);
 
   // the remote host file system's instance
-  const __fs = remoteHostFileSystemFactory(__address, __utils);
+  const __fs = remoteHostFileSystemFactory(__cli, __address, __utils);
 
 
 

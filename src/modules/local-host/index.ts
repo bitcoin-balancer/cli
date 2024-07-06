@@ -41,6 +41,19 @@ const localHostFactory = (): ILocalHost => {
 
 
   /* **********************************************************************************************
+   *                                           ACTIONS                                            *
+   ********************************************************************************************** */
+
+  /**
+   * Executes the script to perform a build of the CLI from the source code.
+   * @returns Promise<string | undefined>
+   */
+  const buildCLI = (): Promise<string | undefined> => exec('npm', ['run', 'build']);
+
+
+
+
+  /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
    ********************************************************************************************** */
   return Object.freeze({
@@ -51,6 +64,9 @@ const localHostFactory = (): ILocalHost => {
 
     // command execution
     exec,
+
+    // actions
+    buildCLI,
   });
 };
 

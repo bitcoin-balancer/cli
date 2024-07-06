@@ -16,6 +16,9 @@ type ILocalHost = {
 
   // command execution
   exec: (command: string, args: string[], mode?: IExecutionMode) => Promise<string | undefined>;
+
+  // actions
+  buildCLI: () => Promise<string | undefined>;
 };
 
 
