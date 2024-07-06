@@ -1,7 +1,9 @@
+import { IHostName } from '../shared/types.js';
 import { readRemoteHostConfigFile } from '../shared/utils/index.js';
 import { execute } from '../shared/command/index.js';
+import { remoteHostUtilsFactory } from './utils.js';
+import { remoteHostFileSystemFactory } from './fs.js';
 import { IRemoteHost } from './types.js';
-import { IHostName } from '../shared/types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -34,100 +36,11 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   // the SSH address
   const __address = `${__config.server.name}@${__config.server.ip}`;
 
+  // the remote host utilities' instance
+  const __utils = remoteHostUtilsFactory(__privateKey, __config.server);
 
-
-
-
-  /* **********************************************************************************************
-   *                                            HELPERS                                           *
-   ********************************************************************************************** */
-
-  /**
-   * Completes a partial list of arguments that will be used in a SSH Command Execution.
-   * @param partialArgs
-   * @returns string[]
-   */
-  const __args = (partialArgs: string[]) => ['-i', __privateKey, ...partialArgs];
-
-  /**
-   * Checks if the server is currently turned on and connected to the Internet.
-   * @returns Promise<boolean>
-   */
-  const __isOnline = async (): Promise<boolean> => {
-    try {
-      await execute('ping', ['-c', '1', '-w', '1', __config.server.ip], 'pipe');
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-
-
-
-
-  /* **********************************************************************************************
-   *                                REMOTE FILE SYSTEM MANAGEMENT                                 *
-   ********************************************************************************************** */
-
-  /**
-   * Pushes a file from the local host to the remote host.
-   * @param srcPath
-   * @param destPath
-   * @returns Promise<string | undefined>
-   */
-  const __pushFile = (srcPath: string, destPath: string): Promise<string | undefined> => (
-    execute('scp', __args([srcPath, `${__address}:${destPath}`]), 'inherit')
-  );
-
-  /**
-   * Removes a file from the remote host.
-   * @param filePath
-   * @returns Promise<string | undefined>
-   */
-  const __removeFile = (filePath: string): Promise<string | undefined> => (
-    execute('ssh', __args([__address, 'rm', filePath]), 'pipe')
-  );
-
-  /**
-   * Creates a directory in the remote host.
-   * @param dirPath
-   * @returns Promise<string | undefined>
-   */
-  const __makeDirectory = (dirPath: string): Promise<string | undefined> => (
-    execute('ssh', __args([__address, 'mkdir', dirPath]), 'pipe')
-  );
-
-  /**
-   * Pushes a directory and its contents from the local host to the remote host.
-   * @param srcPath
-   * @param destPath
-   * @returns Promise<string | undefined>
-   */
-  const __pushDirectory = (srcPath: string, destPath: string): Promise<string | undefined> => (
-    execute('scp', __args(['-r', srcPath, `${__address}:${destPath}`]), 'inherit')
-  );
-
-  /**
-   * Removes a directory from the remote host.
-   * @param dirPath
-   * @returns Promise<string | undefined>
-   */
-  const __removeDirectory = (dirPath: string): Promise<string | undefined> => (
-    execute('ssh', __args([__address, 'rm', '-r', '-f', dirPath]), 'pipe')
-  );
-
-  /**
-   * Removes and creates a brand new directory (completely empty).
-   * @param dirPath
-   * @returns Promise<string | undefined>
-   */
-  const __cleanDirectory = async (dirPath: string): Promise<string | undefined> => {
-    let payload = '';
-    payload += await __removeDirectory(dirPath);
-    payload += await __makeDirectory(dirPath);
-    return payload;
-  };
+  // the remote host file system's instance
+  const __fs = remoteHostFileSystemFactory(__address, __utils);
 
 
 
@@ -141,46 +54,40 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Establishes a SSH Connection with the remote host.
    * @returns Promise<string | undefined>
    */
-  const connect = (): Promise<string | undefined> => execute('ssh', __args([__address]), 'inherit');
+  const connect = (): Promise<string | undefined> => (
+    execute('ssh', __utils.args([__address]), 'inherit')
+  );
 
   /**
    * Executes the landscape-sysinfo binary and returns its results.
    * @returns Promise<string | undefined>
    */
-  const getLandscapeSysInfo = (): Promise<string | undefined> => execute(
-    'ssh',
-    __args([__address, 'landscape-sysinfo']),
-    'pipe',
+  const getLandscapeSysInfo = (): Promise<string | undefined> => (
+    execute('ssh', __utils.args([__address, 'landscape-sysinfo']), 'pipe')
   );
 
   /**
    * Reboots the remote host immediately.
    * @returns Promise<string | undefined>
    */
-  const reboot = (): Promise<string | undefined> => execute(
-    'ssh',
-    __args([__address, 'reboot']),
-    'inherit',
+  const reboot = (): Promise<string | undefined> => (
+    execute('ssh', __utils.args([__address, 'reboot']), 'inherit')
   );
 
   /**
    * Shuts down the remote host immediately.
    * @returns Promise<string | undefined>
    */
-  const shutdown = (): Promise<string | undefined> => execute(
-    'ssh',
-    __args([__address, 'poweroff']),
-    'inherit',
+  const shutdown = (): Promise<string | undefined> => (
+    execute('ssh', __utils.args([__address, 'poweroff']), 'inherit')
   );
 
   /**
    * Copies the SSH Public Key specified in the config file into the remote server.
    * @returns Promise<string | undefined>
    */
-  const copySSHPublicKey = (): Promise<string | undefined> => execute(
-    'ssh-copy-id',
-    __args([__address]),
-    'inherit',
+  const copySSHPublicKey = (): Promise<string | undefined> => (
+    execute('ssh-copy-id', __utils.args([__address]), 'inherit')
   );
 
 
@@ -196,7 +103,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @throws
    * - if the remote host is not running or is unreachable
    */
-  if (!await __isOnline()) {
+  if (!await __utils.isOnline()) {
     throw new Error('The remote host is not running or has no access to the Internet.');
   }
 

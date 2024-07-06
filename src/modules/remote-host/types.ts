@@ -5,10 +5,27 @@ import { IHostName } from '../shared/types.js';
  ************************************************************************************************ */
 
 /**
- * Remote Host Utilities
+ * Remote Host Utils
  * The module in charge of providing utility funcs to simplify interactions with the remote host.
  */
-type IRemoteHostUtilities = {
+type IRemoteHostUtils = {
+  // properties
+  // ...
+
+  // actions
+  args: (partialArgs: string[]) => string[];
+  isOnline: () => Promise<boolean>;
+};
+
+/**
+ * Remote Host File System
+ * The module in charge of performing file system actions on the remote host.
+ */
+type IRemoteHostFileSystem = {
+  // properties
+  // ...
+
+  // actions
 
 };
 
@@ -36,6 +53,7 @@ type IRemoteHost = {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export type {
-  IRemoteHostUtilities,
+  IRemoteHostUtils,
+  IRemoteHostFileSystem,
   IRemoteHost,
 };
