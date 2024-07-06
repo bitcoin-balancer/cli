@@ -41,21 +41,19 @@ const __remoteHostExecution = (
  * containers in a chosen mode.
  */
 export default async (variation: string | undefined) => {
-  // init the payload
-  let payload: string | undefined;
-
-  // execute the action on the appropriate host
+  // select the host
+  let host: ILocalHost | IRemoteHost;
   if (variation === undefined) {
-    const host = await selectHost();
-    payload = host.NAME === 'local'
-      ? await __localhostExecution(<ILocalHost>host, variation)
-      : await __remoteHostExecution(<IRemoteHost>host, variation);
+    host = await selectHost();
   } else if (variation === 'test-mode') {
-    payload = await __localhostExecution(localHostFactory(), variation);
+    host = localHostFactory();
   } else {
-    payload = await __remoteHostExecution(await remoteHostFactory(), variation);
+    host = await remoteHostFactory();
   }
 
-  // print the payload
+  // execute the action
+  const payload = host.NAME === 'local'
+    ? await __localhostExecution(<ILocalHost>host, variation)
+    : await __remoteHostExecution(<IRemoteHost>host, variation);
   console.log(payload);
 };
