@@ -80,7 +80,7 @@ The next time you run any of the `build-*` actions, the Balancer API will start 
 
 ### Important
 
-Even if you do not wish to make use of the Telegram Integration, the environment variable property must still be provided as an empty string (`""`):
+Even if you do not wish to make use of the Telegram Integration, the environment variable property must still be provided as an empty string (`""`) and **should not be included** in the `secrets` array:
 
 ```json
 {
@@ -89,7 +89,7 @@ Even if you do not wish to make use of the Telegram Integration, the environment
     "TELEGRAM": "",
     ...
   },
-  "TELEGRAM": [
+  "secrets": [
     ...
   ]
 }
