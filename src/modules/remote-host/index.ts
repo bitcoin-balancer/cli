@@ -77,6 +77,15 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     mode,
   );
 
+  /**
+   * Executes a node or npm command in the CLI root directory.
+   * @param command
+   * @returns Promise<string | undefined>
+   */
+  const __node = (command: string): Promise<string | undefined> => __sshCLI([`bash -i -c "${command}"`]);
+
+
+
 
 
   /* **********************************************************************************************
@@ -140,7 +149,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     )));
 
     // install the dependencies
-    const dependenciesPayload = await __sshCLI(['bash -i -c "npm ci --omit=dev"']);
+    const dependenciesPayload = await __node('npm ci --omit=dev');
 
     // join all the payloads and return them
     return [rootDirPayload, ...deploymentPayloads, dependenciesPayload].join('\n');
