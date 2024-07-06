@@ -25,11 +25,14 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   // the configuration object extracted from the remote-host.config.json file
   const __config = readRemoteHostConfigFile();
 
+  // the absolute path to the CLI's source code
+  const __cli = __config.cli;
+
+  // the absolute path to the SSH private key
+  const __privateKey = __config.sshPrivateKey;
+
   // the SSH address
   const __address = `${__config.server.name}@${__config.server.ip}`;
-
-  // the path to the SSH private key
-  const __privateKey = __config.sshPrivateKey;
 
 
 
@@ -57,6 +60,73 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     } catch (e) {
       return false;
     }
+  };
+
+
+
+
+
+  /* **********************************************************************************************
+   *                                REMOTE FILE SYSTEM MANAGEMENT                                 *
+   ********************************************************************************************** */
+
+  /**
+   * Pushes a file from the local host to the remote host.
+   * @param srcPath
+   * @param destPath
+   * @returns Promise<string | undefined>
+   */
+  const __pushFile = (srcPath: string, destPath: string): Promise<string | undefined> => (
+    execute('scp', __args([srcPath, `${__address}:${destPath}`]), 'inherit')
+  );
+
+  /**
+   * Removes a file from the remote host.
+   * @param filePath
+   * @returns Promise<string | undefined>
+   */
+  const __removeFile = (filePath: string): Promise<string | undefined> => (
+    execute('ssh', __args([__address, 'rm', filePath]), 'pipe')
+  );
+
+  /**
+   * Creates a directory in the remote host.
+   * @param dirPath
+   * @returns Promise<string | undefined>
+   */
+  const __makeDirectory = (dirPath: string): Promise<string | undefined> => (
+    execute('ssh', __args([__address, 'mkdir', dirPath]), 'pipe')
+  );
+
+  /**
+   * Pushes a directory and its contents from the local host to the remote host.
+   * @param srcPath
+   * @param destPath
+   * @returns Promise<string | undefined>
+   */
+  const __pushDirectory = (srcPath: string, destPath: string): Promise<string | undefined> => (
+    execute('scp', __args(['-r', srcPath, `${__address}:${destPath}`]), 'inherit')
+  );
+
+  /**
+   * Removes a directory from the remote host.
+   * @param dirPath
+   * @returns Promise<string | undefined>
+   */
+  const __removeDirectory = (dirPath: string): Promise<string | undefined> => (
+    execute('ssh', __args([__address, 'rm', '-r', '-f', dirPath]), 'pipe')
+  );
+
+  /**
+   * Removes and creates a brand new directory (completely empty).
+   * @param dirPath
+   * @returns Promise<string | undefined>
+   */
+  const __cleanDirectory = async (dirPath: string): Promise<string | undefined> => {
+    let payload = '';
+    payload += await __removeDirectory(dirPath);
+    payload += await __makeDirectory(dirPath);
+    return payload;
   };
 
 

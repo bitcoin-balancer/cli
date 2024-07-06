@@ -5,7 +5,7 @@ import {
   IDecodedMenuAction,
   IRemoteHostConfig,
   RemoteHostConfigSchema,
-} from './types.js';
+} from '../types.js';
 
 /* ************************************************************************************************
  *                                           FS HELPERS                                           *
