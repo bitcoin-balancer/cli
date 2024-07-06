@@ -162,6 +162,25 @@ npm start
   <br/>
 </details>
 
+<details>
+  <summary><code>build-deploy-cli</code></summary>
+  <br/>
+  Deploys the CLI from its source in the local host to the remote host.
+
+  Firstly, it creates the root directory (if it doesn't already exist):
+
+  ```bash
+  ssh root@ip mkdir -p cli
+  ```
+
+  Then, it deploys the source code files and lastly, it installs the dependencies:
+
+  ```bash
+  ssh root@ip cd cli && npm ci --omit=dev
+  ```
+  <br/>
+</details>
+
 
 
 
