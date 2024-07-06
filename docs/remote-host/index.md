@@ -7,6 +7,7 @@ The first step to configure a remote host is to create the `remote-host.config.j
 ```
 cli
   │
+  ...
   src/
   │  └───...
   ...
@@ -21,6 +22,7 @@ The schema of the configuration file is as follows:
 
 ```json
 {
+  "cli": "/home/<YOUR_USERNAME>/Documents/projects/balancer/cli",
   "sshPrivateKey": "/home/<YOUR_USERNAME>/.ssh/id_rsa",
   "server": {
     "name": "root",

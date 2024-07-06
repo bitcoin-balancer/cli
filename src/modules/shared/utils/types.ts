@@ -34,11 +34,19 @@ type IPackageFile = z.infer<typeof PackageFileSchema>;
  * The configuration that will be used to connect to and interact with the remote host.
  */
 const RemoteHostConfigSchema = z.object({
+  // the absolute path to the CLI's source code
+  cli: z.string(),
+
+  // the absolute path to the SSH Private Key
   sshPrivateKey: z.string(),
+
+  // the details required to interact with the remote host
   server: z.object({
     name: z.string(),
     ip: z.string(),
   }),
+
+  // the list of assets that will be deployed to the remote host
   sourceCode: z.array(z.string()),
 });
 type IRemoteHostConfig = z.infer<typeof RemoteHostConfigSchema>;
