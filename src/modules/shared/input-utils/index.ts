@@ -46,7 +46,7 @@ const selectHost = async (): Promise<ILocalHost | IRemoteHost> => {
       {
         name: 'Remote Host',
         value: <IRemoteHost>remote,
-        disabled: '(unreachable)',
+        disabled: remote === undefined ? '(unreachable)' : false,
       },
     ],
   });
