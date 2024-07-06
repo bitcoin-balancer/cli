@@ -45,10 +45,11 @@ const localHostFactory = (): ILocalHost => {
    ********************************************************************************************** */
 
   /**
-   * Executes the script to perform a build of the CLI from the source code.
+   * Executes the script to generate a build of the CLI straight from the source code.
    * @returns Promise<string | undefined>
    */
   const buildCLI = (): Promise<string | undefined> => exec('npm', ['run', 'build']);
+
 
 
 

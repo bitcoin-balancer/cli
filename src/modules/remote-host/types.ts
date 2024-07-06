@@ -25,8 +25,19 @@ type IRemoteHostFileSystem = {
   // properties
   // ...
 
-  // actions
+  // helpers
+  localCLIPath: (elementPath?: string) => string;
+  remoteCLIPath: (elementPath?: string) => string;
 
+  // actions
+  pushFile: (srcPath: string, destPath: string) => Promise<string | undefined>;
+  removeFile: (filePath: string) => Promise<string | undefined>;
+  makeDirectory: (dirPath: string) => Promise<string | undefined>;
+  pushDirectory: (srcPath: string, destPath: string) => Promise<string | undefined>;
+  removeDirectory: (dirPath: string) => Promise<string | undefined>;
+
+  // deployment helpers
+  deploy: (localPath: string, remotePath: string) => Promise<string | undefined>;
 };
 
 /**
@@ -43,6 +54,9 @@ type IRemoteHost = {
   reboot: () => Promise<string | undefined>;
   shutdown: () => Promise<string | undefined>;
   copySSHPublicKey: () => Promise<string | undefined>;
+
+  // cli management actions
+  deployCLI: () => Promise<string | undefined>
 };
 
 

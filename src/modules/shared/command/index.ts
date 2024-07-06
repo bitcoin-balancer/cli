@@ -20,13 +20,13 @@ const __getExectutionOptions = (mode: IExecutionMode): IExectutionOptions => ({
  * undefined will be returned.
  * @param command
  * @param args
- * @param mode
+ * @param mode?
  * @returns Promise<string | undefined>
  */
 const execute = (
   command: string,
   args: string[],
-  mode: IExecutionMode,
+  mode: IExecutionMode = 'inherit',
 ): Promise<string | undefined> => new Promise((resolve, reject) => {
   // init the options based on the mode
   const options = __getExectutionOptions(mode);

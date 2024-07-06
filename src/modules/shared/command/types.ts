@@ -6,9 +6,10 @@
 
 /**
  * Exection Mode
- * The way a command will be executed.
+ * The way a command will be executed. More info:
+ * https://nodejs.org/docs/latest/api/child_process.html#optionsstdio
  */
-type IExecutionMode = 'inherit' | 'pipe';
+type IExecutionMode = 'overlapped' | 'inherit' | 'pipe' | 'ignore';
 
 /**
  * Execution Options

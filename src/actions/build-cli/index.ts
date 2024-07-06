@@ -3,7 +3,7 @@ import { localHostFactory } from '../../modules/local-host/index.js';
 
 /**
  * Build CLI
- * Builds the CLI from the source code.
+ * Executes the script to generate a build of the CLI straight from the source code.
  */
 export default async () => {
   const host = localHostFactory();
