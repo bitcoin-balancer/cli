@@ -57,7 +57,7 @@ const remoteHostFileSystemFactory = (
    * @returns string
    */
   const remoteCLIPath = (elementPath?: string): string => (
-    `/cli${typeof elementPath === 'string' ? `/${elementPath}` : ''}`
+    `cli${typeof elementPath === 'string' ? `/${elementPath}` : ''}`
   );
 
 

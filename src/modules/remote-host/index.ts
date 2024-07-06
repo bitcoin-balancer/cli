@@ -73,7 +73,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @returns Promise<string | undefined>
    */
   const __sshCLI = (args: string[], mode?: IExecutionMode): Promise<string | undefined> => __ssh(
-    ['cd', 'cli', '&&', ...args],
+    [__address, 'cd', __fs.remoteCLIPath(), '&&', ...args],
     mode,
   );
 
@@ -140,7 +140,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     )));
 
     // install the dependencies
-    const dependenciesPayload = await __sshCLI(['npm', 'ci', '--omit=dev']);
+    const dependenciesPayload = await __sshCLI(['bash -i -c "npm ci --omit=dev"']);
+    // const dependenciesPayload = await __sshCLI(['npm', 'ci', '--omit=dev']);
 
     // join all the payloads and return them
     return [rootDirPayload, ...deploymentPayloads, dependenciesPayload].join('\n');
