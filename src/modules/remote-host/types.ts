@@ -9,9 +9,6 @@ import { IHostName } from '../shared/types.js';
  * The module in charge of providing utility funcs to simplify interactions with the remote host.
  */
 type IRemoteHostUtils = {
-  // properties
-  // ...
-
   // actions
   args: (partialArgs: string[]) => string[];
   isOnline: () => Promise<boolean>;
@@ -22,9 +19,6 @@ type IRemoteHostUtils = {
  * The module in charge of performing file system actions on the remote host.
  */
 type IRemoteHostFileSystem = {
-  // properties
-  // ...
-
   // helpers
   localCLIPath: (elementPath?: string) => string;
   remoteCLIPath: (elementPath?: string) => string;
@@ -54,6 +48,10 @@ type IRemoteHost = {
   reboot: () => Promise<string | undefined>;
   shutdown: () => Promise<string | undefined>;
   copySSHPublicKey: () => Promise<string | undefined>;
+
+  // docker compose actions
+  buildUp: (variation: string | undefined) => Promise<string | undefined>;
+  down: () => Promise<string | undefined>;
 
   // cli management actions
   deployCLI: () => Promise<string>;

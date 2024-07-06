@@ -1,6 +1,4 @@
-import { IExecutionMode } from '../shared/command/index.js';
 import { IHostName } from '../shared/types.js';
-
 
 /* ************************************************************************************************
  *                                             TYPES                                              *
@@ -14,12 +12,15 @@ type ILocalHost = {
   // properties
   NAME: IHostName;
 
-  // command execution
-  exec: (command: string, args: string[], mode?: IExecutionMode) => Promise<string | undefined>;
+  // docker compose actions
+  buildUp: (variation: string | undefined) => Promise<string | undefined>;
+  down: () => Promise<string | undefined>;
 
-  // actions
+  // cli management actions
   buildCLI: () => Promise<string | undefined>;
 };
+
+
 
 
 

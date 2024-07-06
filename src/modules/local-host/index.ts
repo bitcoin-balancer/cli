@@ -1,12 +1,16 @@
 import { IHostName } from '../shared/types.js';
 import { execute } from '../shared/command/index.js';
+import { generate } from '../compose-file/index.js';
 import { ILocalHost } from './types.js';
-import { IExecutionMode } from '../shared/command/types.js';
-
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
+
+/**
+ * Generates an instance of the Local Host.
+ * @returns ILocalHost
+ */
 const localHostFactory = (): ILocalHost => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
@@ -20,35 +24,40 @@ const localHostFactory = (): ILocalHost => {
 
 
   /* **********************************************************************************************
-   *                                       COMMAND EXECUTION                                      *
+   *                                    DOCKER COMPOSE ACTIONS                                    *
    ********************************************************************************************** */
 
   /**
-   * Executes a given command on local host.
-   * @param command
-   * @param args
-   * @param mode
+   * Builds all the images and starts the containers. If the variation is provided, it starts the
+   * containers in a chosen mode.
+   * @param variation
    * @returns Promise<string | undefined>
    */
-  const exec = (
-    command: string,
-    args: string[],
-    mode: IExecutionMode = 'inherit',
-  ): Promise<string | undefined> => execute(command, args, mode);
+  const buildUp = async (variation: string | undefined): Promise<string | undefined> => {
+    // generate the compose.yaml file
+    generate({ testMode: variation === 'test-mode' });
 
+    // execute the docker compose command
+    return execute('docker', ['compose', 'up', '--build', '-d']);
+  };
 
+  /**
+   * Stops containers and removes containers, networks, volumes, and images created by up.
+   * @returns Promise<string | undefined>
+   */
+  const down = (): Promise<string | undefined> => execute('docker', ['compose', 'down']);
 
 
 
   /* **********************************************************************************************
-   *                                           ACTIONS                                            *
+   *                                    CLI MANAGEMENT ACTIONS                                    *
    ********************************************************************************************** */
 
   /**
    * Executes the script to generate a build of the CLI straight from the source code.
    * @returns Promise<string | undefined>
    */
-  const buildCLI = (): Promise<string | undefined> => exec('npm', ['run', 'build']);
+  const buildCLI = (): Promise<string | undefined> => execute('npm', ['run', 'build']);
 
 
 
@@ -63,10 +72,11 @@ const localHostFactory = (): ILocalHost => {
       return __NAME;
     },
 
-    // command execution
-    exec,
+    // docker compose actions
+    buildUp,
+    down,
 
-    // actions
+    // cli management actions
     buildCLI,
   });
 };

@@ -95,6 +95,15 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
   /* **********************************************************************************************
+   *                                       SCRIPT EXECUTION                                       *
+   ********************************************************************************************** */
+
+  /* const __composeFile = (): Promise<string | undefined> => undefined; */
+
+
+
+
+  /* **********************************************************************************************
    *                                         HOST ACTIONS                                         *
    ********************************************************************************************** */
 
@@ -137,6 +146,18 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
   /* **********************************************************************************************
+   *                                    DOCKER COMPOSE ACTIONS                                    *
+   ********************************************************************************************** */
+
+
+  const buildUp = async (variation: string | undefined): Promise<string | undefined> => variation;
+
+  const down = async (): Promise<string | undefined> => '';
+
+
+
+
+  /* **********************************************************************************************
    *                                    CLI MANAGEMENT ACTIONS                                    *
    ********************************************************************************************** */
 
@@ -160,6 +181,16 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // join all the payloads and return them
     return [rootDirPayload, ...deploymentPayloads, dependenciesPayload].join('\n');
   };
+
+
+
+
+
+  /* **********************************************************************************************
+   *                                 DATABASE MANAGEMENT ACTIONS                                  *
+   ********************************************************************************************** */
+
+  // ...
 
 
 
@@ -218,6 +249,10 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     reboot,
     shutdown,
     copySSHPublicKey,
+
+    // docker compose actions
+    buildUp,
+    down,
 
     // cli management actions
     deployCLI,
