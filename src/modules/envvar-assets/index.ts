@@ -1,5 +1,5 @@
 import { readJSONFile, copyFile, writeTextFile } from 'fs-utils-sync';
-import { isSrcPathValid, isDestPathValid } from './validations.js';
+import { isSrcPathValid, isDestPathValid, isSrcPathValidForDeployment } from './validations.js';
 import { SourceFileSchema, ISourceFile, IKeyValObj } from './types.js';
 
 /* ************************************************************************************************
@@ -82,6 +82,7 @@ export {
   // validations
   isSrcPathValid,
   isDestPathValid,
+  isSrcPathValidForDeployment,
 
   // implementation
   generate,

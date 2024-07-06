@@ -1,3 +1,4 @@
+import { normalize } from 'path';
 import { isFile, isDirectory, getDirectoryElements } from 'fs-utils-sync';
 
 /* ************************************************************************************************
@@ -39,6 +40,28 @@ const isDestPathValid = (destPath: string): boolean | string => {
   return `The path '${destPath}' is not a valid destination. Make sure it is an empty directory.`;
 };
 
+/**
+ * Verifies if a path contains all the environment variable assets in order to be deployed to the
+ * remote host.
+ * @param srcPath
+ * @returns boolean | string
+ */
+const isSrcPathValidForDeployment = (srcPath: string): boolean | string => {
+  if (
+    typeof srcPath === 'string'
+    && srcPath.length
+    && isDirectory(srcPath)
+    && isFile(normalize(`${srcPath}/.env`))
+    && isDirectory(normalize(`${srcPath}/secrets`))
+  ) {
+    const { files } = getDirectoryElements(`${srcPath}/secrets`);
+    return files.length > 0
+      ? true
+      : `The secrets directory '${srcPath}/secrets' is empty.`;
+  }
+  return `The path '${srcPath}' is invalid. It must contain the .env file and the secrets directory.`;
+};
+
 
 
 
@@ -49,4 +72,5 @@ const isDestPathValid = (destPath: string): boolean | string => {
 export {
   isSrcPathValid,
   isDestPathValid,
+  isSrcPathValidForDeployment,
 };

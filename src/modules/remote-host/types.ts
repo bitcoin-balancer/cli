@@ -56,7 +56,10 @@ type IRemoteHost = {
   copySSHPublicKey: () => Promise<string | undefined>;
 
   // cli management actions
-  deployCLI: () => Promise<string | undefined>
+  deployCLI: () => Promise<string>;
+
+  // environment variable assets actions
+  deployEnvironmentVariableAssets: (srcPath: string) => Promise<string>;
 };
 
 

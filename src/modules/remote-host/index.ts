@@ -79,6 +79,12 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
   /**
    * Executes a node or npm command in the CLI root directory.
+   * Node & npm commands must be invoked this way because when a command is executed via SSH, the
+   * shell doesn't load the user profiles and therefore, doesn't know where the node and npm
+   * binaries are, leading to 'npm: command not found' errors. More info:
+   * - https://stackoverflow.com/questions/31472755/sudo-npm-command-not-found
+   * - https://stackoverflow.com/questions/32090974/what-does-the-shcannot-set-terminal-process-group-1-inappropriate-ioctl-for
+   * - https://github.com/flathub/com.visualstudio.code/issues/315
    * @param command
    * @returns Promise<string | undefined>
    */
@@ -136,9 +142,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
   /**
    * Deploys the CLI from its source in the local host to the remote host.
-   * @returns Promise<string | undefined>
+   * @returns Promise<string>
    */
-  const deployCLI = async (): Promise<string | undefined> => {
+  const deployCLI = async (): Promise<string> => {
     // create the root directory (if it doesn't exist)
     const rootDirPayload = await __fs.makeDirectory(__fs.remoteCLIPath());
 
@@ -153,6 +159,27 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // join all the payloads and return them
     return [rootDirPayload, ...deploymentPayloads, dependenciesPayload].join('\n');
+  };
+
+
+
+
+
+  /* **********************************************************************************************
+   *                             ENVIRONMENT VARIABLE ASSETS ACTIONS                              *
+   ********************************************************************************************** */
+
+  /**
+   * Deploys the environment variable assets to the remote host.
+   * @param srcPath
+   * @returns Promise<string>
+   */
+  const deployEnvironmentVariableAssets = async (srcPath: string): Promise<string> => {
+    const payloads = await Promise.all([
+      __fs.deploy(`${srcPath}/.env`, __fs.remoteCLIPath('.env')),
+      __fs.deploy(`${srcPath}/secrets`, __fs.remoteCLIPath('secrets')),
+    ]);
+    return payloads.join('\n');
   };
 
 
@@ -194,6 +221,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // cli management actions
     deployCLI,
+
+    // environment variable assets actions
+    deployEnvironmentVariableAssets,
   });
 };
 

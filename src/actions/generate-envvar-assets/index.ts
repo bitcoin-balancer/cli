@@ -9,11 +9,11 @@ import { isSrcPathValid, isDestPathValid, generate } from '../../modules/envvar-
 export default async () => {
   // handle user input
   const srcPath = await input({
-    message: 'Enter path to the source file (source.json)',
+    message: 'Enter the path to the source file (source.json)',
     validate: isSrcPathValid,
   });
   const destPath = await input({
-    message: 'Enter path to the destination (empty directory)',
+    message: 'Enter the path to the destination (empty directory)',
     validate: isDestPathValid,
   });
 
