@@ -36,7 +36,7 @@ const localHostFactory = (): ILocalHost => {
     generate({ testMode: variation === 'test-mode' });
 
     // execute the docker compose command
-    return execute('docker', ['compose', 'up', '--build', '-d']);
+    return execute('docker', ['compose', 'up', '--build', '--detach']);
   };
 
   /**
