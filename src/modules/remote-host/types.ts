@@ -1,4 +1,4 @@
-import { IHostName } from '../shared/types.js';
+
 
 /* ************************************************************************************************
  *                                             TYPES                                              *
@@ -48,7 +48,7 @@ type IRemoteHostFileSystem = {
  */
 type IRemoteHost = {
   // properties
-  NAME: IHostName;
+  // ...
 
   // host actions
   connect: () => Promise<string | undefined>;

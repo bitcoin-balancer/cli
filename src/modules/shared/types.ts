@@ -57,12 +57,6 @@ type IDecodedMenuAction = {
  ************************************************************************************************ */
 
 /**
- * Host Name
- * The kinds of hosts supported by Balancer CLI.
- */
-type IHostName = 'local' | 'remote';
-
-/**
  * Remote Server Config
  * The configuration required to interact with a remote host.
  */
@@ -107,7 +101,6 @@ export {
   type IDecodedMenuAction,
 
   // host
-  type IHostName,
   RemoteHostServerConfigSchema,
   type IRemoteHostServerConfig,
   RemoteHostConfigSchema,

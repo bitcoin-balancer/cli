@@ -1,5 +1,4 @@
 import { getDirectoryElements } from 'fs-utils-sync';
-import { IHostName } from '../shared/types.js';
 import { readRemoteHostConfigFile } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
@@ -23,7 +22,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
 
   // the name of the host
-  const __NAME: IHostName = 'remote';
+  // const __NAME: IHostName = 'remote';
 
   // the configuration object extracted from the remote-host.config.json file
   const __config = readRemoteHostConfigFile();
@@ -100,7 +99,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @returns Promise<string | undefined>
    */
   const __nodeScript = (name: INodeScriptName, flags?: string): Promise<string | undefined> => (
-    __node(`node ${__fs.remoteScriptPath(name)}${typeof flags === 'string' ? flags : ''}`)
+    __node(`node ${__fs.remoteScriptPath(name)}${typeof flags === 'string' ? ` ${flags}` : ''}`)
   );
 
 
@@ -196,6 +195,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @returns Promise<string | undefined>
    */
   const down = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'down']);
+
 
 
 
@@ -314,9 +314,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
   return Object.freeze({
     // properties
-    get NAME() {
-      return __NAME;
-    },
+    // ...
 
     // host actions
     connect,

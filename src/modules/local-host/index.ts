@@ -1,4 +1,3 @@
-import { IHostName } from '../shared/types.js';
 import { execute } from '../shared/command/index.js';
 import { generate } from '../compose-file/index.js';
 import { ILocalHost } from './types.js';
@@ -16,8 +15,7 @@ const localHostFactory = (): ILocalHost => {
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
 
-  // the name of the host
-  const __NAME: IHostName = 'local';
+  // ...
 
 
 
@@ -68,9 +66,7 @@ const localHostFactory = (): ILocalHost => {
    ********************************************************************************************** */
   return Object.freeze({
     // properties
-    get NAME() {
-      return __NAME;
-    },
+    // ...
 
     // docker compose actions
     buildUp,

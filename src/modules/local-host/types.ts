@@ -1,4 +1,4 @@
-import { IHostName } from '../shared/types.js';
+
 
 /* ************************************************************************************************
  *                                             TYPES                                              *
@@ -10,7 +10,7 @@ import { IHostName } from '../shared/types.js';
  */
 type ILocalHost = {
   // properties
-  NAME: IHostName;
+  // ...
 
   // docker compose actions
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
