@@ -91,6 +91,16 @@ const localHostFactory = (): ILocalHost => {
 
 
 
+  /**
+   * Runs the tests for a chosen variation.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const apiTest = (
+    variation: string,
+  ): Promise<string | undefined> => execute('npm', ['run', `test:${variation}`]);
+
+
 
 
   /* **********************************************************************************************
@@ -121,6 +131,8 @@ const localHostFactory = (): ILocalHost => {
     down,
     restart,
     logs,
+
+    apiTest,
 
     // cli management actions
     buildCLI,

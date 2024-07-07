@@ -232,6 +232,9 @@ npm start
 
   ```bash
   docker compose logs -f
+
+  # if a variation is provided
+  docker compose logs <variation> -f
   ```
 
   <br/>

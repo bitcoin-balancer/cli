@@ -90,6 +90,19 @@ const MENU = [
         value: 'logs:gui',
         description: 'Displays log output from the gui service',
       },
+      new Separator(),
+      {
+        value: 'api-test:integration',
+        description: 'Runs the integration tests in the api service',
+      },
+      {
+        value: 'api-test:unit',
+        description: 'Runs the unit tests in the api service',
+      },
+      {
+        value: 'api-test:bench',
+        description: 'Runs the benchmarks in the api service',
+      },
     ],
   },
   {
