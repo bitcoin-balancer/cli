@@ -162,7 +162,7 @@ npm start
   The following variations are supported:
 
   - <code>build-up:test-mode</code>
-    - This mode is used to run unit, integration or benchmark tests locally.
+    - This mode is used to run unit, integration or benchmark tests locally
 
   - <code>build-up:restore-mode</code>
     - This mode is used to restore a database backup that was generated in the past

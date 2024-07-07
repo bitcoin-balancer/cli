@@ -136,12 +136,20 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   const connect = (): Promise<string | undefined> => __ssh([__address]);
 
   /**
-   * Executes the landscape-sysinfo binary and returns its results.
+   * Executes the landscape-sysinfo binary, extracts the running docker containers and returns 
+   * its results.
    * @returns Promise<string | undefined>
    */
-  const getLandscapeSysInfo = (): Promise<string | undefined> => __ssh(
-    [__address, 'landscape-sysinfo'],
-  );
+  const getLandscapeSysInfo = async (): Promise<string | undefined> => {
+    // execute the landscape-sysinfo binary
+    const landscapeSysInfoPayload = await __ssh([__address, 'landscape-sysinfo']);
+
+    // execute the docker compose ps binary
+    const dockerComposePSPayload = await __sshCLI(['docker', 'compose', 'ps']);
+
+    // finally, return the combined payloads
+    return [landscapeSysInfoPayload, dockerComposePSPayload].join('\n');
+  };
 
   /**
    * Reboots the remote host immediately.
