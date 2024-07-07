@@ -248,6 +248,26 @@ npm start
   <br/>
 </details>
 
+<details>
+  <summary><code>api-test:'$type'</code></summary>
+  <br/>
+  Runs the automated tests on the api service for the chosen variation.
+
+  ```bash
+  npm run test:<variation>
+  ```
+
+  <br/>
+  The following variations are supported:
+
+  - <code>api-test:integration</code> runs the integration tests in the api service
+
+  - <code>api-test:unit</code> runs the unit tests in the api service
+
+  - <code>api-test:bench</code> runs the benchmarks in the api service
+  <br/>
+</details>
+
 
 
 

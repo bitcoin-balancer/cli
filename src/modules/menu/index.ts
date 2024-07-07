@@ -92,6 +92,11 @@ const MENU = [
       },
       new Separator(),
       {
+        value: 'prune',
+        description: 'Remove all unused containers, networks and images (both dangling and unused)',
+      },
+      new Separator(),
+      {
         value: 'api-test:integration',
         description: 'Runs the integration tests in the api service',
       },
