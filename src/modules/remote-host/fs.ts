@@ -1,6 +1,6 @@
 import { isFile } from 'fs-utils-sync';
 import { execute } from '../shared/command/index.js';
-import { IRemoteHostFileSystem, IRemoteHostUtils } from './types.js';
+import { INodeScriptName, IRemoteHostFileSystem, IRemoteHostUtils } from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -59,6 +59,13 @@ const remoteHostFileSystemFactory = (
   const remoteCLIPath = (elementPath?: string): string => (
     `cli${typeof elementPath === 'string' ? `/${elementPath}` : ''}`
   );
+
+  /**
+   * Builds the absolute path for a CLI script in the remote.
+   * @param name
+   * @returns string
+   */
+  const remoteScriptPath = (name: INodeScriptName): string => `dist/actions/scripts/${name}.js`;
 
 
 
@@ -194,6 +201,7 @@ const remoteHostFileSystemFactory = (
     // helpers
     localCLIPath,
     remoteCLIPath,
+    remoteScriptPath,
 
     // actions
     pushFile,

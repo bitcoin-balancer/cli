@@ -5,6 +5,13 @@ import { IHostName } from '../shared/types.js';
  ************************************************************************************************ */
 
 /**
+ * Node Script Name
+ * Apart from actions, the CLI also exposes scripts that can be executed by actions or even external
+ * systems.
+ */
+type INodeScriptName = 'compose-file';
+
+/**
  * Remote Host Utils
  * The module in charge of providing utility funcs to simplify interactions with the remote host.
  */
@@ -22,6 +29,7 @@ type IRemoteHostFileSystem = {
   // helpers
   localCLIPath: (elementPath?: string) => string;
   remoteCLIPath: (elementPath?: string) => string;
+  remoteScriptPath: (name: INodeScriptName) => string;
 
   // actions
   pushFile: (srcPath: string, destPath: string) => Promise<string | undefined>;
@@ -62,12 +70,11 @@ type IRemoteHost = {
 
 
 
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export type {
+  INodeScriptName,
   IRemoteHostUtils,
   IRemoteHostFileSystem,
   IRemoteHost,

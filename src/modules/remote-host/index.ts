@@ -1,9 +1,10 @@
+import { getDirectoryElements } from 'fs-utils-sync';
 import { IHostName } from '../shared/types.js';
 import { readRemoteHostConfigFile } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
-import { IRemoteHost } from './types.js';
+import { INodeScriptName, IRemoteHost } from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -88,7 +89,20 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param command
    * @returns Promise<string | undefined>
    */
-  const __node = (command: string): Promise<string | undefined> => __sshCLI([`bash -i -c "${command}"`]);
+  const __node = (command: string): Promise<string | undefined> => __sshCLI(
+    [`bash -i -c "${command}"`],
+  );
+
+  /**
+   * Executes a script using Node.js's binary.
+   * @param name
+   * @param flags?
+   * @returns Promise<string | undefined>
+   */
+  const __nodeScript = (name: INodeScriptName, flags?: string): Promise<string | undefined> => (
+    __node(`node ${__fs.remoteScriptPath(name)}${typeof flags === 'string' ? flags : ''}`)
+  );
+
 
 
 
@@ -97,7 +111,17 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    *                                       SCRIPT EXECUTION                                       *
    ********************************************************************************************** */
 
-  /* const __composeFile = (): Promise<string | undefined> => undefined; */
+  /**
+   * Generates the compose.yaml file based a custom mode.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const __composeFile = (variation: string | undefined): Promise<string | undefined> => {
+    if (variation === 'restore-mode') {
+      return __nodeScript('compose-file', '--restoreMode');
+    }
+    return __nodeScript('compose-file');
+  };
 
 
 
@@ -154,7 +178,18 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param variation
    * @returns Promise<string | undefined>
    */
-  const buildUp = async (variation: string | undefined): Promise<string | undefined> => variation;
+  const buildUp = async (variation: string | undefined): Promise<string | undefined> => {
+    // build the compose.yaml file based on the variation
+    const composeFilePayload = await __composeFile(variation);
+
+    // execute a pull to make sure it's running the latest images
+    const pullPayload = await __sshCLI([
+      'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
+    ]);
+
+    // return the payloads
+    return [composeFilePayload, pullPayload].join('\n');
+  };
 
   /**
    * Stops containers and removes containers, networks, volumes, and images created by up.
@@ -209,16 +244,41 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
 
   /**
+   * Sets the permissions for a secret file.
+   * @param name
+   * @returns Promise<string | undefined>
+   */
+  const __setPermissionsForSecret = (name: string): Promise<string | undefined> => __sshCLI([
+    'chmod', 'u=rwx,o=r', `secrets/${name}`,
+  ]);
+
+  /**
+   * Sets the permissions for all the secrets that have just been deployed.
+   * @returns Promise<(string | undefined)[]>
+   */
+  const __setPermissionsForAllSecrets = (): Promise<(string | undefined)[]> => {
+    // read the list of secrets
+    const { files } = getDirectoryElements(__fs.localCLIPath('secrets'), { includeExts: ['.txt'] });
+    return Promise.all(files.map((el) => __setPermissionsForSecret(el.baseName)));
+  };
+
+  /**
    * Deploys the environment variable assets to the remote host.
    * @param srcPath
    * @returns Promise<string>
    */
   const deployEnvironmentVariableAssets = async (srcPath: string): Promise<string> => {
-    const payloads = await Promise.all([
+    // push the assets
+    const assetsDeploymentPayload = await Promise.all([
       __fs.deploy(`${srcPath}/.env`, __fs.remoteCLIPath('.env')),
       __fs.deploy(`${srcPath}/secrets`, __fs.remoteCLIPath('secrets')),
     ]);
-    return payloads.join('\n');
+
+    // set the correct permissions
+    const permissionsPayload = await __setPermissionsForAllSecrets();
+
+    // finally, return the combined payloads
+    return [...assetsDeploymentPayload, ...permissionsPayload].join('\n');
   };
 
 
