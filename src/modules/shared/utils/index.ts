@@ -57,7 +57,15 @@ const decodeMenuAction = (action: string): IDecodedMenuAction => {
  * @param payloads
  * @returns string
  */
-const mergePayloads = (payloads: (string | undefined)[]): string => payloads.join('\n\n');
+const mergePayloads = (payloads: (string | undefined)[]): string => <string>payloads.reduce(
+  (previous, current) => {
+    if (typeof current === 'string' && current.length) {
+      return `${previous}\n${current}`;
+    }
+    return previous;
+  },
+  '',
+);
 
 
 
