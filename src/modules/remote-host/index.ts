@@ -229,6 +229,19 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    */
   const restart = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'restart']);
 
+  /**
+   * Displays log output from services. If a variation is provided, it narrows down the logs to a
+   * specific service.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const logs = async (variation: string | undefined): Promise<string | undefined> => {
+    if (typeof variation === 'string') {
+      return __sshCLI(['docker', 'compose', 'logs', variation, '-f']);
+    }
+    return __sshCLI(['docker', 'compose', 'logs', '-f']);
+  };
+
 
 
 
@@ -361,6 +374,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     buildUp,
     down,
     restart,
+    logs,
 
     // cli management actions
     deployCLI,

@@ -76,6 +76,19 @@ const localHostFactory = (): ILocalHost => {
    */
   const restart = (): Promise<string | undefined> => execute('docker', ['compose', 'restart']);
 
+  /**
+   * Displays log output from services. If a variation is provided, it narrows down the logs to a
+   * specific service.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const logs = async (variation: string | undefined): Promise<string | undefined> => {
+    if (typeof variation === 'string') {
+      return execute('docker', ['compose', 'logs', variation, '-f']);
+    }
+    return execute('docker', ['compose', 'logs', '-f']);
+  };
+
 
 
 
@@ -107,6 +120,7 @@ const localHostFactory = (): ILocalHost => {
     buildAndPushImages,
     down,
     restart,
+    logs,
 
     // cli management actions
     buildCLI,

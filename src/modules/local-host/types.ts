@@ -18,6 +18,7 @@ type ILocalHost = {
   buildAndPushImages: () => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
   restart:() => Promise<string | undefined>;
+  logs: (variation: string | undefined) => Promise<string | undefined>;
 
   // cli management actions
   buildCLI: () => Promise<string | undefined>;

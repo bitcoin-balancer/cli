@@ -73,6 +73,23 @@ const MENU = [
         value: 'restart',
         description: 'Restarts all stopped and running services',
       },
+      new Separator(),
+      {
+        value: 'logs',
+        description: 'Displays log output from all services',
+      },
+      {
+        value: 'logs:postgres',
+        description: 'Displays log output from the postgres service',
+      },
+      {
+        value: 'logs:api',
+        description: 'Displays log output from the api service',
+      },
+      {
+        value: 'logs:gui',
+        description: 'Displays log output from the gui service',
+      },
     ],
   },
   {
