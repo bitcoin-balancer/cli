@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { localHostFactory } from '../../modules/local-host/index.js';
-import { remoteHostFactory } from '../../modules/remote-host/index.js';
+import { localHostFactory } from '../modules/local-host/index.js';
+import { remoteHostFactory } from '../modules/remote-host/index.js';
 
 /**
  * Build CLI Deploy

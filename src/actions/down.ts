@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { selectHost } from '../../modules/shared/input-utils/index.js';
+import { selectHost } from '../modules/shared/input-utils/index.js';
 
 /**
  * Down

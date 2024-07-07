@@ -93,7 +93,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
 
-
   /* **********************************************************************************************
    *                                       SCRIPT EXECUTION                                       *
    ********************************************************************************************** */
@@ -149,10 +148,19 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    *                                    DOCKER COMPOSE ACTIONS                                    *
    ********************************************************************************************** */
 
-
+  /**
+   * Builds all the images and starts the containers. If the variation is provided, it starts the
+   * containers in a chosen mode.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
   const buildUp = async (variation: string | undefined): Promise<string | undefined> => variation;
 
-  const down = async (): Promise<string | undefined> => '';
+  /**
+   * Stops containers and removes containers, networks, volumes, and images created by up.
+   * @returns Promise<string | undefined>
+   */
+  const down = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'down']);
 
 
 

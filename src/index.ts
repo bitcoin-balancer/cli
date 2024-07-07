@@ -15,7 +15,7 @@ import { displayMenu } from './modules/menu/index.js';
 
     // execute the action
     const { id, variation } = decodeMenuAction(encodedAction);
-    const action = await import(`./actions/${id}/index.js`);
+    const action = await import(`./actions/${id}.js`);
     await action.default(variation);
 
     // end the process successfully

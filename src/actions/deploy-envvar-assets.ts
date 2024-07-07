@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { input } from '@inquirer/prompts';
-import { isSrcPathValidForDeployment } from '../../modules/envvar-assets/index.js';
-import { remoteHostFactory } from '../../modules/remote-host/index.js';
+import { isSrcPathValidForDeployment } from '../modules/envvar-assets/index.js';
+import { remoteHostFactory } from '../modules/remote-host/index.js';
 
 /**
  * Deploy Environment Variable Assets

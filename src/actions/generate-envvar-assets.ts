@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { input } from '@inquirer/prompts';
-import { isSrcPathValid, isDestPathValid, generate } from '../../modules/envvar-assets/index.js';
+import { isSrcPathValid, isDestPathValid, generate } from '../modules/envvar-assets/index.js';
 
 /**
  * Generate Environment Variable Assets

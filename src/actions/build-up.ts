@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { ILocalHost, localHostFactory } from '../../modules/local-host/index.js';
-import { IRemoteHost, remoteHostFactory } from '../../modules/remote-host/index.js';
-import { selectHost } from '../../modules/shared/input-utils/index.js';
+import { ILocalHost, localHostFactory } from '../modules/local-host/index.js';
+import { IRemoteHost, remoteHostFactory } from '../modules/remote-host/index.js';
+import { selectHost } from '../modules/shared/input-utils/index.js';
 
 /**
  * Build Up
