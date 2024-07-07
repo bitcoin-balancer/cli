@@ -323,7 +323,17 @@ npm start
 
 ### Database Management
 
-@TODO
+<details>
+  <summary><code>psql</code></summary>
+  <br/>
+  Start the terminal-based front-end to PostgreSQL
+
+  ```bash
+  docker compose exec -it postgres psql -U postgres
+  ```
+
+  <br/>
+</details>
 
 
 
