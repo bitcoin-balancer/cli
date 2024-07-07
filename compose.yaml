@@ -45,7 +45,7 @@ services:
       - TELEGRAM
     environment:
       - NODE_ENV=${NODE_ENV}
-      - TEST_MODE=true
+      - TEST_MODE=false
       - RESTORE_MODE=false
       - API_PORT=5075
       - POSTGRES_HOST=${POSTGRES_HOST}
@@ -58,6 +58,27 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    logging:
+      driver: local
+      options:
+        max-size: "10m"
+        max-file: "10"
+        compress: "true"
+
+
+  gui:
+    container_name: balancer-gui
+    build:
+      context: ../gui
+      args:
+        - NODE_ENV=${NODE_ENV}
+    image: jesusgraterol/balancer-gui:latest
+    ports:
+      - 8090:8090
+    environment:
+      - NODE_ENV=${NODE_ENV}
+    depends_on:
+      - api
     logging:
       driver: local
       options:

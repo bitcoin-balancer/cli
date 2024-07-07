@@ -161,11 +161,9 @@ npm start
   <br/>
   The following variations are supported:
 
-  - <code>up:test-mode</code>
-    - This mode is used to run unit, integration or benchmark tests locally
+  - <code>up:test-mode</code> used to run unit, integration or benchmark tests locally
 
-  - <code>up:restore-mode</code>
-    - This mode is used to restore a database backup that was generated in the past
+  - <code>up:restore-mode</code> used to restore a database backup that was generated in the past
 
   <br/>
 </details>
@@ -189,11 +187,9 @@ npm start
   <br/>
   The following variations are supported:
 
-  - <code>build-up:test-mode</code>
-    - This mode is used to run unit, integration or benchmark tests locally
+  - <code>build-up:test-mode</code> used to run unit, integration or benchmark tests locally
 
-  - <code>build-up:restore-mode</code>
-    - This mode is used to restore a database backup that was generated in the past
+  - <code>build-up:restore-mode</code> used to restore a database backup that was generated in the past
 
   <br/>
 </details>
@@ -226,6 +222,26 @@ npm start
   ```bash
   docker compose restart
   ```
+  <br/>
+</details>
+
+<details>
+  <summary><code>logs</code></summary>
+  <br/>
+  Displays log output from all services. If a variation is provided, it narrows down the logs to a specific service.
+
+  ```bash
+  docker compose logs -f
+  ```
+
+  <br/>
+  The following variations are supported:
+
+  - <code>logs:postgres</code> displays log output from the postgres service
+
+  - <code>logs:api</code> displays log output from the api service
+
+  - <code>logs:gui</code> displays log output from the gui service
   <br/>
 </details>
 
