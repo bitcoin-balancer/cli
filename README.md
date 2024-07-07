@@ -142,6 +142,34 @@ npm start
 ### Docker Compose
 
 <details>
+  <summary><code>up</code></summary>
+  <br/>
+  Builds, (re)creates, starts, and attaches to containers for a service. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
+
+  <br/>
+
+  When executed on the local host, it runs:
+  ```bash
+  docker compose up --detach
+  ```
+
+  In contrast, when executed on the remote host, it always pulls the latest images from the registry (Docker Hub):
+  ```bash
+  docker compose up --pull always --no-build --detach
+  ```
+
+  <br/>
+  The following variations are supported:
+
+  - <code>up:test-mode</code>
+    - This mode is used to run unit, integration or benchmark tests locally
+
+  - <code>up:restore-mode</code>
+    - This mode is used to restore a database backup that was generated in the past
+
+  <br/>
+</details>
+<details>
   <summary><code>build-up</code></summary>
   <br/>
   Builds all the images and starts the containers. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
