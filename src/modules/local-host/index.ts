@@ -26,6 +26,19 @@ const localHostFactory = (): ILocalHost => {
    ********************************************************************************************** */
 
   /**
+   * Builds, (re)creates, starts, and attaches to containers for a service based on a chosen mode.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const up = async (variation: string | undefined): Promise<string | undefined> => {
+    // generate the compose.yaml file
+    generate({ testMode: variation === 'test-mode' });
+
+    // execute the docker compose command
+    return execute('docker', ['compose', 'up', '--detach']);
+  };
+
+  /**
    * Builds all the images and starts the containers. If the variation is provided, it starts the
    * containers in a chosen mode.
    * @param variation
@@ -89,6 +102,7 @@ const localHostFactory = (): ILocalHost => {
     // ...
 
     // docker compose actions
+    up,
     buildUp,
     buildAndPushImages,
     down,

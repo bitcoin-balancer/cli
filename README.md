@@ -179,6 +179,7 @@ npm start
   ```
   <br/>
 </details>
+
 <details>
   <summary><code>down</code></summary>
   <br/>
@@ -189,7 +190,16 @@ npm start
   ```
   <br/>
 </details>
+<details>
+  <summary><code>restart</code></summary>
+  <br/>
+  Restarts all stopped and running services.
 
+  ```bash
+  docker compose restart
+  ```
+  <br/>
+</details>
 
 
 
@@ -208,7 +218,6 @@ npm start
   ```
   <br/>
 </details>
-
 <details>
   <summary><code>build-deploy-cli</code></summary>
   <br/>

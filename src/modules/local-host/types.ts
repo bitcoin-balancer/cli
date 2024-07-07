@@ -13,6 +13,7 @@ type ILocalHost = {
   // ...
 
   // docker compose actions
+  up: (variation: string | undefined) => Promise<string | undefined>;
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
   buildAndPushImages: () => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
