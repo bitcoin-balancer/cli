@@ -90,7 +90,7 @@ const localHostFactory = (): ILocalHost => {
   };
 
   /**
-   * Remove all unused containers, networks and images (both dangling and unused).
+   * Removes all unused containers, networks and images (both dangling and unused).
    * @returns Promise<string | undefined>
    */
   const prune = (): Promise<string | undefined> => (

@@ -249,6 +249,17 @@ npm start
 </details>
 
 <details>
+  <summary><code>prune</code></summary>
+  <br/>
+  Removes all unused containers, networks and images (both dangling and unused).
+
+  ```bash
+  docker system prune --all --force
+  ```
+  <br/>
+</details>
+
+<details>
   <summary><code>api-test:'$type'</code></summary>
   <br/>
   Runs the automated tests on the api service for the chosen variation.

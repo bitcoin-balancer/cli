@@ -3,7 +3,7 @@ import { selectHost } from '../modules/shared/input-utils/index.js';
 
 /**
  * Prune
- * Remove all unused containers, networks and images (both dangling and unused).
+ * Removes all unused containers, networks and images (both dangling and unused).
  */
 export default async () => {
   const host = await selectHost();
