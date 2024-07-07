@@ -52,6 +52,13 @@ const decodeMenuAction = (action: string): IDecodedMenuAction => {
   return { id: action };
 };
 
+/**
+ * Merges a list of payloads into a single string.
+ * @param payloads
+ * @returns string
+ */
+const mergePayloads = (payloads: (string | undefined)[]): string => payloads.join('\n\n');
+
 
 
 
@@ -66,4 +73,5 @@ export {
 
   // actions helpers
   decodeMenuAction,
+  mergePayloads,
 };

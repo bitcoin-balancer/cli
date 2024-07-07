@@ -1,5 +1,5 @@
 import { getDirectoryElements } from 'fs-utils-sync';
-import { readRemoteHostConfigFile } from '../shared/utils/index.js';
+import { readRemoteHostConfigFile, mergePayloads } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
@@ -136,7 +136,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   const connect = (): Promise<string | undefined> => __ssh([__address]);
 
   /**
-   * Executes the landscape-sysinfo binary, extracts the running docker containers and returns 
+   * Executes the landscape-sysinfo binary, extracts the running docker containers and returns
    * its results.
    * @returns Promise<string | undefined>
    */
@@ -148,7 +148,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     const dockerComposePSPayload = await __sshCLI(['docker', 'compose', 'ps']);
 
     // finally, return the combined payloads
-    return [landscapeSysInfoPayload, dockerComposePSPayload].join('\n');
+    return mergePayloads([landscapeSysInfoPayload, dockerComposePSPayload]);
   };
 
   /**
@@ -195,7 +195,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     ]);
 
     // return the payloads
-    return [composeFilePayload, pullPayload].join('\n');
+    return mergePayloads([composeFilePayload, pullPayload]);
   };
 
   /**
@@ -230,7 +230,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     const dependenciesPayload = await __node('npm ci --omit=dev');
 
     // join all the payloads and return them
-    return [rootDirPayload, ...deploymentPayloads, dependenciesPayload].join('\n');
+    return mergePayloads([rootDirPayload, ...deploymentPayloads, dependenciesPayload]);
   };
 
 
@@ -293,7 +293,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     const permissionsPayload = await __setPermissionsForAllSecrets();
 
     // finally, return the combined payloads
-    return [...assetsDeploymentPayload, ...permissionsPayload].join('\n');
+    return mergePayloads([...assetsDeploymentPayload, ...permissionsPayload]);
   };
 
 
