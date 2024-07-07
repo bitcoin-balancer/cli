@@ -58,6 +58,7 @@ type IRemoteHost = {
   copySSHPublicKey: () => Promise<string | undefined>;
 
   // docker compose actions
+  up: (variation: string | undefined) => Promise<string | undefined>;
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
   restart: () => Promise<string | undefined>;

@@ -180,7 +180,26 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
 
   /**
-   * Builds all the images and starts the containers. If the variation is provided, it starts the
+   * Pulls the latest images and starts the containers. If the variation is provided, it starts the
+   * containers in a chosen mode.
+   * @param variation
+   * @returns Promise<string | undefined>
+   */
+  const up = async (variation: string | undefined): Promise<string | undefined> => {
+    // build the compose.yaml file based on the variation
+    const composeFilePayload = await __composeFile(variation);
+
+    // execute a pull to make sure it's running the latest images
+    const pullPayload = await __sshCLI([
+      'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
+    ]);
+
+    // return the payloads
+    return mergePayloads([composeFilePayload, pullPayload]);
+  };
+
+  /**
+   * Pulls the latest images and starts the containers. If the variation is provided, it starts the
    * containers in a chosen mode.
    * @param variation
    * @returns Promise<string | undefined>
@@ -338,6 +357,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     copySSHPublicKey,
 
     // docker compose actions
+    up,
     buildUp,
     down,
     restart,
