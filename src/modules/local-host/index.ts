@@ -89,7 +89,13 @@ const localHostFactory = (): ILocalHost => {
     return execute('docker', ['compose', 'logs', '-f']);
   };
 
-
+  /**
+   * Remove all unused containers, networks and images (both dangling and unused).
+   * @returns Promise<string | undefined>
+   */
+  const prune = (): Promise<string | undefined> => (
+    execute('docker', ['system', 'prune', '--all', '--force'])
+  );
 
   /**
    * Runs the tests for a chosen variation.
@@ -132,6 +138,7 @@ const localHostFactory = (): ILocalHost => {
     restart,
     logs,
 
+    prune,
     apiTest,
 
     // cli management actions

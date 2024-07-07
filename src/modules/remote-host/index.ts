@@ -221,13 +221,13 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Stops containers and removes containers, networks, volumes, and images created by up.
    * @returns Promise<string | undefined>
    */
-  const down = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'down']);
+  const down = (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'down']);
 
   /**
    * Restarts all stopped and running services.
    * @returns Promise<string | undefined>
    */
-  const restart = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'restart']);
+  const restart = (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'restart']);
 
   /**
    * Displays log output from services. If a variation is provided, it narrows down the logs to a
@@ -241,6 +241,14 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     }
     return __sshCLI(['docker', 'compose', 'logs', '-f']);
   };
+
+  /**
+   * Remove all unused containers, networks and images (both dangling and unused).
+   * @returns Promise<string | undefined>
+   */
+  const prune = (): Promise<string | undefined> => (
+    __ssh([__address, 'docker', 'system', 'prune', '--all', '--force'])
+  );
 
 
 
@@ -375,6 +383,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     down,
     restart,
     logs,
+    prune,
 
     // cli management actions
     deployCLI,

@@ -19,7 +19,7 @@ type ILocalHost = {
   down: () => Promise<string | undefined>;
   restart:() => Promise<string | undefined>;
   logs: (variation: string | undefined) => Promise<string | undefined>;
-
+  prune: () => Promise<string | undefined>;
   apiTest: (variation: string) => Promise<string | undefined>;
 
   // cli management actions
