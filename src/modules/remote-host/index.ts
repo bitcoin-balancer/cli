@@ -255,6 +255,22 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
   /* **********************************************************************************************
+   *                                 DATABASE MANAGEMENT ACTIONS                                  *
+   ********************************************************************************************** */
+
+  /**
+   * Initializes a psql session in the postgres container.
+   * @returns Promise<string | undefined>
+   */
+  const psql = (): Promise<string | undefined> => __sshCLI([
+    'docker', 'compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres',
+  ]);
+
+
+
+
+
+  /* **********************************************************************************************
    *                                    CLI MANAGEMENT ACTIONS                                    *
    ********************************************************************************************** */
 
@@ -384,6 +400,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     restart,
     logs,
     prune,
+
+    // databse management actions
+    psql,
 
     // cli management actions
     deployCLI,

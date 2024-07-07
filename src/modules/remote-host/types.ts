@@ -65,6 +65,9 @@ type IRemoteHost = {
   logs: (variation: string | undefined) => Promise<string | undefined>;
   prune: () => Promise<string | undefined>;
 
+  // databse management actions
+  psql: () => Promise<string | undefined>;
+
   // cli management actions
   deployCLI: () => Promise<string>;
 

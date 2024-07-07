@@ -109,6 +109,22 @@ const localHostFactory = (): ILocalHost => {
 
 
 
+
+  /* **********************************************************************************************
+   *                                 DATABASE MANAGEMENT ACTIONS                                  *
+   ********************************************************************************************** */
+
+  /**
+   * Initializes a psql session in the postgres container.
+   * @returns Promise<string | undefined>
+   */
+  const psql = (): Promise<string | undefined> => (
+    execute('docker', ['compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres'])
+  );
+
+
+
+
   /* **********************************************************************************************
    *                                    CLI MANAGEMENT ACTIONS                                    *
    ********************************************************************************************** */
@@ -140,6 +156,9 @@ const localHostFactory = (): ILocalHost => {
 
     prune,
     apiTest,
+
+    // database management actions
+    psql,
 
     // cli management actions
     buildCLI,

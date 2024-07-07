@@ -22,6 +22,9 @@ type ILocalHost = {
   prune: () => Promise<string | undefined>;
   apiTest: (variation: string) => Promise<string | undefined>;
 
+  // databse management actions
+  psql: () => Promise<string | undefined>;
+
   // cli management actions
   buildCLI: () => Promise<string | undefined>;
 };

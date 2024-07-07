@@ -125,6 +125,24 @@ const MENU = [
     ],
   },
   {
+    name: 'Database Management',
+    description: 'Monitor and manage the database',
+    value: [
+      {
+        value: 'psql',
+        description: 'Start the terminal-based front-end to PostgreSQL',
+      },
+      {
+        value: 'backup-db',
+        description: 'Takes a snapshot of the database and generates a backup file',
+      },
+      {
+        value: 'restore-db',
+        description: 'Cleans the current database and restores a backup file',
+      },
+    ],
+  },
+  {
     name: 'Environment Variable Assets',
     description: 'Generate and deploy environment variable assets',
     value: [
