@@ -40,6 +40,18 @@ const localHostFactory = (): ILocalHost => {
   };
 
   /**
+   * Builds all the images and pushes them to the registry (Docker Hub).
+   * @returns Promise<string>
+   */
+  const buildAndPushImages = async (): Promise<string | undefined> => {
+    // generate the compose.yaml file
+    generate();
+
+    // build and push the images
+    return execute('docker', ['compose', 'build', '--push']);
+  };
+
+  /**
    * Stops containers and removes containers, networks, volumes, and images created by up.
    * @returns Promise<string | undefined>
    */
@@ -70,6 +82,7 @@ const localHostFactory = (): ILocalHost => {
 
     // docker compose actions
     buildUp,
+    buildAndPushImages,
     down,
 
     // cli management actions

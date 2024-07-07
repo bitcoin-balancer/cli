@@ -14,6 +14,7 @@ type ILocalHost = {
 
   // docker compose actions
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
+  buildAndPushImages: () => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
 
   // cli management actions

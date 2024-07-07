@@ -59,6 +59,7 @@ const MENU = [
         value: 'build-up:restore-mode',
         description: 'Builds all the images and starts the containers in RESTORE_MODE',
       },
+      new Separator(),
       {
         value: 'build-push',
         description: 'Builds all the images and pushes them to the registry (Docker Hub)',

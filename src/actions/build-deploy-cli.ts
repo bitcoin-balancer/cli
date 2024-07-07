@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { mergePayloads } from '../modules/shared/utils/index.js';
 import { localHostFactory } from '../modules/local-host/index.js';
 import { remoteHostFactory } from '../modules/remote-host/index.js';
 
@@ -8,14 +9,13 @@ import { remoteHostFactory } from '../modules/remote-host/index.js';
  */
 export default async () => {
   // instantiate the hosts
-  let payload = '';
   const localHost = localHostFactory();
   const remoteHost = await remoteHostFactory();
 
   // generate the build
-  payload += await localHost.buildCLI();
+  const buildPayload = await localHost.buildCLI();
 
   // deploy it to the remote host
-  payload += await remoteHost.deployCLI();
-  console.log(payload);
+  const deployPayload = await remoteHost.deployCLI();
+  console.log(mergePayloads([buildPayload, deployPayload]));
 };
