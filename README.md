@@ -170,6 +170,16 @@ npm start
   <br/>
 </details>
 <details>
+  <summary><code>build-push</code></summary>
+  <br/>
+  Builds all the images and pushes them to the registry (Docker Hub).
+
+  ```bash
+  docker compose build --push
+  ```
+  <br/>
+</details>
+<details>
   <summary><code>down</code></summary>
   <br/>
   Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
