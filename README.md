@@ -17,23 +17,6 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 <br/>
 <br/>
 
-## Guides
-
-- [Environment Variables](./docs/environment-variables/index.md)
-
-- [Remote Host Configuration (Optional)](./docs/remote-host/index.md)
-
-- [Telegram Integration (Optional)](./docs/telegram/index.md)
-
-- [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
-
-
-
-
-
-<br/>
-<br/>
-
 ## Requirements
 
 ### Software
@@ -71,6 +54,23 @@ npm install
 npm run build
 npm start
 ```
+
+
+
+
+
+<br/>
+<br/>
+
+## Guides
+
+- [Environment Variables](./docs/environment-variables/index.md)
+
+- [Remote Host Configuration (Optional)](./docs/remote-host/index.md)
+
+- [Telegram Integration (Optional)](./docs/telegram/index.md)
+
+- [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
 
 
 

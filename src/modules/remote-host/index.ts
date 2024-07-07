@@ -204,6 +204,12 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    */
   const down = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'down']);
 
+  /**
+   * Restarts all stopped and running services.
+   * @returns Promise<string | undefined>
+   */
+  const restart = async (): Promise<string | undefined> => __sshCLI(['docker', 'compose', 'restart']);
+
 
 
 
@@ -334,6 +340,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // docker compose actions
     buildUp,
     down,
+    restart,
 
     // cli management actions
     deployCLI,

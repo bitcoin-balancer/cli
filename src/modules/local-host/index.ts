@@ -57,6 +57,14 @@ const localHostFactory = (): ILocalHost => {
    */
   const down = (): Promise<string | undefined> => execute('docker', ['compose', 'down']);
 
+  /**
+   * Restarts all stopped and running services.
+   * @returns Promise<string | undefined>
+   */
+  const restart = (): Promise<string | undefined> => execute('docker', ['compose', 'restart']);
+
+
+
 
 
   /* **********************************************************************************************
@@ -84,6 +92,7 @@ const localHostFactory = (): ILocalHost => {
     buildUp,
     buildAndPushImages,
     down,
+    restart,
 
     // cli management actions
     buildCLI,
