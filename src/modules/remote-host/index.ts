@@ -3,7 +3,7 @@ import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
 import { isDatabaseBackupDestPathValid } from './validations.js';
-import { INodeScriptName, IRemoteHost } from './types.js';
+import { INodeScriptName, IVolumeName, IRemoteHost } from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -41,7 +41,7 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
   // the name of the volume used to manage the PostgreSQL database backup and restore actions
   // do not confuse this volume with 'pgdata' which is where the actual data is stored
-  const __pgdataManagementVolume = 'balancer_pgdata-management';
+  const __pgdataManagementVolume: IVolumeName = 'balancer_pgdata-management';
 
   // the remote host utilities' instance
   const __utils = remoteHostUtilsFactory(__privateKey, __server);

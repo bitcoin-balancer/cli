@@ -1,6 +1,11 @@
 import { isFile } from 'fs-utils-sync';
 import { execute } from '../shared/command/index.js';
-import { INodeScriptName, IRemoteHostFileSystem, IRemoteHostUtils } from './types.js';
+import {
+  INodeScriptName,
+  IVolumeName,
+  IRemoteHostFileSystem,
+  IRemoteHostUtils,
+} from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -70,20 +75,20 @@ const remoteHostFileSystemFactory = (
 
   /**
    * Retrieves the remote absolute path for a volume based on a name.
-   * @param volumeName
+   * @param name
    * @returns Promise<string>
    * @throws
    * - if the path cannot be extracted for any reason.
    */
-  const getAbsolutePathForRemoteVolume = async (volumeName: string): Promise<string> => {
+  const getAbsolutePathForRemoteVolume = async (name: IVolumeName): Promise<string> => {
     // retrieve the mount path
     const volPath = await execute(
       'ssh',
-      __utils.args([__address, 'docker', 'volume', 'inspect', '--format', "'{{ .Mountpoint }}'", volumeName]),
+      __utils.args([__address, 'docker', 'volume', 'inspect', '--format', "'{{ .Mountpoint }}'", name]),
       'pipe',
     );
     if (typeof volPath !== 'string' || !volPath.length) {
-      throw new Error(`The path for ${volumeName} could not be extracted. Received: ${volPath}`);
+      throw new Error(`The path for ${name} could not be extracted. Received: ${volPath}`);
     }
     return volPath.replace(/(\r\n|\n|\r)/gm, '');
   };

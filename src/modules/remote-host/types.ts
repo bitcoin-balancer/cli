@@ -12,6 +12,12 @@
 type INodeScriptName = 'compose-file';
 
 /**
+ * Volume Name
+ * All volumes created and managed by Docker Compose are named.
+ */
+type IVolumeName = 'balancer_pgdata-management';
+
+/**
  * Remote Host Utils
  * The module in charge of providing utility funcs to simplify interactions with the remote host.
  */
@@ -31,7 +37,7 @@ type IRemoteHostFileSystem = {
   localCLIPath: (elementPath?: string) => string;
   remoteCLIPath: (elementPath?: string) => string;
   remoteScriptPath: (name: INodeScriptName) => string;
-  getAbsolutePathForRemoteVolume: (volumeName: string) => Promise<string>;
+  getAbsolutePathForRemoteVolume: (name: IVolumeName) => Promise<string>;
 
   // actions
   pushFile: (srcPath: string, destPath: string) => Promise<string | undefined>;
@@ -87,6 +93,7 @@ type IRemoteHost = {
  ************************************************************************************************ */
 export type {
   INodeScriptName,
+  IVolumeName,
   IRemoteHostUtils,
   IRemoteHostFileSystem,
   IRemoteHost,
