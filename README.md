@@ -238,6 +238,7 @@ npm start
   ```
 
   <br/>
+
   The following variations are supported:
 
   - <code>logs:postgres</code> displays log output from the postgres service
@@ -339,11 +340,15 @@ npm start
   <br/>
   Generates a database backup file, pulls it to the local host and performs a clean up once complete.
 
-  Firstly, it generates a backup file ($TIMESTAMP.dump) and places it in the <code>balancer_pgdata-management</code> volume.
+  <br/>
+
+  Firstly, it generates a backup file (<code>$TIMESTAMP.dump</code>) and places it in the <code>balancer_pgdata-management</code> volume.
 
   ```bash
   docker compose exec postgres pg_dump -U postgres -f /var/lib/pgdata-management/$TIMESTAMP.dump -Fc
   ```
+
+  <br/>
 
   Next, it pulls the backup file from the remote host to a specified destination directory in the localhost:
 
@@ -351,6 +356,8 @@ npm start
   scp root@ip:/var/lib/docker/volumes/balancer_pgdata-management/_data/$TIMESTAMP.dump /localhost/dest/dir
   ```
 
+  <br/>
+  
   Finally, it cleans up the <code>balancer_pgdata-management</code> volume:
 
   ```bash
