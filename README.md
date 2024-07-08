@@ -365,6 +365,36 @@ npm start
   ```
   <br/>
 </details>
+<details>
+  <summary><code>restore-db</code></summary>
+  <br/>
+  Restores a chosen backup file after cleaning the current state of the database and performs a clean up once complete.
+
+  <br/>
+
+  Firstly, it pushes the chosen backup file (<code>$TIMESTAMP.dump</code>) into the <code>balancer_pgdata-management</code> volume.
+
+  ```bash
+  scp /localhost/src/$TIMESTAMP.dump root@ip:/var/lib/docker/volumes/balancer_pgdata-management/_data/$TIMESTAMP.dump
+  ```
+
+  <br/>
+
+  Next, it restores the database by making use of the backup file:
+
+  ```bash
+  docker compose exec postgres pg_restore --clean --if-exists -U postgres -d postgres /var/lib/pgdata-management/$TIMESTAMP.dump
+  ```
+
+  <br/>
+  
+  Finally, it cleans up the <code>balancer_pgdata-management</code> volume:
+
+  ```bash
+  ssh root@ip rm -f /var/lib/docker/volumes/balancer_pgdata-management/_data/$TIMESTAMP.dump
+  ```
+  <br/>
+</details>
 
 
 
