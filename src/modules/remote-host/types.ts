@@ -31,6 +31,7 @@ type IRemoteHostFileSystem = {
   localCLIPath: (elementPath?: string) => string;
   remoteCLIPath: (elementPath?: string) => string;
   remoteScriptPath: (name: INodeScriptName) => string;
+  getAbsolutePathForRemoteVolume: (volumeName: string) => Promise<string>;
 
   // actions
   pushFile: (srcPath: string, destPath: string) => Promise<string | undefined>;

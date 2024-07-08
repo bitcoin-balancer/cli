@@ -68,6 +68,27 @@ const remoteHostFileSystemFactory = (
   const remoteScriptPath = (name: INodeScriptName): string => `dist/actions/scripts/${name}.js`;
 
 
+  /**
+   * Retrieves the remote absolute path for a volume based on a name.
+   * @param volumeName
+   * @returns Promise<string>
+   * @throws
+   * - if the path cannot be extracted for any reason.
+   */
+  const getAbsolutePathForRemoteVolume = async (volumeName: string): Promise<string> => {
+    // retrieve the mount path
+    const volPath = await execute(
+      'ssh',
+      __utils.args([__address, 'docker', 'volume', 'inspect', '--format', "'{{ .Mountpoint }}'", volumeName]),
+      'pipe',
+    );
+    if (typeof volPath !== 'string' || !volPath.length) {
+      throw new Error(`The path for ${volumeName} could not be extracted. Received: ${volPath}`);
+    }
+    return volPath.replace(/(\r\n|\n|\r)/gm, '');
+  };
+
+
 
 
 
@@ -131,18 +152,6 @@ const remoteHostFileSystemFactory = (
   const removeDirectory = (dirPath: string): Promise<string | undefined> => (
     execute('ssh', __utils.args([__address, 'rm', '-r', '-f', dirPath]))
   );
-
-  /**
-   * Removes and creates a brand new directory (completely empty).
-   * @param dirPath
-   * @returns Promise<string | undefined>
-   */
-  /* const cleanDirectory = async (dirPath: string): Promise<string | undefined> => {
-    let payload = '';
-    payload += await removeDirectory(dirPath);
-    payload += await makeDirectory(dirPath);
-    return payload;
-  }; */
 
 
 
@@ -212,6 +221,7 @@ const remoteHostFileSystemFactory = (
     localCLIPath,
     remoteCLIPath,
     remoteScriptPath,
+    getAbsolutePathForRemoteVolume,
 
     // actions
     pushFile,

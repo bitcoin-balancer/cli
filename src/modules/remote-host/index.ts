@@ -39,6 +39,10 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   // the list of assets that will be deployed to the remote host
   const __sourceCode = __config.sourceCode;
 
+  // the name of the volume used to manage the PostgreSQL database backup and restore actions
+  // do not confuse this volume with 'pgdata' which is where the actual data is stored
+  const __pgdataManagementVolume = 'balancer_pgdata-management';
+
   // the remote host utilities' instance
   const __utils = remoteHostUtilsFactory(__privateKey, __server);
 
@@ -281,18 +285,23 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
       'docker', 'compose', 'exec', 'postgres', 'pg_dump', '-U', 'postgres', '-f', relativePath, '-Fc',
     ]);
 
+    // calculate the absolute path for the volume and the backup file
+    const volumeAbsolutePath = await __fs.getAbsolutePathForRemoteVolume(__pgdataManagementVolume);
+    const backupAbsolutePath = `${volumeAbsolutePath}/${name}`;
+
     // pull the backup file to the local host
-    // ...
+    const pullPayload = await __fs.pullFile(backupAbsolutePath, destPath);
 
     // delete the file from the volume
-    // ...
+    const cleanupPayload = await __fs.removeFile(backupAbsolutePath);
 
     // finally, return the merged payloads
-    return mergePayloads([backupPayload]);
+    return mergePayloads([backupPayload, pullPayload, cleanupPayload]);
   };
 
 
   const restoreDatabaseBackup = async (srcPath: string): Promise<string | undefined> => srcPath;
+
 
 
 
