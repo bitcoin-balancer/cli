@@ -46,6 +46,7 @@ const generatePOSTGRESService = (): string => {
   _ += '      - POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}\n';
   _ += '    volumes:\n';
   _ += '      - pgdata:/var/lib/postgresql/data\n';
+  _ += '      - pgdata-management:/var/lib/pgdata-management\n';
   _ += '    expose:\n';
   _ += '      - 5432:5432\n';
   _ += '    healthcheck:\n';
