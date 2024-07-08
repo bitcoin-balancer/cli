@@ -37,7 +37,6 @@ const generatePOSTGRESService = (): string => {
   _ += '    container_name: balancer-postgres\n';
   _ += '    image: postgres:16.3-alpine3.20\n';
   _ += '    restart: always\n';
-  _ += '    user: postgres\n';
   _ += '    secrets:\n';
   _ += '      - POSTGRES_PASSWORD_FILE\n';
   _ += '    environment:\n';

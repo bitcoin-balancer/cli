@@ -56,6 +56,12 @@ const remoteHostUtilsFactory = (
     }
   };
 
+  /**
+   * Generates the name to be used for a database backup.
+   * @returns string
+   */
+  const generateDatabaseBackupName = (): string => `${Date.now()}.dump`;
+
 
 
 
@@ -70,6 +76,7 @@ const remoteHostUtilsFactory = (
     // actions
     args,
     isOnline,
+    generateDatabaseBackupName,
   });
 };
 

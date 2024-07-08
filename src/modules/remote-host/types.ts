@@ -19,6 +19,7 @@ type IRemoteHostUtils = {
   // actions
   args: (partialArgs: string[]) => string[];
   isOnline: () => Promise<boolean>;
+  generateDatabaseBackupName: () => string;
 };
 
 /**
@@ -33,6 +34,7 @@ type IRemoteHostFileSystem = {
 
   // actions
   pushFile: (srcPath: string, destPath: string) => Promise<string | undefined>;
+  pullFile: (srcPath: string, destPath: string) => Promise<string | undefined>;
   removeFile: (filePath: string) => Promise<string | undefined>;
   makeDirectory: (dirPath: string) => Promise<string | undefined>;
   pushDirectory: (srcPath: string, destPath: string) => Promise<string | undefined>;
@@ -67,6 +69,8 @@ type IRemoteHost = {
 
   // databse management actions
   psql: () => Promise<string | undefined>;
+  generateDatabaseBackup: (destPath: string) => Promise<string | undefined>;
+  restoreDatabaseBackup: (srcPath: string) => Promise<string | undefined>;
 
   // cli management actions
   deployCLI: () => Promise<string>;

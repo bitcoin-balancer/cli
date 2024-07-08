@@ -1,8 +1,8 @@
-import { getDirectoryElements } from 'fs-utils-sync';
 import { readRemoteHostConfigFile, mergePayloads } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
+import { isDatabaseBackupDestPathValid } from './validations.js';
 import { INodeScriptName, IRemoteHost } from './types.js';
 
 /* ************************************************************************************************
@@ -20,9 +20,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   /* **********************************************************************************************
    *                                          PROPERTIES                                          *
    ********************************************************************************************** */
-
-  // the name of the host
-  // const __NAME: IHostName = 'remote';
 
   // the configuration object extracted from the remote-host.config.json file
   const __config = readRemoteHostConfigFile();
@@ -266,6 +263,36 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     'docker', 'compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres',
   ]);
 
+  /**
+   * Generates a database backup file, pulls it to the local host and performs a clean up once
+   * complete.
+   * @param destPath
+   * @returns Promise<string | undefined>
+   */
+  const generateDatabaseBackup = async (destPath: string): Promise<string | undefined> => {
+    // generate the name of the backup file and the remote path
+    const name = __utils.generateDatabaseBackupName();
+
+    // generate the backup file's path within the postgres container
+    const relativePath = `/var/lib/pgdata-management/${name}`;
+
+    // generate the backup file
+    const backupPayload = await __sshCLI([
+      'docker', 'compose', 'exec', 'postgres', 'pg_dump', '-U', 'postgres', '-f', relativePath, '-Fc',
+    ]);
+
+    // pull the backup file to the local host
+    // ...
+
+    // delete the file from the volume
+    // ...
+
+    // finally, return the merged payloads
+    return mergePayloads([backupPayload]);
+  };
+
+
+  const restoreDatabaseBackup = async (srcPath: string): Promise<string | undefined> => srcPath;
 
 
 
@@ -300,39 +327,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
   /* **********************************************************************************************
-   *                                 DATABASE MANAGEMENT ACTIONS                                  *
-   ********************************************************************************************** */
-
-  // ...
-
-
-
-
-
-  /* **********************************************************************************************
    *                             ENVIRONMENT VARIABLE ASSETS ACTIONS                              *
    ********************************************************************************************** */
-
-  /**
-   * Sets the permissions for a secret file.
-   * User: read, write & execute
-   * Other: read
-   * @param name
-   * @returns Promise<string | undefined>
-   */
-  const __setPermissionsForSecret = (name: string): Promise<string | undefined> => __sshCLI([
-    'chmod', 'u=rwx,o=r', `secrets/${name}`,
-  ]);
-
-  /**
-   * Sets the permissions for all the secrets that have just been deployed.
-   * @returns Promise<(string | undefined)[]>
-   */
-  const __setPermissionsForAllSecrets = (): Promise<(string | undefined)[]> => {
-    // read the list of secrets
-    const { files } = getDirectoryElements(__fs.localCLIPath('secrets'), { includeExts: ['.txt'] });
-    return Promise.all(files.map((el) => __setPermissionsForSecret(el.baseName)));
-  };
 
   /**
    * Deploys the environment variable assets to the remote host and sets the appropriate permissions
@@ -351,11 +347,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
       __fs.deploy(`${srcPath}/secrets`, __fs.remoteCLIPath('secrets')),
     ]);
 
-    // set the correct permissions
-    const permissionsPayload = await __setPermissionsForAllSecrets();
-
     // finally, return the combined payloads
-    return mergePayloads([...assetsDeploymentPayload, ...permissionsPayload]);
+    return mergePayloads(assetsDeploymentPayload);
   };
 
 
@@ -403,6 +396,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // databse management actions
     psql,
+    generateDatabaseBackup,
+    restoreDatabaseBackup,
 
     // cli management actions
     deployCLI,
@@ -422,6 +417,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 export {
   // types
   type IRemoteHost,
+
+  // validations
+  isDatabaseBackupDestPathValid,
 
   // factory
   remoteHostFactory,

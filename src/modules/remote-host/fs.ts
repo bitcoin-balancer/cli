@@ -86,6 +86,16 @@ const remoteHostFileSystemFactory = (
   );
 
   /**
+   * Pulls a file from the remote host to the local host.
+   * @param srcPath
+   * @param destPath
+   * @returns Promise<string | undefined>
+   */
+  const pullFile = (srcPath: string, destPath: string): Promise<string | undefined> => (
+    execute('scp', __utils.args([`${__address}:${srcPath}`, destPath]))
+  );
+
+  /**
    * Removes a file from the remote host.
    * @param filePath
    * @returns Promise<string | undefined>
@@ -205,6 +215,7 @@ const remoteHostFileSystemFactory = (
 
     // actions
     pushFile,
+    pullFile,
     removeFile,
     makeDirectory,
     pushDirectory,
