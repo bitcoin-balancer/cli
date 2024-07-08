@@ -66,7 +66,7 @@ npm start
 
 - [Environment Variables](./docs/environment-variables/index.md)
 
-- [Remote Host Configuration (Optional)](./docs/remote-host/index.md)
+- [Remote Host Configuration](./docs/remote-host/index.md)
 
 - [Telegram Integration (Optional)](./docs/telegram/index.md)
 
