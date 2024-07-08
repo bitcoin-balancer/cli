@@ -49,7 +49,7 @@ const generatePOSTGRESService = (): string => {
   _ += '    expose:\n';
   _ += '      - 5432:5432\n';
   _ += '    healthcheck:\n';
-  _ += '      test: [ "CMD", "pg_isready" ]\n';
+  _ += '      test: [ "CMD", "pg_isready", "-U", "postgres" ]\n';
   _ += '      interval: "10s"\n';
   _ += '      timeout: "5s"\n';
   _ += '      retries: "5"\n';
