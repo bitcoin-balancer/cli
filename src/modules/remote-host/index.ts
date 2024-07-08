@@ -1,8 +1,9 @@
+import { basename } from 'node:path';
 import { readRemoteHostConfigFile, mergePayloads } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
-import { isDatabaseBackupDestPathValid } from './validations.js';
+import { isDatabaseBackupDestPathValid, isDatabaseBackupSrcPathValid } from './validations.js';
 import { INodeScriptName, IVolumeName, IRemoteHost } from './types.js';
 
 /* ************************************************************************************************
@@ -271,9 +272,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Generates a database backup file, pulls it to the local host and performs a clean up once
    * complete.
    * @param destPath
-   * @returns Promise<string | undefined>
+   * @returns Promise<string>
    */
-  const generateDatabaseBackup = async (destPath: string): Promise<string | undefined> => {
+  const generateDatabaseBackup = async (destPath: string): Promise<string> => {
     // generate the name of the backup file and the remote path
     const name = __utils.generateDatabaseBackupName();
 
@@ -299,8 +300,36 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     return mergePayloads([backupPayload, pullPayload, cleanupPayload]);
   };
 
+  /**
+   * Restores a chosen backup file after cleaning the current state of the database and performs a
+   * clean up once complete.
+   * @param srcPath
+   * @returns Promise<string>
+   */
+  const restoreDatabaseBackup = async (srcPath: string): Promise<string> => {
+    // init the name of the backup file
+    const backupFileName = basename(srcPath);
 
-  const restoreDatabaseBackup = async (srcPath: string): Promise<string | undefined> => srcPath;
+    // retrieve the absolute path to the pgdata-management volume
+    const volumeAbsolutePath = await __fs.getAbsolutePathForRemoteVolume(__pgdataManagementVolume);
+    const backupAbsolutePath = `${volumeAbsolutePath}/${backupFileName}`;
+
+    // push the backup file directly into the pgdata-management volume
+    const pushPayload = await __fs.pushFile(srcPath, backupAbsolutePath);
+
+    // restore the database
+    const relativePath = `/var/lib/pgdata-management/${backupFileName}`;
+    const restorePayload = await __sshCLI([
+      'docker', 'compose', 'exec', 'postgres', 'pg_restore', '--clean', '--if-exists',
+      '-U', 'postgres', '-d', 'postgres', relativePath,
+    ]);
+
+    // clean the pgdata-management volume
+    const cleanupPayload = await __fs.removeFile(backupAbsolutePath);
+
+    // finally, return the merge payloads
+    return mergePayloads([pushPayload, restorePayload, cleanupPayload]);
+  };
 
 
 
@@ -429,6 +458,7 @@ export {
 
   // validations
   isDatabaseBackupDestPathValid,
+  isDatabaseBackupSrcPathValid,
 
   // factory
   remoteHostFactory,

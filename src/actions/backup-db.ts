@@ -13,7 +13,7 @@ export default async () => {
 
   // prompt the user to input the destination path for the backup file
   const destPath = await input({
-    message: 'Enter the destination path for the backup file (local host directory)',
+    message: 'Enter the path where the backup file will be placed (local host directory)',
     validate: isDatabaseBackupDestPathValid,
   });
 

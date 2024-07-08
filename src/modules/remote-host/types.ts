@@ -76,8 +76,8 @@ type IRemoteHost = {
 
   // databse management actions
   psql: () => Promise<string | undefined>;
-  generateDatabaseBackup: (destPath: string) => Promise<string | undefined>;
-  restoreDatabaseBackup: (srcPath: string) => Promise<string | undefined>;
+  generateDatabaseBackup: (destPath: string) => Promise<string>;
+  restoreDatabaseBackup: (srcPath: string) => Promise<string>;
 
   // cli management actions
   deployCLI: () => Promise<string>;
