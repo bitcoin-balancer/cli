@@ -260,7 +260,7 @@ npm start
 </details>
 
 <details>
-  <summary><code>api-test:'$type'</code></summary>
+  <summary><code>api-test:$type</code></summary>
   <br/>
   Runs the automated tests on the api service for the chosen variation.
 
@@ -334,7 +334,30 @@ npm start
 
   <br/>
 </details>
+<details>
+  <summary><code>backup-db</code></summary>
+  <br/>
+  Generates a database backup file, pulls it to the local host and performs a clean up once complete.
 
+  Firstly, it generates a backup file ($TIMESTAMP.dump) and places it in the <code>balancer_pgdata-management</code> volume.
+
+  ```bash
+  docker compose exec postgres pg_dump -U postgres -f /var/lib/pgdata-management/$TIMESTAMP.dump -Fc
+  ```
+
+  Next, it pulls the backup file from the remote host to a specified destination directory in the localhost:
+
+  ```bash
+  scp root@ip:/var/lib/docker/volumes/balancer_pgdata-management/_data/$TIMESTAMP.dump /localhost/dest/dir
+  ```
+
+  Finally, it cleans up the <code>balancer_pgdata-management</code> volume:
+
+  ```bash
+  ssh root@ip rm -f /var/lib/docker/volumes/balancer_pgdata-management/_data/$TIMESTAMP.dump
+  ```
+  <br/>
+</details>
 
 
 
