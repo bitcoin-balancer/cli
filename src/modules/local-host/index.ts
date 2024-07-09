@@ -102,9 +102,9 @@ const localHostFactory = (): ILocalHost => {
    * @param variation
    * @returns Promise<string | undefined>
    */
-  const apiTest = (
-    variation: string,
-  ): Promise<string | undefined> => execute('npm', ['run', `test:${variation}`]);
+  const apiTest = (variation: string): Promise<string | undefined> => (
+    execute('docker', ['compose', 'exec', 'api', 'npm', 'run', `test:${variation}`])
+  );
 
 
 
