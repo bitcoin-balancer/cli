@@ -78,6 +78,8 @@ const generateAPIService = (testMode: boolean, restoreMode: boolean): string => 
   _ += '      - POSTGRES_PASSWORD_FILE\n';
   _ += '      - ROOT_ACCOUNT\n';
   _ += '      - TELEGRAM\n';
+  _ += '      - ALTCHA_SECRET\n';
+  _ += '      - JWT_SECRET\n';
   _ += '    environment:\n';
   _ += '      - NODE_ENV=${NODE_ENV}\n';
   _ += `      - TEST_MODE=${testMode}\n`;
