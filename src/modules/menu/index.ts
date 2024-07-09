@@ -90,6 +90,10 @@ const MENU = [
         value: 'logs:gui',
         description: 'Displays log output from the gui service',
       },
+      {
+        value: 'logs:cloudflared',
+        description: 'Displays log output from the cloudflared service',
+      },
       new Separator(),
       {
         value: 'prune',

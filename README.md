@@ -246,6 +246,8 @@ npm start
   - <code>logs:api</code> displays log output from the api service
 
   - <code>logs:gui</code> displays log output from the gui service
+
+  - <code>logs:cloudflared</code> displays log output from the cloudflared service
   <br/>
 </details>
 
