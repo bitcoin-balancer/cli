@@ -135,6 +135,8 @@ const generateCLOUDFLAREDService = (): string => {
   _ += '    image: cloudflare/cloudflared\n';
   _ += '    restart: unless-stopped\n';
   _ += '    command: tunnel run\n';
+  _ += '    secrets:\n';
+  _ += '      - TUNNEL_TOKEN\n';
   _ += '    environment:\n';
   _ += '      - TUNNEL_TOKEN=${TUNNEL_TOKEN}\n';
   _ += __generateLogging();
