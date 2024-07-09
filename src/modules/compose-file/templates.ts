@@ -90,6 +90,8 @@ const generateAPIService = (testMode: boolean, restoreMode: boolean): string => 
   _ += '      - POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}\n';
   _ += '      - ROOT_ACCOUNT=${ROOT_ACCOUNT}\n';
   _ += '      - TELEGRAM=${TELEGRAM}\n';
+  _ += '      - ALTCHA_SECRET=${ALTCHA_SECRET}\n';
+  _ += '      - JWT_SECRET=${JWT_SECRET}\n';
   _ += '    depends_on:\n';
   _ += '      postgres:\n';
   _ += '        condition: service_healthy\n';
