@@ -91,8 +91,8 @@ const MENU = [
         description: 'Displays log output from the gui service',
       },
       {
-        value: 'logs:cloudflared',
-        description: 'Displays log output from the cloudflared service',
+        value: 'logs:ct',
+        description: 'Displays log output from the ct service',
       },
       new Separator(),
       {
