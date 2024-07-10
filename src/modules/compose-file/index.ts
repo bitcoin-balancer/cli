@@ -1,6 +1,6 @@
 import { writeTextFile } from 'fs-utils-sync';
+import { getEnvironmentVariableInsights } from '../shared/utils/index.js';
 import { IComposeFileConfig } from './types.js';
-import { getEnvironmentVariableInsights } from './utils.js';
 import { canGenerateComposeFile } from './validations.js';
 import {
   generatePOSTGRESService,

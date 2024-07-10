@@ -1,4 +1,4 @@
-import { IRemoteHostServerConfig } from '../shared/types.js';
+import { IRemoteHostServerConfig } from '../shared/utils/types.js';
 import { execute } from '../shared/command/index.js';
 import { IRemoteHostUtils } from './types.js';
 

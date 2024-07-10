@@ -1,11 +1,13 @@
-import { readJSONFile } from 'fs-utils-sync';
+import { basename } from 'node:path';
+import { readJSONFile, getDirectoryElements, readTextFile } from 'fs-utils-sync';
 import {
   PackageFileSchema,
   IPackageFile,
-  IDecodedMenuAction,
   IRemoteHostConfig,
   RemoteHostConfigSchema,
-} from '../types.js';
+  IEnvironmentVariableInsights,
+  IDecodedMenuAction,
+} from './types.js';
 
 /* ************************************************************************************************
  *                                           FS HELPERS                                           *
@@ -28,6 +30,36 @@ const readPackageFile = (): IPackageFile => PackageFileSchema.parse(readJSONFile
 const readRemoteHostConfigFile = (): IRemoteHostConfig => (
   RemoteHostConfigSchema.parse(readJSONFile('remote-host.config.json'))
 );
+
+/**
+ * Retrieves the list of secrets located in the secrets directory.
+ * @returns string[]
+ * @throws
+ * - if no secrets are found in the directory
+ */
+const getSecrets = (): string[] => {
+  const { files } = getDirectoryElements('secrets', { includeExts: ['.txt'] });
+  if (!files.length) {
+    throw new Error('The secrets directory does not contain any secret files.');
+  }
+  return files.map((file) => basename(file.baseName, '.txt'));
+};
+
+/**
+ * Extracts the .env file's insights so the compose.yaml file can be built.
+ * @returns IEnvironmentVariableInsights
+ * @throws
+ * - if the .env file doesn't exist or cannot be loaded for any reason
+ * - if no secrets are found in the directory
+ */
+const getEnvironmentVariableInsights = (): IEnvironmentVariableInsights => {
+  const file = readTextFile('.env');
+  return {
+    isProduction: file.includes('NODE_ENV=production'),
+    hasCloudflaredToken: file.includes('TUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN'),
+    secrets: getSecrets(),
+  };
+};
 
 
 
@@ -80,9 +112,14 @@ const mergePayloads = (payloads: (string | undefined)[]): string => {
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
+  // types
+  // ...
+
   // fs helpers
   readPackageFile,
   readRemoteHostConfigFile,
+  getSecrets,
+  getEnvironmentVariableInsights,
 
   // actions helpers
   decodeMenuAction,

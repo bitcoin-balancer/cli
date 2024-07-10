@@ -32,27 +32,6 @@ type IPackageFile = z.infer<typeof PackageFileSchema>;
 
 
 /* ************************************************************************************************
- *                                              MENU                                              *
- ************************************************************************************************ */
-
-/**
- * Decoded Menu Action
- * The menu displays encoded actions to simplify the choosing process. The actions need to be
- * decoded into id and variation so they can be properly interacted with.
- */
-type IDecodedMenuAction = {
-  // the id of the action that will be executed
-  id: string,
-
-  // optional variation of an action
-  variation?: string,
-};
-
-
-
-
-
-/* ************************************************************************************************
  *                                              HOST                                              *
  ************************************************************************************************ */
 
@@ -90,6 +69,50 @@ type IRemoteHostConfig = z.infer<typeof RemoteHostConfigSchema>;
 
 
 /* ************************************************************************************************
+ *                                      ENVIRONMENT VARIABLES                                     *
+ ************************************************************************************************ */
+
+/**
+ * Environment Variable Insights
+ * General data regarding the environment variable assets that are needed to build the compose file.
+ */
+type IEnvironmentVariableInsights = {
+  // true if NODE_ENV === 'production'
+  isProduction: boolean;
+
+  // true if TUNNEL_TOKEN === '/run/secrets/TUNNEL_TOKEN'
+  hasCloudflaredToken: boolean;
+
+  // the list of secrets located in the 'secrets' directory
+  secrets: string[];
+};
+
+
+
+
+
+/* ************************************************************************************************
+ *                                              MENU                                              *
+ ************************************************************************************************ */
+
+/**
+ * Decoded Menu Action
+ * The menu displays encoded actions to simplify the choosing process. The actions need to be
+ * decoded into id and variation so they can be properly interacted with.
+ */
+type IDecodedMenuAction = {
+  // the id of the action that will be executed
+  id: string,
+
+  // optional variation of an action
+  variation?: string,
+};
+
+
+
+
+
+/* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
@@ -97,12 +120,15 @@ export {
   PackageFileSchema,
   type IPackageFile,
 
-  // menu
-  type IDecodedMenuAction,
-
   // host
   RemoteHostServerConfigSchema,
   type IRemoteHostServerConfig,
   RemoteHostConfigSchema,
   type IRemoteHostConfig,
+
+  // environment variables
+  IEnvironmentVariableInsights,
+
+  // menu
+  type IDecodedMenuAction,
 };
