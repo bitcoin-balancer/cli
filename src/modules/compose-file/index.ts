@@ -62,7 +62,9 @@ const generateComposeFile = ({
   _ += '\n\n\n\n\n';
 
   // secrets
-  _ += generateSecrets(secrets);
+  _ += generateSecrets(
+    includeCTService && !secrets.includes('TUNNEL_TOKEN') ? [...secrets, 'TUNNEL_TOKEN'] : secrets,
+  );
 
   // finally, save the file
   writeTextFile('compose.yaml', _);
@@ -76,9 +78,5 @@ const generateComposeFile = ({
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
-  // utils
-  getEnvironmentVariableInsights,
-
-  // implementation
   generateComposeFile,
 };

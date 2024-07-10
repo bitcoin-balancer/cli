@@ -210,21 +210,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // build the compose.yaml file based on the variation
     const composeFilePayload = await __composeFile(variation);
 
-    /* // init the args
-    //let args: string[] = ['docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach']
-
-    // if the cloudflared token was provided, build the image before starting the containers
-    const { hasTunnelToken } = getEnvironmentVariableInsights();
-    if (hasTunnelToken) {
-      await __sshCLI([
-        'docker', 'compose', 'build', 'cloudflared',
-      ]);
-      args = [
-        'docker', 'build', '-t', 'balancer-cloudflared:latest', '-f', 'Dockerfile.cloudflared', './'
-        'docker', 'compose', 'build', 'cloudflared',
-        '&&', ...args];
-    } */
-
     // execute a pull to make sure it's running the latest images
     const pullPayload = await __sshCLI([
       'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
