@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import { argv } from 'node:process';
 import { parseArgs } from 'argv-utils';
-import { generate } from '../../modules/compose-file/index.js';
+import { generateComposeFile } from '../../modules/compose-file/index.js';
 
 /**
  * Compose File
@@ -14,7 +14,10 @@ import { generate } from '../../modules/compose-file/index.js';
 
   // execute the action
   try {
-    generate({ testMode: args.testMode === 'true', restoreMode: args.restoreMode === 'true' });
+    generateComposeFile({
+      testMode: args.testMode === 'true',
+      restoreMode: args.restoreMode === 'true',
+    });
 
     // end the process successfully
     process.exit(0);

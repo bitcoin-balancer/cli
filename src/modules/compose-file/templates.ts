@@ -61,9 +61,14 @@ const generatePOSTGRESService = (): string => {
  * Generates the content for the api service.
  * @param testMode
  * @param restoreMode
+ * @param hasTunnelToken
  * @returns string
  */
-const generateAPIService = (testMode: boolean, restoreMode: boolean): string => {
+const generateAPIService = (
+  testMode: boolean,
+  restoreMode: boolean,
+  hasTunnelToken: boolean,
+): string => {
   let _ = '';
   _ += '  api:\n';
   _ += '    container_name: balancer-api\n';
@@ -84,6 +89,7 @@ const generateAPIService = (testMode: boolean, restoreMode: boolean): string => 
   _ += '      - NODE_ENV=${NODE_ENV}\n';
   _ += `      - TEST_MODE=${testMode}\n`;
   _ += `      - RESTORE_MODE=${restoreMode}\n`;
+  _ += `      - HAS_TUNNEL_TOKEN=${hasTunnelToken}\n`;
   _ += '      - API_PORT=5075\n';
   _ += '      - POSTGRES_HOST=${POSTGRES_HOST}\n';
   _ += '      - POSTGRES_USER=${POSTGRES_USER}\n';
@@ -128,12 +134,13 @@ const generateGUIService = (): string => {
  * Generates the content for the cloudflare tunnel service.
  * @returns string
  */
-const generateCLOUDFLAREDService = (): string => {
+const generateCTService = (): string => {
   let _ = '';
-  _ += '  cloudflared:\n';
-  _ += '    container_name: balancer-cloudflared\n';
+  _ += '  ct:\n';
+  _ += '    container_name: balancer-ct\n';
   _ += '    build:\n';
-  _ += '      dockerfile: Dockerfile.cloudflared\n';
+  _ += '      context: ../ct\n';
+  _ += '    image: jesusgraterol/balancer-ct:latest\n';
   _ += '    user: root\n';
   _ += '    restart: unless-stopped\n';
   _ += '    secrets:\n';
@@ -141,25 +148,6 @@ const generateCLOUDFLAREDService = (): string => {
   _ += __generateLogging();
   return _;
 };
-
-/**
- * Generates the content for the cloudflare tunnel service.
- * @returns string
- */
-/* const generateCLOUDFLAREDService = (): string => {
-  let _ = '';
-  _ += '  cloudflared:\n';
-  _ += '    container_name: balancer-cloudflared\n';
-  _ += '    image: cloudflare/cloudflared\n';
-  _ += '    restart: unless-stopped\n';
-  _ += '    command: tunnel run\n';
-  // _ += '    secrets:\n';
-  // _ += '      - TUNNEL_TOKEN\n';
-  _ += '    environment:\n';
-  _ += '      - TUNNEL_TOKEN=${TUNNEL_TOKEN}\n';
-  _ += __generateLogging();
-  return _;
-}; */
 
 /**
  * Generates the content for the volumes.
@@ -199,7 +187,7 @@ export {
   generatePOSTGRESService,
   generateAPIService,
   generateGUIService,
-  generateCLOUDFLAREDService,
+  generateCTService,
   generateVolumes,
   generateSecrets,
 };

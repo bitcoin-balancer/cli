@@ -6,7 +6,7 @@ import {
   generatePOSTGRESService,
   generateAPIService,
   generateGUIService,
-  generateCLOUDFLAREDService,
+  generateCTService,
   generateSecrets,
   generateVolumes,
 } from './templates.js';
@@ -24,17 +24,16 @@ import {
  * - if testMode and restoreMode are both enabled simultaneously
  * - if NODE_ENV is set to 'production' and testMode is enabled
  * - if NODE_ENV is set to 'development' and restoreMode is enabled
- * - if the cloudflared token is set but NODE_ENV is set to 'development'
  */
-const generate = ({
+const generateComposeFile = ({
   testMode = false,
   restoreMode = false,
 }: Partial<IComposeFileConfig> = {}): void => {
   // extract the insights
-  const { isProduction, hasCloudflaredToken, secrets } = getEnvironmentVariableInsights();
+  const { isProduction, hasTunnelToken, secrets } = getEnvironmentVariableInsights();
 
   // validate the request
-  canGenerateComposeFile(isProduction, hasCloudflaredToken, testMode, restoreMode);
+  canGenerateComposeFile(isProduction, testMode, restoreMode);
 
   // header
   let _ = 'name: balancer\n\n';
@@ -44,16 +43,16 @@ const generate = ({
   _ += generatePOSTGRESService();
   _ += '\n\n\n';
 
-  _ += generateAPIService(testMode, restoreMode);
+  _ += generateAPIService(testMode, restoreMode, hasTunnelToken);
   _ += testMode ? '\n\n\n\n\n' : '\n\n\n';
 
   if (!testMode && !restoreMode) {
     _ += generateGUIService();
-    _ += hasCloudflaredToken ? '\n\n\n' : '\n\n\n\n\n';
+    _ += hasTunnelToken ? '\n\n\n' : '\n\n\n\n\n';
   }
 
-  if (hasCloudflaredToken) {
-    _ += generateCLOUDFLAREDService();
+  if (hasTunnelToken) {
+    _ += generateCTService();
     _ += '\n\n\n\n\n';
   }
 
@@ -80,5 +79,5 @@ export {
   getEnvironmentVariableInsights,
 
   // implementation
-  generate,
+  generateComposeFile,
 };

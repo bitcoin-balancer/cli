@@ -81,7 +81,7 @@ type IEnvironmentVariableInsights = {
   isProduction: boolean;
 
   // true if TUNNEL_TOKEN === '/run/secrets/TUNNEL_TOKEN'
-  hasCloudflaredToken: boolean;
+  hasTunnelToken: boolean;
 
   // the list of secrets located in the 'secrets' directory
   secrets: string[];

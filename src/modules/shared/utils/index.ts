@@ -56,7 +56,7 @@ const getEnvironmentVariableInsights = (): IEnvironmentVariableInsights => {
   const file = readTextFile('.env');
   return {
     isProduction: file.includes('NODE_ENV=production'),
-    hasCloudflaredToken: file.includes('TUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN'),
+    hasTunnelToken: file.includes('TUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN'),
     secrets: getSecrets(),
   };
 };

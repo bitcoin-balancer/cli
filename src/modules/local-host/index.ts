@@ -1,5 +1,5 @@
 import { execute } from '../shared/command/index.js';
-import { generate } from '../compose-file/index.js';
+import { generateComposeFile } from '../compose-file/index.js';
 import { ILocalHost } from './types.js';
 
 /* ************************************************************************************************
@@ -32,7 +32,7 @@ const localHostFactory = (): ILocalHost => {
    */
   const up = async (variation: string | undefined): Promise<string | undefined> => {
     // generate the compose.yaml file
-    generate({ testMode: variation === 'test-mode' });
+    generateComposeFile({ testMode: variation === 'test-mode' });
 
     // execute the docker compose command
     return execute('docker', ['compose', 'up', '--detach']);
@@ -46,7 +46,7 @@ const localHostFactory = (): ILocalHost => {
    */
   const buildUp = async (variation: string | undefined): Promise<string | undefined> => {
     // generate the compose.yaml file
-    generate({ testMode: variation === 'test-mode' });
+    generateComposeFile({ testMode: variation === 'test-mode' });
 
     // execute the docker compose command
     return execute('docker', ['compose', 'up', '--build', '--detach']);
@@ -58,7 +58,7 @@ const localHostFactory = (): ILocalHost => {
    */
   const buildAndPushImages = async (): Promise<string | undefined> => {
     // generate the compose.yaml file
-    generate();
+    generateComposeFile();
 
     // build and push the images
     return execute('docker', ['compose', 'build', '--push']);
