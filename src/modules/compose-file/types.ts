@@ -11,6 +11,9 @@ type IComposeFileConfig = {
   // the mode in which the services will run
   testMode: boolean;
   restoreMode: boolean;
+
+  // if enabled, it will include the Cloudflared Tunnel Service even if the secret is not present
+  includeCTService: boolean;
 };
 
 

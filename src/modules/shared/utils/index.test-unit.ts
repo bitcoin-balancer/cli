@@ -69,7 +69,7 @@ describe('getEnvironmentVariableInsights', () => {
     mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: false,
-      hasCloudflaredToken: false,
+      hasTunnelToken: false,
       secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();
@@ -81,7 +81,7 @@ describe('getEnvironmentVariableInsights', () => {
     mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt', 'TELEGRAM.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
-      hasCloudflaredToken: false,
+      hasTunnelToken: false,
       secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();
@@ -93,7 +93,7 @@ describe('getEnvironmentVariableInsights', () => {
     mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt', 'TELEGRAM.txt', 'TUNNEL_TOKEN.txt']);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
-      hasCloudflaredToken: true,
+      hasTunnelToken: true,
       secrets: ['POSTGRES_PASSWORD_FILE', 'ROOT_ACCOUNT', 'TELEGRAM', 'TUNNEL_TOKEN'],
     });
     expect(readTextFile).toHaveBeenCalledOnce();

@@ -28,6 +28,7 @@ import {
 const generateComposeFile = ({
   testMode = false,
   restoreMode = false,
+  includeCTService = false,
 }: Partial<IComposeFileConfig> = {}): void => {
   // extract the insights
   const { isProduction, hasTunnelToken, secrets } = getEnvironmentVariableInsights();
@@ -48,10 +49,10 @@ const generateComposeFile = ({
 
   if (!testMode && !restoreMode) {
     _ += generateGUIService();
-    _ += hasTunnelToken ? '\n\n\n' : '\n\n\n\n\n';
+    _ += hasTunnelToken || includeCTService ? '\n\n\n' : '\n\n\n\n\n';
   }
 
-  if (hasTunnelToken) {
+  if (hasTunnelToken || includeCTService) {
     _ += generateCTService();
     _ += '\n\n\n\n\n';
   }
