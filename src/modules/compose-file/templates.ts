@@ -132,16 +132,34 @@ const generateCLOUDFLAREDService = (): string => {
   let _ = '';
   _ += '  cloudflared:\n';
   _ += '    container_name: balancer-cloudflared\n';
+  _ += '    build:\n';
+  _ += '      dockerfile: Dockerfile.cloudflared\n';
+  _ += '    user: root\n';
+  _ += '    restart: unless-stopped\n';
+  _ += '    secrets:\n';
+  _ += '      - TUNNEL_TOKEN\n';
+  _ += __generateLogging();
+  return _;
+};
+
+/**
+ * Generates the content for the cloudflare tunnel service.
+ * @returns string
+ */
+/* const generateCLOUDFLAREDService = (): string => {
+  let _ = '';
+  _ += '  cloudflared:\n';
+  _ += '    container_name: balancer-cloudflared\n';
   _ += '    image: cloudflare/cloudflared\n';
   _ += '    restart: unless-stopped\n';
   _ += '    command: tunnel run\n';
-  _ += '    secrets:\n';
-  _ += '      - TUNNEL_TOKEN\n';
+  // _ += '    secrets:\n';
+  // _ += '      - TUNNEL_TOKEN\n';
   _ += '    environment:\n';
   _ += '      - TUNNEL_TOKEN=${TUNNEL_TOKEN}\n';
   _ += __generateLogging();
   return _;
-};
+}; */
 
 /**
  * Generates the content for the volumes.

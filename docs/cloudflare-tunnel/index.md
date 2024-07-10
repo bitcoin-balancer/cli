@@ -33,7 +33,7 @@ For a complete guide on how to set this up, please visit: [Cloudflare Tunnel](ht
       Domain: yourdomain.com
       Path: leave this property blank
       Service Type: HTTP
-      URL: localhost:8090
+      URL: gui:8090 <service-name:port>
       ```
     - **api**:
       ```text
@@ -41,5 +41,5 @@ For a complete guide on how to set this up, please visit: [Cloudflare Tunnel](ht
       Domain: yourdomain.com
       Path: leave this property blank
       Service Type: HTTP
-      URL: localhost:5075
+      URL: api:5075 <service-name:port>
       ```

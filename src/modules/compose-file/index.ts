@@ -76,5 +76,9 @@ const generate = ({
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
 export {
+  // utils
+  getEnvironmentVariableInsights,
+
+  // implementation
   generate,
 };

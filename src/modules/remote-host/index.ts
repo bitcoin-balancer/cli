@@ -1,6 +1,7 @@
 import { basename } from 'node:path';
 import { readRemoteHostConfigFile, mergePayloads } from '../shared/utils/index.js';
 import { execute, IExecutionMode } from '../shared/command/index.js';
+import { getEnvironmentVariableInsights } from '../compose-file/index.js';
 import { remoteHostUtilsFactory } from './utils.js';
 import { remoteHostFileSystemFactory } from './fs.js';
 import { isDatabaseBackupDestPathValid, isDatabaseBackupSrcPathValid } from './validations.js';
@@ -209,6 +210,21 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   const buildUp = async (variation: string | undefined): Promise<string | undefined> => {
     // build the compose.yaml file based on the variation
     const composeFilePayload = await __composeFile(variation);
+
+    // init the args
+    // let args: string[] = ['docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach'];
+
+    // if the cloudflared token was provided, build the image before starting the containers
+    const { hasCloudflaredToken } = getEnvironmentVariableInsights();
+    if (hasCloudflaredToken) {
+      await __sshCLI([
+        'docker', 'compose', 'build', 'cloudflared',
+      ]);
+      /* args = [
+        'docker', 'build', '-t', 'balancer-cloudflared:latest', '-f', 'Dockerfile.cloudflared', './'
+        'docker', 'compose', 'build', 'cloudflared',
+        '&&', ...args]; */
+    }
 
     // execute a pull to make sure it's running the latest images
     const pullPayload = await __sshCLI([

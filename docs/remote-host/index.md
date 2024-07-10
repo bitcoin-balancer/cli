@@ -30,6 +30,7 @@ The schema of the configuration file is as follows:
   },
   "sourceCode": [
     "dist",
+    "Dockerfile.cloudflared",
     "package-lock.json",
     "package.json"
   ]
