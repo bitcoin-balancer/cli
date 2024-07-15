@@ -161,7 +161,7 @@ npm start
   <br/>
   The following variations are supported:
 
-  - <code>up:test-mode</code> used to run unit, integration or benchmark tests locally (Deprecated)
+  - <s><code>up:test-mode</code> used to run unit, integration or benchmark tests locally</s> (Deprecated)
 
   - <code>up:restore-mode</code> used to restore a database backup that was generated in the past
 
@@ -186,8 +186,6 @@ npm start
 
   <br/>
   The following variations are supported:
-
-  - <code>build-up:test-mode</code> used to run unit, integration or benchmark tests locally (Moved to **Docker Compose Tests**)
 
   - <code>build-up:restore-mode</code> used to restore a database backup that was generated in the past
 
