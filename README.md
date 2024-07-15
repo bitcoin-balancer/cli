@@ -272,11 +272,10 @@ npm start
 <details>
   <summary><code>build-up:test-mode</code></summary>
   <br/>
-  Builds all the images and starts the containers. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally). 
+  Builds all the images and starts the containers. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
 
   <br/>
 
-  When executed on the local host, it runs:
   ```bash
   docker compose up --build --detach
   ```
