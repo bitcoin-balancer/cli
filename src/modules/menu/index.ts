@@ -38,10 +38,10 @@ const MENU = [
         value: 'up',
         description: 'Creates and starts the containers',
       },
-      {
+      /* {
         value: 'up:test-mode',
         description: 'Creates and starts the containers in TEST_MODE',
-      },
+      }, */
       {
         value: 'up:restore-mode',
         description: 'Creates and starts the containers in RESTORE_MODE',
@@ -50,10 +50,6 @@ const MENU = [
       {
         value: 'build-up',
         description: 'Builds all the images and starts the containers',
-      },
-      {
-        value: 'build-up:test-mode',
-        description: 'Builds all the images and starts the containers in TEST_MODE',
       },
       {
         value: 'build-up:restore-mode',
@@ -99,6 +95,21 @@ const MENU = [
         value: 'prune',
         description: 'Remove all unused containers, networks and images (both dangling and unused)',
       },
+    ],
+  },
+  {
+    name: 'Docker Compose Tests',
+    description: 'Run docker compose commands for automated tests',
+    value: [
+      {
+        value: 'build-up:test-mode',
+        description: 'Builds all the images and starts the containers in TEST_MODE',
+      },
+      new Separator(),
+      {
+        value: 'down',
+        description: 'Stops containers and removes containers, networks, volumes, and images created by up',
+      },
       new Separator(),
       {
         value: 'api-test:integration',
@@ -116,7 +127,7 @@ const MENU = [
   },
   {
     name: 'CLI Management',
-    description: 'Generate and deploy environment variable assets',
+    description: 'Build and deploy the CLI Program',
     value: [
       {
         value: 'build-cli',

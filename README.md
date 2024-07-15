@@ -161,7 +161,7 @@ npm start
   <br/>
   The following variations are supported:
 
-  - <code>up:test-mode</code> used to run unit, integration or benchmark tests locally
+  - <code>up:test-mode</code> used to run unit, integration or benchmark tests locally (Deprecated)
 
   - <code>up:restore-mode</code> used to restore a database backup that was generated in the past
 
@@ -187,7 +187,7 @@ npm start
   <br/>
   The following variations are supported:
 
-  - <code>build-up:test-mode</code> used to run unit, integration or benchmark tests locally
+  - <code>build-up:test-mode</code> used to run unit, integration or benchmark tests locally (Moved to **Docker Compose Tests**)
 
   - <code>build-up:restore-mode</code> used to restore a database backup that was generated in the past
 
@@ -258,6 +258,46 @@ npm start
 
   ```bash
   docker system prune --all --force
+  ```
+  <br/>
+</details>
+
+
+
+
+
+
+<br/>
+
+### Docker Compose Tests
+
+<details>
+  <summary><code>build-up</code></summary>
+  <br/>
+  Builds all the images and starts the containers. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
+
+  <br/>
+
+  When executed on the local host, it runs:
+  ```bash
+  docker compose up --build --detach
+  ```
+
+  <br/>
+  The following variations are supported:
+
+  - <code>build-up:test-mode</code> used to run unit, integration or benchmark tests locally
+
+  <br/>
+</details>
+
+<details>
+  <summary><code>down</code></summary>
+  <br/>
+  Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
+
+  ```bash
+  docker compose down
   ```
   <br/>
 </details>
