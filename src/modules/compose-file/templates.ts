@@ -85,6 +85,7 @@ const generateAPIService = (
   _ += '      - TELEGRAM\n';
   _ += '      - ALTCHA_SECRET\n';
   _ += '      - JWT_SECRET\n';
+  _ += '      - COOKIE_SECRET\n';
   _ += '    environment:\n';
   _ += '      - NODE_ENV=${NODE_ENV}\n';
   _ += `      - TEST_MODE=${testMode}\n`;
@@ -100,6 +101,7 @@ const generateAPIService = (
   _ += '      - TELEGRAM=${TELEGRAM}\n';
   _ += '      - ALTCHA_SECRET=${ALTCHA_SECRET}\n';
   _ += '      - JWT_SECRET=${JWT_SECRET}\n';
+  _ += '      - COOKIE_SECRET=${COOKIE_SECRET}\n';
   _ += '    depends_on:\n';
   _ += '      postgres:\n';
   _ += '        condition: service_healthy\n';
