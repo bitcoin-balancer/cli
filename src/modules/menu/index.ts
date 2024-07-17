@@ -38,10 +38,6 @@ const MENU = [
         value: 'up',
         description: 'Creates and starts the containers',
       },
-      /* {
-        value: 'up:test-mode',
-        description: 'Creates and starts the containers in TEST_MODE',
-      }, */
       {
         value: 'up:restore-mode',
         description: 'Creates and starts the containers in RESTORE_MODE',
@@ -101,6 +97,11 @@ const MENU = [
     name: 'Docker Compose Tests',
     description: 'Run docker compose commands for automated tests',
     value: [
+      {
+        value: 'up:test-mode',
+        description: 'Creates and starts the containers in TEST_MODE',
+      },
+      new Separator(),
       {
         value: 'build-up:test-mode',
         description: 'Builds all the images and starts the containers in TEST_MODE',
