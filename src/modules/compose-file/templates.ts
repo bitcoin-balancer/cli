@@ -88,6 +88,7 @@ const generateAPIService = (
   _ += '      - COOKIE_SECRET\n';
   _ += '    environment:\n';
   _ += '      - NODE_ENV=${NODE_ENV}\n';
+  _ += '      - GUI_URL=${GUI_URL}\n';
   _ += `      - TEST_MODE=${testMode}\n`;
   _ += `      - RESTORE_MODE=${restoreMode}\n`;
   _ += `      - HAS_TUNNEL_TOKEN=${hasTunnelToken}\n`;
