@@ -153,6 +153,8 @@ npm start
   docker compose up --detach
   ```
 
+  <br/>
+
   In contrast, when executed on the remote host, it always pulls the latest images from the registry (Docker Hub):
   ```bash
   docker compose up --pull always --no-build --detach
@@ -160,8 +162,6 @@ npm start
 
   <br/>
   The following variations are supported:
-
-  - <s><code>up:test-mode</code> used to run unit, integration or benchmark tests locally</s> (Deprecated)
 
   - <code>up:restore-mode</code> used to restore a database backup that was generated in the past
 
@@ -178,6 +178,8 @@ npm start
   ```bash
   docker compose up --build --detach
   ```
+
+  <br/>
 
   In contrast, when executed on the remote host, it never builds the images. Instead, it always pulls them from the registry (Docker Hub):
   ```bash
@@ -209,6 +211,31 @@ npm start
 
   ```bash
   docker compose down
+  ```
+  <br/>
+</details>
+
+<details>
+  <summary><code>down-build-up</code></summary>
+  <br/>
+  Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
+
+  ```bash
+  docker compose down
+  ```
+
+  <br/>
+
+  Afterwards, it builds, (re)creates, starts, and attaches to containers for a service. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
+
+  When executed on the local host, it runs:
+  ```bash
+  docker compose up --detach
+  ```
+
+  In contrast, when executed on the remote host, it always pulls the latest images from the registry (Docker Hub):
+  ```bash
+  docker compose up --pull always --no-build --detach
   ```
   <br/>
 </details>
@@ -245,7 +272,7 @@ npm start
 
   - <code>logs:gui</code> displays log output from the gui service
 
-  - <code>logs:cloudflared</code> displays log output from the cloudflared service
+  - <code>logs:ct</code> displays log output from the cloudflared service
   <br/>
 </details>
 
@@ -273,8 +300,6 @@ npm start
   <summary><code>up:test-mode</code></summary>
   <br/>
   Builds, (re)creates, starts, and attaches to containers for a service with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
-
-  <br/>
   
   ```bash
   docker compose up --detach
@@ -287,8 +312,6 @@ npm start
   <summary><code>build-up:test-mode</code></summary>
   <br/>
   Builds all the images and starts the containers with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
-
-  <br/>
 
   ```bash
   docker compose up --build --detach
@@ -305,6 +328,26 @@ npm start
   ```bash
   docker compose down
   ```
+  <br/>
+</details>
+
+<details>
+  <summary><code>down-build-up:test-mode</code></summary>
+  <br/>
+  Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
+
+  ```bash
+  docker compose down
+  ```
+
+  <br/>
+
+  Afterwards, it builds all the images and starts the containers with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
+
+  ```bash
+  docker compose up --build --detach
+  ```
+
   <br/>
 </details>
 
@@ -355,6 +398,8 @@ npm start
   ```bash
   ssh root@ip mkdir -p cli
   ```
+
+  <br/>
 
   Then, it deploys the source code files and lastly, it installs the dependencies:
 
@@ -454,7 +499,9 @@ npm start
 <details>
   <summary><code>generate-envvar-assets</code></summary>
   <br/>
+  
   Generates the environment variable assets based on a source file and places the results in a custom path.
+
   <br/>
 
 </details>
