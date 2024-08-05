@@ -4,8 +4,9 @@ import { IRemoteHost, remoteHostFactory } from '../modules/remote-host/index.js'
 import { selectHost } from '../modules/shared/input-utils/index.js';
 
 /**
- * Build Up
- * Builds all the images and starts the containers. If the variation is provided, it starts the
+ * Down Build Up
+ * Stops containers and removes containers, networks, volumes, and images created by up. Afterwards,
+ * it builds all the images and starts the containers. If the variation is provided, it starts the
  * containers in a chosen mode.
  */
 export default async (variation: string | undefined) => {
@@ -19,7 +20,11 @@ export default async (variation: string | undefined) => {
     host = await remoteHostFactory();
   }
 
-  // execute the action
-  const payload = await host.buildUp(variation);
-  console.log(payload);
+  // stop and remove containers
+  const downPayload = await host.down();
+  console.log(downPayload);
+
+  // build images and start containers
+  const buildUpPayload = await host.buildUp(variation);
+  console.log(buildUpPayload);
 };

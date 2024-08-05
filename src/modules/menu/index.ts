@@ -115,6 +115,10 @@ const MENU = [
         value: 'down',
         description: 'Stops containers and removes containers, networks, volumes, and images created by up',
       },
+      {
+        value: 'down-build-up:test-mode',
+        description: 'Stops containers and removes containers, networks, volumes, and images created by up. Afterwards, it builds all the images and starts the containers in TEST_MODE',
+      },
       new Separator(),
       {
         value: 'api-test:integration',
