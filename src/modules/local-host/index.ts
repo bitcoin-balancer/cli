@@ -58,7 +58,7 @@ const localHostFactory = (): ILocalHost => {
    */
   const buildAndPushImages = async (): Promise<string | undefined> => {
     // generate the compose.yaml file
-    generateComposeFile({ includeCTService: true });
+    generateComposeFile({ buildProductionGUI: true, includeCTService: true });
 
     // build and push the images
     return execute('docker', ['compose', 'build', '--push']);

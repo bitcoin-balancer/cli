@@ -28,6 +28,7 @@ import {
 const generateComposeFile = ({
   testMode = false,
   restoreMode = false,
+  buildProductionGUI = false,
   includeCTService = false,
 }: Partial<IComposeFileConfig> = {}): void => {
   // extract the insights
@@ -48,7 +49,7 @@ const generateComposeFile = ({
   _ += testMode ? '\n\n\n\n\n' : '\n\n\n';
 
   if (!testMode && !restoreMode) {
-    _ += generateGUIService();
+    _ += generateGUIService(buildProductionGUI);
     _ += hasTunnelToken || includeCTService ? '\n\n\n' : '\n\n\n\n\n';
   }
 

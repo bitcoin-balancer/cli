@@ -12,6 +12,9 @@ type IComposeFileConfig = {
   testMode: boolean;
   restoreMode: boolean;
 
+  // if enabled, it will trigger the production build for the GUI service
+  buildProductionGUI: boolean;
+
   // if enabled, it will include the Cloudflared Tunnel Service even if the secret is not present
   includeCTService: boolean;
 };

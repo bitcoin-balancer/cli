@@ -112,21 +112,20 @@ const generateAPIService = (
 
 /**
  * Generates the content for the gui service.
+ * @param productionBuild?
  * @returns string
  */
-const generateGUIService = (): string => {
+const generateGUIService = (productionBuild?: boolean): string => {
   let _ = '';
   _ += '  gui:\n';
   _ += '    container_name: balancer-gui\n';
   _ += '    build:\n';
   _ += '      context: ../gui\n';
   _ += '      args:\n';
-  _ += '        - NODE_ENV=${NODE_ENV}\n';
+  _ += `        - NODE_ENV=${productionBuild ? 'production' : 'development'}\n`;
   _ += '    image: jesusgraterol/balancer-gui:latest\n';
   _ += '    ports:\n';
   _ += '      - 8090:8090\n';
-  _ += '    environment:\n';
-  _ += '      - NODE_ENV=${NODE_ENV}\n';
   _ += '    depends_on:\n';
   _ += '      - api\n';
   _ += __generateLogging();
