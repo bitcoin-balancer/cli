@@ -8,8 +8,6 @@ import { localHostFactory } from '../modules/local-host/index.js';
  */
 export default async () => {
   const host = localHostFactory();
-  const prunePayload = await host.prune();
-  console.log(prunePayload);
-  const buildAndPushPayload = await host.buildAndPushImages();
-  console.log(buildAndPushPayload);
+  const payload = await host.buildAndPushImages();
+  console.log(payload);
 };

@@ -13,13 +13,13 @@ type ILocalHost = {
   // ...
 
   // docker compose actions
+  prune: () => Promise<string | undefined>;
   up: (variation: string | undefined) => Promise<string | undefined>;
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
   buildAndPushImages: () => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
   restart:() => Promise<string | undefined>;
   logs: (variation: string | undefined) => Promise<string | undefined>;
-  prune: () => Promise<string | undefined>;
   apiTest: (variation: string) => Promise<string | undefined>;
 
   // databse management actions

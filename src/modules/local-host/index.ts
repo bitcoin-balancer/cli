@@ -1,3 +1,4 @@
+import { mergePayloads } from '../shared/utils/index.js';
 import { execute } from '../shared/command/index.js';
 import { generateComposeFile } from '../compose-file/index.js';
 import { ILocalHost } from './types.js';
@@ -24,6 +25,14 @@ const localHostFactory = (): ILocalHost => {
   /* **********************************************************************************************
    *                                    DOCKER COMPOSE ACTIONS                                    *
    ********************************************************************************************** */
+
+  /**
+   * Removes all unused containers, networks and images (both dangling and unused).
+   * @returns Promise<string | undefined>
+   */
+  const prune = (): Promise<string | undefined> => (
+    execute('docker', ['system', 'prune', '--all', '--force'])
+  );
 
   /**
    * Builds, (re)creates, starts, and attaches to containers for a service based on a chosen mode.
@@ -53,15 +62,22 @@ const localHostFactory = (): ILocalHost => {
   };
 
   /**
-   * Builds all the images and pushes them to the registry (Docker Hub).
+   * Removes all unused containers, networks and images (both dangling and unused). Then, it builds
+   * all the images and pushes them to the registry (Docker Hub).
    * @returns Promise<string>
    */
   const buildAndPushImages = async (): Promise<string | undefined> => {
     // generate the compose.yaml file
     generateComposeFile({ buildProductionGUI: true, includeCTService: true });
 
+    // prune the system
+    const prunePayload = await prune();
+
     // build and push the images
-    return execute('docker', ['compose', 'build', '--push']);
+    const buildAndPushPayload = await execute('docker', ['compose', 'build', '--push']);
+
+    // return the payloads
+    return mergePayloads([prunePayload, buildAndPushPayload]);
   };
 
   /**
@@ -88,14 +104,6 @@ const localHostFactory = (): ILocalHost => {
     }
     return execute('docker', ['compose', 'logs', '-f']);
   };
-
-  /**
-   * Removes all unused containers, networks and images (both dangling and unused).
-   * @returns Promise<string | undefined>
-   */
-  const prune = (): Promise<string | undefined> => (
-    execute('docker', ['system', 'prune', '--all', '--force'])
-  );
 
   /**
    * Runs the tests for a chosen variation.
@@ -147,14 +155,13 @@ const localHostFactory = (): ILocalHost => {
     // ...
 
     // docker compose actions
+    prune,
     up,
     buildUp,
     buildAndPushImages,
     down,
     restart,
     logs,
-
-    prune,
     apiTest,
 
     // database management actions
