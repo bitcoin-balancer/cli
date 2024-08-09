@@ -68,9 +68,9 @@ npm start
 
 - [Remote Host Configuration](./docs/remote-host/index.md)
 
-- [Telegram Integration (Optional)](./docs/telegram/index.md)
-
 - [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
+
+- [Telegram Integration (Optional)](./docs/telegram/index.md)
 
 
 

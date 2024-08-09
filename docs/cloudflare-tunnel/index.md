@@ -43,3 +43,4 @@ For a complete guide on how to set this up, please visit: [Cloudflare Tunnel](ht
       Service Type: HTTP
       URL: api:5075 <service-name:port>
       ```
+      **IMPORTANT:** the API must always be exposed under the `balancerapi` subdomain as its URL is derived by the GUI at runtime. For example: `balancerapi.yourdomain.com`.
