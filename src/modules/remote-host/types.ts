@@ -67,12 +67,13 @@ type IRemoteHost = {
   copySSHPublicKey: () => Promise<string | undefined>;
 
   // docker compose actions
+  prune: () => Promise<string | undefined>;
+  restartDockerService: () => Promise<string | undefined>;
   up: (variation: string | undefined) => Promise<string | undefined>;
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
   restart: () => Promise<string | undefined>;
   logs: (variation: string | undefined) => Promise<string | undefined>;
-  prune: () => Promise<string | undefined>;
 
   // databse management actions
   psql: () => Promise<string | undefined>;

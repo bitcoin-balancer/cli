@@ -439,12 +439,13 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     copySSHPublicKey,
 
     // docker compose actions
+    prune,
+    restartDockerService,
     up,
     buildUp,
     down,
     restart,
     logs,
-    prune,
 
     // databse management actions
     psql,
