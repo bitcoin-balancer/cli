@@ -31,8 +31,8 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 ### Hardware
 
 - 1 CPU
-- 2 GB Memory
-- 25 GB Storage
+- 512 GB Memory
+- 10 GB Storage
 
 
 
