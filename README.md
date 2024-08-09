@@ -194,9 +194,16 @@ npm start
   <br/>
 </details>
 <details>
-  <summary><code>build-push</code></summary>
+  <summary><code>prune-build-push</code></summary>
   <br/>
-  Builds all the images and pushes them to the registry (Docker Hub).
+  Removes all unused containers, networks and images (both dangling and unused).
+
+  ```bash
+  docker system prune --all --force
+  ```
+  <br/>
+
+  Then, it builds all the images and pushes them to the registry (Docker Hub).
 
   ```bash
   docker compose build --push

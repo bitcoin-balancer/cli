@@ -53,8 +53,8 @@ const MENU = [
       },
       new Separator(),
       {
-        value: 'build-push',
-        description: 'Builds all the images and pushes them to the registry (Docker Hub)',
+        value: 'prune-build-push',
+        description: 'Removes all unused containers, networks and images (both dangling and unused). Then, it builds all the images and pushes them to the registry (Docker Hub)',
       },
       new Separator(),
       {
