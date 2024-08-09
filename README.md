@@ -181,7 +181,21 @@ npm start
 
   <br/>
 
-  In contrast, when executed on the remote host, it never builds the images. Instead, it always pulls them from the registry (Docker Hub):
+  When executed on the remote host, it firstly removes all unused containers, networks and images (both dangling and unused).
+
+  ```bash
+  docker system prune --all --force
+  ```
+  <br/>
+
+  Then, it restarts the Docker Service:
+
+  ```bash
+  systemctl restart docker
+  ```
+  <br/>
+
+  Finally, it pulls the latest images from the registry (Docker Hub):
   ```bash
   docker compose up --pull always --no-build --detach
   ```

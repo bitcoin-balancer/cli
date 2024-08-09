@@ -182,6 +182,22 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    ********************************************************************************************** */
 
   /**
+   * Removes all unused containers, networks and images (both dangling and unused).
+   * @returns Promise<string | undefined>
+   */
+  const prune = (): Promise<string | undefined> => (
+    __ssh([__address, 'docker', 'system', 'prune', '--all', '--force'])
+  );
+
+  /**
+   * Restarts Docker's Systemd service.
+   * @returns Promise<string | undefined>
+   */
+  const restartDockerService = (): Promise<string | undefined> => (
+    __ssh([__address, 'systemctl', 'restart', 'docker'])
+  );
+
+  /**
    * Pulls the latest images and starts the containers. If the variation is provided, it starts the
    * containers in a chosen mode.
    * @param variation
@@ -210,13 +226,19 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // build the compose.yaml file based on the variation
     const composeFilePayload = await __composeFile(variation);
 
+    // prune the system
+    const prunePayload = await prune();
+
+    // restart the docker service
+    const restartPayload = await restartDockerService();
+
     // execute a pull to make sure it's running the latest images
     const pullPayload = await __sshCLI([
       'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
     ]);
 
     // return the payloads
-    return mergePayloads([composeFilePayload, pullPayload]);
+    return mergePayloads([composeFilePayload, prunePayload, restartPayload, pullPayload]);
   };
 
   /**
@@ -243,14 +265,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     }
     return __sshCLI(['docker', 'compose', 'logs', '-f']);
   };
-
-  /**
-   * Removes all unused containers, networks and images (both dangling and unused).
-   * @returns Promise<string | undefined>
-   */
-  const prune = (): Promise<string | undefined> => (
-    __ssh([__address, 'docker', 'system', 'prune', '--all', '--force'])
-  );
 
 
 
