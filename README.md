@@ -590,13 +590,13 @@ npm start
 
 ## Supported Exchanges
 
-|              | Window       | Liquidity    | Coins        | Trading      |
-| ------------ | ------------ | ------------ | ------------ | ------------ |
-| **Binance**  | &check;      | &cross;      | &cross;      | &cross;      |
-| **Bitfinex** | &cross;      | &cross;      | &cross;      | &cross;      |
-| **Coinbase** | &cross;      | &cross;      | &cross;      | &cross;      |
-| **Kraken**   | &cross;      | &cross;      | &cross;      | &cross;      |
-| **OKX**      | &cross;      | &cross;      | &cross;      | &cross;      |
+|                                           | Window       | Liquidity    | Coins        | Trading      |
+| ----------------------------------------- | ------------ | ------------ | ------------ | ------------ |
+| [**Binance**](https://www.binance.com/)   | &check;      | &check;      | &check;      | &check;      |
+| [**Bitfinex**](https://www.bitfinex.com/) | &check;      | &cross;      | &cross;      | &cross;      |
+| [**Coinbase**](https://www.coinbase.com/) | &cross;      | &cross;      | &cross;      | &cross;      |
+| [**Kraken**](https://www.kraken.com/)     | &check;      | &cross;      | &cross;      | &cross;      |
+| [**OKX**](https://www.okx.com/)           | &cross;      | &cross;      | &cross;      | &cross;      |
 
 
 
