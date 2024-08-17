@@ -86,7 +86,7 @@ const generateAPIService = (
   _ += '      - ALTCHA_SECRET\n';
   _ += '      - JWT_SECRET\n';
   _ += '      - COOKIE_SECRET\n';
-  _ += '      - EXCHANGES_CREDENTIALS\n';
+  _ += '      - EXCHANGE_CREDENTIALS\n';
   _ += '    environment:\n';
   _ += '      - NODE_ENV=${NODE_ENV}\n';
   _ += '      - GUI_URL=${GUI_URL}\n';
@@ -104,8 +104,8 @@ const generateAPIService = (
   _ += '      - ALTCHA_SECRET=${ALTCHA_SECRET}\n';
   _ += '      - JWT_SECRET=${JWT_SECRET}\n';
   _ += '      - COOKIE_SECRET=${COOKIE_SECRET}\n';
-  _ += '      - EXCHANGES_CONFIGURATION=${EXCHANGES_CONFIGURATION}\n';
-  _ += '      - EXCHANGES_CREDENTIALS=${EXCHANGES_CREDENTIALS}\n';
+  _ += '      - EXCHANGE_CONFIGURATION=${EXCHANGE_CONFIGURATION}\n';
+  _ += '      - EXCHANGE_CREDENTIALS=${EXCHANGE_CREDENTIALS}\n';
   _ += '    depends_on:\n';
   _ += '      postgres:\n';
   _ += '        condition: service_healthy\n';
