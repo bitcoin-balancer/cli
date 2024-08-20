@@ -630,6 +630,7 @@ npm start
 - [ ] Create Bitcoin Quotes Component and place it in `sign-in` and `update-password` **(`gui`)**
 - [ ] Store server metrics (usage%, load%, temperature°) in OHLC format **(`api`)**
 - [ ] Expand the automated tests' coverage **(`api`)**
+- [ ] Fix the glitch in `mobile-tabs.component.tsx` that makes the tabs lag ~1 second before placing themselves correctly (this issue may be caused by the `min-h-dvh` class set in the parent container) **(`gui`)**
 - [ ] ...
 
 
