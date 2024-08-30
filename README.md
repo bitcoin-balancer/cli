@@ -14,8 +14,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 
 
-<br/>
-<br/>
+<br/><br/><br/>
 
 ## Requirements
 
@@ -37,8 +36,8 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 
 
-<br/>
-<br/>
+
+<br/><br/><br/>
 
 ## Getting Started
 
@@ -59,8 +58,8 @@ npm start
 
 
 
-<br/>
-<br/>
+
+<br/><br/><br/>
 
 ## Guides
 
@@ -75,8 +74,8 @@ npm start
 
 
 
-<br/>
-<br/>
+
+<br/><br/><br/>
 
 ## CLI Actions
 
@@ -556,103 +555,19 @@ npm start
 
 
 
-<br/>
-<br/>
-<br/>
-
-## Repositories
-
-- [cli](https://github.com/bitcoin-balancer/cli)
-- [api](https://github.com/bitcoin-balancer/api)
-- [gui](https://github.com/bitcoin-balancer/gui)
-
-
-
-
-
-<br/>
-<br/>
-<br/>
+<br/><br/><br/>
 
 ## Docker Images
 
 - [postgres](https://hub.docker.com/_/postgres)
 - [jesusgraterol/balancer-api](https://hub.docker.com/r/jesusgraterol/balancer-api)
 - [jesusgraterol/balancer-gui](https://hub.docker.com/r/jesusgraterol/balancer-gui)
+- [jesusgraterol/balancer-ct](https://hub.docker.com/r/jesusgraterol/balancer-ct)
 
 
 
 
-
-<br/>
-<br/>
-<br/>
-
-## Supported Exchanges
-
-|                                           | Window       | Liquidity    | Coins        | Trading      |
-| ----------------------------------------- | ------------ | ------------ | ------------ | ------------ |
-| [**Binance**](https://www.binance.com/)   | &check;      | &check;      | &check;      | &check;      |
-| [**Bitfinex**](https://www.bitfinex.com/) | &check;      | &cross;      | &cross;      | &cross;      |
-| [**Coinbase**](https://www.coinbase.com/) | &cross;      | &cross;      | &cross;      | &cross;      |
-| [**Kraken**](https://www.kraken.com/)     | &check;      | &cross;      | &cross;      | &cross;      |
-| [**OKX**](https://www.okx.com/)           | &cross;      | &cross;      | &cross;      | &cross;      |
-
-
-### Binance Users
-
-- ...
-
-
-### Bitfinex Users
-
-- ...
-
-### Kraken Users
-
-- Unlike other exchanges, the rate limits on Kraken are very strict. Therefore, when setting the `Re-fetch frequency (seconds)` field in the Window Configuration ensure to set a value larger than 10 seconds to avoid hitting rate limits.
-
-- When the Kraken implementation was being developed, the trading pairs making use of **USDT** had very low volume compared to pairs making use of **USD**. If you wish to use of **USD** make sure to set it in the `EXCHANGE_CONFIGURATION.quoteAsset` environment variable.
-
-
-<br/>
-<br/>
-<br/>
-
-## @TODO
-
-
-### High Priority
-
-- [ ] Complete the implementation of the supported exchanges **(`api`)**
-- [ ] ...
-
-
-### Medium Priority
-
-- [ ] Create a benchmarking system to improve the database’s performance **(`api`)**
-- [ ] ...
-
-
-
-### Low Priority
-
-- [ ] Create the `browserdb` package and use it to implement the request caching system **(`gui`)**
-- [ ] Allow users to toggle between `light` and `dark` mode **(`gui`)**
-- [ ] Make the users' list searchable **(`gui`)**
-- [ ] Make the Blacklisted IP addresses searchable **(`gui` & `api`)**
-- [ ] Create Bitcoin Quotes Component and place it in `sign-in` and `update-password` **(`gui`)**
-- [ ] Store server metrics (usage%, load%, temperature°) in OHLC format **(`api`)**
-- [ ] Expand the automated tests' coverage **(`api`)**
-- [ ] Fix the glitch in `mobile-tabs.component.tsx` that makes the tabs lag ~1 second before placing themselves correctly (this issue may be caused by the `min-h-dvh` class set in the parent container) **(`gui`)**
-- [ ] ...
-
-
-
-
-<br/>
-<br/>
-<br/>
+<br/><br/><br/>
 
 ## Run the CLI's Tests
 
@@ -671,9 +586,7 @@ npm run test:bench
 
 
 
-<br/>
-<br/>
-<br/>
+<br/><br/><br/>
 
 ## License
 
