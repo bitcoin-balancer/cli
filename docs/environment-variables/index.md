@@ -2,11 +2,18 @@
 
 # Environment Variables
 
-@TODO
+The environment variables are a series of configuration and secret values used by Balancer to build and run its platform. The steps to generate and deploy the environment variables assets are:
 
-<br/><br/><br/>
+1. Create and fill the source file (`source.json`)
+2. Generate the environment variable assets
+3. Deploy the assets to the remote host
 
-## Source File
+And that's all! At this point, you'll be able to [build and run](../build-run-balancer/index.md) your Balancer Platform.
+
+
+<br/>
+
+## Creating and filling the Source File
 
 The source file (`source.json`) file used to generate the **environment variable assets** has the following schema:
 
@@ -76,7 +83,7 @@ The `environment` property
 
 
 
-<br/><br/><br/>
+<br/>
 
 ## Generating the Environment Variable Assets
 
@@ -92,4 +99,11 @@ readlink -f output
 # /home/jesusgraterol/Desktop/output
 ```
 
-....
+
+
+
+<br/>
+
+## Deploying the assets to the Remote Host
+
+...

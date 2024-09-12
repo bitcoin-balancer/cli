@@ -57,9 +57,9 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 ## Guides
 
-- [Environment Variables](./docs/environment-variables/index.md)
-
 - [Remote Host Configuration](./docs/remote-host/index.md)
+
+- [Environment Variables](./docs/environment-variables/index.md)
 
 - [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
 
