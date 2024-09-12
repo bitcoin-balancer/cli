@@ -11,6 +11,8 @@ The environment variables are a series of configuration and secret values used b
 And that's all! At this point, you'll be able to [build and run](../build-run-balancer/index.md) your Balancer Platform.
 
 
+
+
 <br/>
 
 ## Creating and filling the Source File
@@ -19,7 +21,7 @@ The source file (`source.json`) file used to generate the **environment variable
 
 ```json
 {
-	"environment":  {
+	"environment": {
 		"NODE_ENV": "...",
 		"GUI_URL": "...",
 		"POSTGRES_HOST": "...",
@@ -35,35 +37,35 @@ The source file (`source.json`) file used to generate the **environment variable
 		"TELEGRAM": {
 			"token": "...",
 			"chatID": 0
-		 },
-		 "ALTCHA_SECRET": "...",
-		 "JWT_SECRET": {
-		 	"refresh": "...",
-		 	"access": "..."
-		 },
-		 "COOKIE_SECRET": "...",
-		 "EXCHANGE_CONFIGURATION": {
-		 	"baseAsset": "...",
-		 	"quoteAsset": "...",
-		 	"window": "...",
-		 	"liquidity": "...",
-		 	"coins": "...",
-		 	"trading": "..."
-		 },
-		 "EXCHANGE_CREDENTIALS": {
-		 	"binance": {
-		 		"key": "...",
-		 		"secret": "..."
-		 	},
-		 	"bitfinex": {
-		 		"key": "...",
-		 		"secret": "..."
-		 	},
-		 	"kraken": {
-		 		"key": "...",
-		 		"secret": "..."
-		 	}
-		 },
+		},
+		"ALTCHA_SECRET": "...",
+		"JWT_SECRET": {
+			"refresh": "...",
+			"access": "..."
+		},
+		"COOKIE_SECRET": "...",
+		"EXCHANGE_CONFIGURATION": {
+			"baseAsset": "...",
+			"quoteAsset": "...",
+			"window": "...",
+			"liquidity": "...",
+			"coins": "...",
+			"trading": "..."
+		},
+		"EXCHANGE_CREDENTIALS": {
+			"binance": {
+				"key": "...",
+				"secret": "..."
+			},
+			"bitfinex": {
+				"key": "...",
+				"secret": "..."
+			},
+			"kraken": {
+				"key": "...",
+				"secret": "..."
+			}
+		},
 		"TUNNEL_TOKEN": "..."
 	},
 	"secrets": [
@@ -78,7 +80,10 @@ The source file (`source.json`) file used to generate the **environment variable
 }
 ```
 
-The `environment` property 
+Balancer makes use of [Docker Compose Secrets](https://docs.docker.com/compose/use-secrets/) to avoid putting sensitive data in the Operating System's environment variables for [security reasons](https://blog.diogomonica.com//2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/).
+
+
+The list of property names contained in `secrets` should be left untouched and the data must be placed in the `environment` property
 
 
 
