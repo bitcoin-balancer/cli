@@ -27,7 +27,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 - Docker Engine `^v27.0.3`
 - Docker Compose `^v2.28.1`
 
-### Hardware
+### Hardware (Remote Host)
 
 - 1 CPU
 - 512 GB Memory
