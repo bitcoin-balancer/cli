@@ -1,4 +1,4 @@
-[< Back](../../README.md)
+[< Back](../../README.md#getting-started)
 
 # Download and build the CLI
 

@@ -1,4 +1,4 @@
-[< Back](../../README.md)
+[< Back](../../README.md#getting-started)
 
 # Deploy the CLI to the Remote Host
 
