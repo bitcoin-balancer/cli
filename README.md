@@ -41,18 +41,12 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 ## Getting Started
 
-```bash
-# download the source code
-git clone git@github.com:bitcoin-balancer/cli.git
+1. [Set up your remote host](./docs/remote-host/index.md)
+2. [Set up your environment variables](./docs/environment-variables/index.md)
+3. [Download and build the CLI](./docs/download-build-cli/index.md)
+4. [Deploy the CLI to the Remote Host](./docs/deploy-cli/index.md)
+5. [Build and run Balancer](./docs/build-run-balancer/index.md)
 
-# install the dependencies
-cd ./cli
-npm install
-
-# build & start the CLI
-npm run build
-npm start
-```
 
 
 
