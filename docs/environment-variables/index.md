@@ -83,12 +83,23 @@ The source file (`source.json`) file used to generate the **environment variable
 Balancer makes use of [Docker Compose Secrets](https://docs.docker.com/compose/use-secrets/) to avoid putting sensitive data in the Operating System's environment variables for [security reasons](https://blog.diogomonica.com//2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/).
 
 
-The list of property names contained in `secrets` should be left untouched and the data must be placed in the `environment` property
+### `NODE_ENV`
+
+The environment that will be used by Node.js processes.
+
+```json
+{
+	"environment": {
+		"NODE_ENV": "production",
+		...
+	},
+	"secrets": [...]
+}
+```
 
 
 
-
-<br/>
+<br/><br/>
 
 ## Generating the Environment Variable Assets
 
@@ -104,11 +115,15 @@ readlink -f output
 # /home/jesusgraterol/Desktop/output
 ```
 
+Start the CLI with `npm start`, choose the category named **Environment Variable Assets** and then trigger the `generate-envvar-assets` action:
+
+![generate-envvar-assets](../assets/generate-envvar-assets.png)
 
 
-
-<br/>
+<br/><br/>
 
 ## Deploying the assets to the Remote Host
 
-...
+Once you have generated the environment variable assets and have stored them securely, you can proceed to deploy them to the remote host by triggering the `deploy-envvar-assets` action:
+
+![deploy-envvar-assets](../assets/deploy-envvar-assets.png)
