@@ -21,62 +21,62 @@ The source file (`source.json`) file used to generate the **environment variable
 
 ```json
 {
-	"environment": {
-		"NODE_ENV": "...",
-		"GUI_URL": "...",
-		"POSTGRES_HOST": "...",
-		"POSTGRES_USER": "...",
-		"POSTGRES_DB": "...",
-		"POSTGRES_PASSWORD_FILE": "...",
-		"ROOT_ACCOUNT": {
-			"uid": "...",
-			"nickname": "...",
-			"password": "...",
-			"otpSecret": "..."
-		},
-		"TELEGRAM": {
-			"token": "...",
-			"chatID": 0
-		},
-		"ALTCHA_SECRET": "...",
-		"JWT_SECRET": {
-			"refresh": "...",
-			"access": "..."
-		},
-		"COOKIE_SECRET": "...",
-		"EXCHANGE_CONFIGURATION": {
-			"baseAsset": "...",
-			"quoteAsset": "...",
-			"window": "...",
-			"liquidity": "...",
-			"coins": "...",
-			"trading": "..."
-		},
-		"EXCHANGE_CREDENTIALS": {
-			"binance": {
-				"key": "...",
-				"secret": "..."
-			},
-			"bitfinex": {
-				"key": "...",
-				"secret": "..."
-			},
-			"kraken": {
-				"key": "...",
-				"secret": "..."
-			}
-		},
-		"TUNNEL_TOKEN": "..."
-	},
-	"secrets": [
-		"POSTGRES_PASSWORD_FILE",
-		"ROOT_ACCOUNT",
-		"TELEGRAM",
-		"ALTCHA_SECRET",
-		"JWT_SECRET",
-		"COOKIE_SECRET",
-		"EXCHANGE_CREDENTIALS"
-	]
+  "environment": {
+    "NODE_ENV": "...",
+    "GUI_URL": "...",
+    "POSTGRES_HOST": "...",
+    "POSTGRES_USER": "...",
+    "POSTGRES_DB": "...",
+    "POSTGRES_PASSWORD_FILE": "...",
+    "ROOT_ACCOUNT": {
+      "uid": "...",
+      "nickname": "...",
+      "password": "...",
+      "otpSecret": "..."
+    },
+    "TELEGRAM": {
+      "token": "...",
+      "chatID": 0
+    },
+    "ALTCHA_SECRET": "...",
+    "JWT_SECRET": {
+      "refresh": "...",
+      "access": "..."
+    },
+    "COOKIE_SECRET": "...",
+    "EXCHANGE_CONFIGURATION": {
+      "baseAsset": "...",
+      "quoteAsset": "...",
+      "window": "...",
+      "liquidity": "...",
+      "coins": "...",
+      "trading": "..."
+    },
+    "EXCHANGE_CREDENTIALS": {
+      "binance": {
+        "key": "...",
+        "secret": "..."
+      },
+      "bitfinex": {
+        "key": "...",
+        "secret": "..."
+      },
+      "kraken": {
+        "key": "...",
+        "secret": "..."
+      }
+    },
+    "TUNNEL_TOKEN": "..."
+  },
+  "secrets": [
+    "POSTGRES_PASSWORD_FILE",
+    "ROOT_ACCOUNT",
+    "TELEGRAM",
+    "ALTCHA_SECRET",
+    "JWT_SECRET",
+    "COOKIE_SECRET",
+    "EXCHANGE_CREDENTIALS"
+  ]
 }
 ```
 
