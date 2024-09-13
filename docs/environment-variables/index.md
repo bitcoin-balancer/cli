@@ -91,7 +91,7 @@ Accepted values are: `development` | `production`. If you're not a Balancer deve
 
 ```json
 {
-	"NODE_ENV": "production",
+  "NODE_ENV": "production",
 }
 ```
 
@@ -101,7 +101,7 @@ The URL that will be used to access your Balancer GUI. If you're a Balancer deve
 
 ```json
 {
-	"GUI_URL": "https://balancer.jesusgraterol.dev",
+  "GUI_URL": "https://balancer.jesusgraterol.dev",
 }
 ```
 
@@ -115,10 +115,10 @@ To generate the password, start `localkit` and generate a random password of at 
 
 ```json
 {
-	"POSTGRES_HOST": "postgres",
-	"POSTGRES_USER": "postgres",
-	"POSTGRES_DB": "postgres",
-	"POSTGRES_PASSWORD_FILE": "<YOUR_PASSWORD>",
+  "POSTGRES_HOST": "postgres",
+  "POSTGRES_USER": "postgres",
+  "POSTGRES_DB": "postgres",
+  "POSTGRES_PASSWORD_FILE": "<YOUR_PASSWORD>",
 }
 ```
 
@@ -132,12 +132,12 @@ The details that will be used to create your `root` account (user with the highe
 
 ```json
 {
-	"ROOT_ACCOUNT": {
-		"uid": "<YOUR_UID>",
-		"nickname": "root",
-		"password": "<YOUR_UID>",
-		"otpSecret": "<YOUR_OTP_SECRET>",
-	},
+  "ROOT_ACCOUNT": {
+    "uid": "<YOUR_UID>",
+    "nickname": "root",
+    "password": "<YOUR_UID>",
+    "otpSecret": "<YOUR_OTP_SECRET>",
+  },
 }
 ```
 
@@ -152,10 +152,10 @@ The guide to integrate Telegram can be found [here](../telegram/index.md).
 
 ```json
 {
-	"TELEGRAM": {
-		"token": "<YOUR_TOKEN>",
-		"chatID": <YOUR_CHAT_ID>
-	},
+  "TELEGRAM": {
+    "token": "<YOUR_TOKEN>",
+    "chatID": <YOUR_CHAT_ID>
+  },
 }
 ```
 
@@ -163,10 +163,10 @@ If you do not wish to go through with the integration, the environment variable 
 
 ```json
 {
-	"TELEGRAM": {
-		"token": "",
-		"chatID": 0
-	},
+  "TELEGRAM": {
+    "token": "",
+    "chatID": 0
+  },
 }
 ```
 
