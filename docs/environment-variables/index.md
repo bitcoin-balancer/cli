@@ -170,10 +170,70 @@ If you do not wish to go through with the integration, the environment variable 
 }
 ```
 
+### `ALTCHA_SECRET`
+
+The secret that will be used to generate and verify [Captcha](https://altcha.org/) challenges. 
+This value must be a random string 
+
+To generate the secret, start `localkit` and generate a random password of at least ~128 characters. 
+
+**Sample:** `"b,;?d4e8~Wwu7e...<ZID[m7~]81&)"`
+
+```json
+{
+  "ALTCHA_SECRET": "<YOUR_SECRET>",
+}
+```
+
+### `JWT_SECRET`
+
+The secrets that will be used to generate `access` and `refresh` [JWTs](https://jwt.io/) in order to manage authentication.
+
+To generate the secrets, start `localkit` and generate a string of at least ~100 random bytes.
+
+**Sample:** `"1mohlEW4...bHynviQ"`
+
+
+```json
+{
+  "JWT_SECRET": {
+    "refresh": "<YOUR_REFRESH_SECRET>",
+    "access": "<YOUR_ACCESS_SECRET>",
+  },
+}
+```
+
+### `COOKIE_SECRET`
+
+The secret that will be used to sign the authentication cookie in order to prevent tampering.
+
+To generate the secret, start `localkit` and generate a random password of at least ~128 characters. 
+
+**Sample:** `"b,;?d4e8~Wwu7e...<ZID[m7~]81&)"`
+
+```json
+{
+  "COOKIE_SECRET": "<YOUR_SECRET>",
+}
+```
+
+### `EXCHANGE_CONFIGURATION`
+
+@TODO
+
+### `EXCHANGE_CREDENTIALS`
+
+@TODO
+
+### `TUNNEL_TOKEN`
+
+@TODO
 
 
 
-<br/><br/>
+
+
+<br/><br/><br/>
 
 ## Generating the Environment Variable Assets
 
@@ -194,7 +254,10 @@ Start the CLI with `npm start`, choose the category named **Environment Variable
 ![generate-envvar-assets](../assets/generate-envvar-assets.png)
 
 
-<br/><br/>
+
+
+
+<br/><br/><br/>
 
 ## Deploying the assets to the Remote Host
 
