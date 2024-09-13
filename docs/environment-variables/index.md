@@ -219,15 +219,68 @@ To generate the secret, start `localkit` and generate a random password of at le
 
 ### `EXCHANGE_CONFIGURATION`
 
-@TODO
+Balancer was coded to be exchange agnostic and modular. In other words, one exchange can be used to gather and process market data while a different exchange can be used for trading.
+
+It is also possible to use any stable coin. At the time of writting this guide, the `quoteAsset` property accepts any of the following: `"USDT"`, `"USDC"`, `"DAI"`, `"FDUSD"`, `"PYUSD"`, `"USDD"`, `"TUSD"`.
+
+To view the list of supported exchange identifiers, visit: [Supported Exchanges](https://github.com/bitcoin-balancer/.github/blob/main/profile/sections/supported-exchanges/index.md).
+
+```json
+{
+  "EXCHANGE_CONFIGURATION": {
+    "baseAsset": "BTC",
+    "quoteAsset": "<YOUR_QUOTE_ASSET>",
+    "window": "<YOUR_EXCHANGE_ID>",
+    "liquidity": "<YOUR_EXCHANGE_ID>",
+    "coins": "<YOUR_EXCHANGE_ID>",
+    "trading": "<YOUR_EXCHANGE_ID>",
+  },
+}
+```
 
 ### `EXCHANGE_CREDENTIALS`
 
-@TODO
+The credentials (API Key & Secret) for every exchange used in `EXCHANGE_CONFIGURATION` must be provided so Balancer can interact with their APIs.
+
+**Important:** when generating the credentials in the exchange's platform, make sure to limit the actions that can be performed by the key to the very minimum. Balancer will never try to withdraw or trade any pair other than `baseAsset`/`quoteAsset`.
+
+```json
+{
+  "EXCHANGE_CREDENTIALS": {
+    "binance": {
+      "key": "<YOUR_API_KEY>",
+      "secret": "<YOUR_API_SECRET>"
+    },
+    "kraken": {
+      "key": "<YOUR_API_KEY>",
+      "secret": "<YOUR_API_SECRET>"
+    },
+  },
+}
+```
+
 
 ### `TUNNEL_TOKEN`
 
-@TODO
+The Balancer platform makes use of the latest technologies as well as best industry practices. However, putting the platform behind a reverse proxy adds an important security layer that can protect you from many different kinds of attacks.
+
+The guide to integrate [Cloudflare Tunnel](https://www.cloudflare.com/products/tunnel/) can be found [here](../cloudflare-tunnel/index.md). 
+
+- **Sample:** `"ekjad2Maslj...WEa20MaL"`
+
+```json
+{
+  "TUNNEL_TOKEN": "<YOUR_TOKEN>",
+}
+```
+
+If you do not wish to go through with the integration, the environment variable still needs to be set as follows:
+
+```json
+{
+  "TUNNEL_TOKEN": "",
+}
+```
 
 
 
