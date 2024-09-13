@@ -536,12 +536,6 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
   #     .env
   ```
 
-  Once the deployment is complete, the proper permissions are set on each secret file:
-  
-  ```bash
-  chmod u=rwx,o=r secrets/SECRET_NAME.txt
-  ```
-
   <br/>
 </details>
 

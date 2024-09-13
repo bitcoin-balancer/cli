@@ -385,10 +385,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   /**
    * Deploys the environment variable assets to the remote host and sets the appropriate permissions
    * for all the files.
-   * Actions are executed on the remote by the 'root' user, which can cause some issues when
-   * dealing with files as some processes may not have the correct permissions. Therefore, this
-   * action sets these on each secret file: chmod u=rwx,o=r secrets/SECRET_NAME.txt so any process
-   * can have access to it.
    * @param srcPath
    * @returns Promise<string>
    */
