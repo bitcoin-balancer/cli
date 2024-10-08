@@ -59,13 +59,6 @@ type IRemoteHost = {
   // properties
   // ...
 
-  // host actions
-  connect: () => Promise<string | undefined>;
-  getLandscapeSysInfo: () => Promise<string | undefined>;
-  reboot: () => Promise<string | undefined>;
-  shutdown: () => Promise<string | undefined>;
-  copySSHPublicKey: () => Promise<string | undefined>;
-
   // docker compose actions
   prune: () => Promise<string | undefined>;
   restartDockerService: () => Promise<string | undefined>;
@@ -85,6 +78,13 @@ type IRemoteHost = {
 
   // environment variable assets actions
   deployEnvironmentVariableAssets: (srcPath: string) => Promise<string>;
+
+  // host actions
+  connect: () => Promise<string | undefined>;
+  getLandscapeSysInfo: () => Promise<string | undefined>;
+  reboot: () => Promise<string>;
+  shutdown: () => Promise<string>;
+  copySSHPublicKey: () => Promise<string | undefined>;
 };
 
 

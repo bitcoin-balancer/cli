@@ -98,7 +98,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 <details>
   <summary><code>reboot</code></summary>
   <br/>
-  Reboots the remote host immediately.
+  Reboots the remote host after stopping containers and removing containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
   ssh root@ip reboot
@@ -108,7 +108,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 <details>
   <summary><code>shutdown</code></summary>
   <br/>
-  Shuts down the remote host immediately.
+  Shuts down the remote host after stopping containers and removing containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
   ssh root@ip poweroff

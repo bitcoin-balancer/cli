@@ -127,55 +127,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
 
-  /* **********************************************************************************************
-   *                                         HOST ACTIONS                                         *
-   ********************************************************************************************** */
-
-  /**
-   * Establishes a SSH Connection with the remote host.
-   * @returns Promise<string | undefined>
-   */
-  const connect = (): Promise<string | undefined> => __ssh([__address]);
-
-  /**
-   * Executes the landscape-sysinfo binary, extracts the running docker containers and returns
-   * its results.
-   * @returns Promise<string | undefined>
-   */
-  const getLandscapeSysInfo = async (): Promise<string | undefined> => {
-    // execute the landscape-sysinfo binary
-    const landscapeSysInfoPayload = await __ssh([__address, 'landscape-sysinfo']);
-
-    // execute the docker compose ps binary
-    const dockerComposePSPayload = await __sshCLI(['docker', 'compose', 'ps']);
-
-    // finally, return the combined payloads
-    return mergePayloads([landscapeSysInfoPayload, dockerComposePSPayload]);
-  };
-
-  /**
-   * Reboots the remote host immediately.
-   * @returns Promise<string | undefined>
-   */
-  const reboot = (): Promise<string | undefined> => __ssh([__address, 'reboot']);
-
-  /**
-   * Shuts down the remote host immediately.
-   * @returns Promise<string | undefined>
-   */
-  const shutdown = (): Promise<string | undefined> => __ssh([__address, 'poweroff']);
-
-  /**
-   * Copies the SSH Public Key specified in the config file into the remote server.
-   * @returns Promise<string | undefined>
-   */
-  const copySSHPublicKey = (): Promise<string | undefined> => (
-    execute('ssh-copy-id', __utils.args([__address]))
-  );
-
-
-
-
 
   /* **********************************************************************************************
    *                                    DOCKER COMPOSE ACTIONS                                    *
@@ -402,6 +353,63 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
 
 
+  /* **********************************************************************************************
+   *                                         HOST ACTIONS                                         *
+   ********************************************************************************************** */
+
+  /**
+   * Establishes a SSH Connection with the remote host.
+   * @returns Promise<string | undefined>
+   */
+  const connect = (): Promise<string | undefined> => __ssh([__address]);
+
+  /**
+   * Executes the landscape-sysinfo binary, extracts the running docker containers and returns
+   * its results.
+   * @returns Promise<string | undefined>
+   */
+  const getLandscapeSysInfo = async (): Promise<string | undefined> => {
+    // execute the landscape-sysinfo binary
+    const landscapeSysInfoPayload = await __ssh([__address, 'landscape-sysinfo']);
+
+    // execute the docker compose ps binary
+    const dockerComposePSPayload = await __sshCLI(['docker', 'compose', 'ps']);
+
+    // finally, return the combined payloads
+    return mergePayloads([landscapeSysInfoPayload, dockerComposePSPayload]);
+  };
+
+  /**
+   * Reboots the remote host immediately.
+   * @returns Promise<string>
+   */
+  const reboot = async (): Promise<string> => {
+    const downPayload = await down();
+    const rebootPayload = await __ssh([__address, 'reboot']);
+    return mergePayloads([downPayload, rebootPayload]);
+  };
+
+  /**
+   * Shuts down the remote host immediately.
+   * @returns Promise<string | undefined>
+   */
+  const shutdown = async (): Promise<string> => {
+    const downPayload = await down();
+    const poweroffPayload = await __ssh([__address, 'poweroff']);
+    return mergePayloads([downPayload, poweroffPayload]);
+  };
+
+  /**
+   * Copies the SSH Public Key specified in the config file into the remote server.
+   * @returns Promise<string | undefined>
+   */
+  const copySSHPublicKey = (): Promise<string | undefined> => (
+    execute('ssh-copy-id', __utils.args([__address]))
+  );
+
+
+
+
 
   /* **********************************************************************************************
    *                                         HEALTH CHECK                                         *
@@ -427,13 +435,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // properties
     // ...
 
-    // host actions
-    connect,
-    getLandscapeSysInfo,
-    reboot,
-    shutdown,
-    copySSHPublicKey,
-
     // docker compose actions
     prune,
     restartDockerService,
@@ -453,6 +454,13 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // environment variable assets actions
     deployEnvironmentVariableAssets,
+
+    // host actions
+    connect,
+    getLandscapeSysInfo,
+    reboot,
+    shutdown,
+    copySSHPublicKey,
   });
 };
 
