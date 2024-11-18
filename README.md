@@ -22,10 +22,10 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 - UNIX-like OS
 - git `^v2.43.0`
-- Node.js `^v22.3.0`
-- npm `^v10.8.1`
-- Docker Engine `^v27.0.3`
-- Docker Compose `^v2.28.1`
+- Node.js `^v22.11.0`
+- npm `^v10.9.0`
+- Docker Engine `^v27.3.1`
+- Docker Compose `^v2.29.7`
 
 ### Hardware (Remote Host)
 
