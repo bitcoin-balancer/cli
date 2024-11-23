@@ -81,6 +81,8 @@ const generateAPIService = (
   _ += '      - 5075:5075\n';
   _ += '    secrets:\n';
   _ += '      - POSTGRES_PASSWORD_FILE\n';
+  _ += '      - HASHING_SECRET\n';
+  _ += '      - ENCRYPTING_SECRET\n';
   _ += '      - ROOT_ACCOUNT\n';
   _ += '      - TELEGRAM\n';
   _ += '      - ALTCHA_SECRET\n';
@@ -99,6 +101,8 @@ const generateAPIService = (
   _ += '      - POSTGRES_DB=${POSTGRES_DB}\n';
   _ += '      - POSTGRES_PORT=5432\n';
   _ += '      - POSTGRES_PASSWORD_FILE=${POSTGRES_PASSWORD_FILE}\n';
+  _ += '      - HASHING_SECRET=${HASHING_SECRET}\n';
+  _ += '      - ENCRYPTING_SECRET=${ENCRYPTING_SECRET}\n';
   _ += '      - ROOT_ACCOUNT=${ROOT_ACCOUNT}\n';
   _ += '      - TELEGRAM=${TELEGRAM}\n';
   _ += '      - ALTCHA_SECRET=${ALTCHA_SECRET}\n';
