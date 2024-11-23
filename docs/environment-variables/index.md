@@ -28,6 +28,8 @@ The source file (`source.json`) file used to generate the **environment variable
     "POSTGRES_USER": "...",
     "POSTGRES_DB": "...",
     "POSTGRES_PASSWORD_FILE": "...",
+    "HASHING_SECRET": "...",
+    "ENCRYPTING_SECRET": "...",
     "ROOT_ACCOUNT": {
       "uid": "...",
       "nickname": "...",
@@ -70,6 +72,8 @@ The source file (`source.json`) file used to generate the **environment variable
   },
   "secrets": [
     "POSTGRES_PASSWORD_FILE",
+    "HASHING_SECRET",
+    "ENCRYPTING_SECRET",
     "ROOT_ACCOUNT",
     "TELEGRAM",
     "ALTCHA_SECRET",
@@ -119,6 +123,36 @@ To generate the password, start `localkit` and generate a random password of at 
   "POSTGRES_USER": "postgres",
   "POSTGRES_DB": "postgres",
   "POSTGRES_PASSWORD_FILE": "<YOUR_PASSWORD>",
+}
+```
+
+### `HASHING_SECRET`
+
+The secret that will be used to hash data such as passwords.
+
+To generate the secret, start `localkit` and generate a string of 90 - 100 random bytes.
+
+**Sample:** `"1mohlEW4...bHynviQ"`
+
+
+```json
+{
+  "HASHING_SECRET": "<YOUR_SECRET>",
+}
+```
+
+### `ENCRYPTING_SECRET`
+
+The secret that will be used to encrypt data such as OTP secrets.
+
+To generate the secret, start `localkit` and generate a string of 90 - 100 random bytes.
+
+**Sample:** `"1mohlEW4...bHynviQ"`
+
+
+```json
+{
+  "ENCRYPTING_SECRET": "<YOUR_SECRET>",
 }
 ```
 
