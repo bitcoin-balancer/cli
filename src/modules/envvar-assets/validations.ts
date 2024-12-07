@@ -1,4 +1,5 @@
 import { normalize } from 'path';
+import { isStringValid } from 'web-utils-kit';
 import { isFile, isDirectory, getDirectoryElements } from 'fs-utils-sync';
 
 /* ************************************************************************************************
@@ -12,7 +13,7 @@ import { isFile, isDirectory, getDirectoryElements } from 'fs-utils-sync';
  */
 const isSrcPathValid = (srcPath: string): boolean | string => {
   if (
-    typeof srcPath === 'string'
+    isStringValid(srcPath)
     && /.json$/.test(srcPath)
     && isFile(srcPath)
   ) {
@@ -28,8 +29,7 @@ const isSrcPathValid = (srcPath: string): boolean | string => {
  */
 const isDestPathValid = (destPath: string): boolean | string => {
   if (
-    typeof destPath === 'string'
-    && destPath.length
+    isStringValid(destPath, 1)
     && isDirectory(destPath)
   ) {
     const { files, directories } = getDirectoryElements(destPath);
@@ -48,8 +48,7 @@ const isDestPathValid = (destPath: string): boolean | string => {
  */
 const isSrcPathValidForDeployment = (srcPath: string): boolean | string => {
   if (
-    typeof srcPath === 'string'
-    && srcPath.length
+    isStringValid(srcPath, 1)
     && isDirectory(srcPath)
     && isFile(normalize(`${srcPath}/.env`))
     && isDirectory(normalize(`${srcPath}/secrets`))

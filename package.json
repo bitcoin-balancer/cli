@@ -2,7 +2,7 @@
   "name": "cli",
   "description": "The CLI is a robust command-line interface designed to streamline the management of Balancer's infrastructure and internal operations.",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -41,18 +41,19 @@
   },
   "homepage": "https://github.com/bitcoin-balancer/cli#readme",
   "devDependencies": {
-    "@types/node": "20.16.9",
+    "@types/node": "20.17.9",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
     "eslint-config-airbnb-typescript": "18.0.0",
-    "ts-lib-builder": "1.0.3",
-    "typescript": "5.6.2",
+    "ts-lib-builder": "1.0.5",
+    "typescript": "5.7.2",
     "vitest": "1.6.0"
   },
   "dependencies": {
     "@inquirer/prompts": "5.5.0",
-    "argv-utils": "1.0.2",
-    "fs-utils-sync": "1.0.2",
+    "argv-utils": "1.0.3",
+    "fs-utils-sync": "1.0.3",
+    "web-utils-kit": "1.0.3",
     "zod": "3.23.8"
   }
 }
