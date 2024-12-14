@@ -235,6 +235,7 @@ network:
   ethernets:
     enp0s25: # the adapter shown in the first step
       optional: true
+      dhcp4: no
       addresses:
         - 172.16.20.254/24 # the ip you wish to set
       nameservers:
