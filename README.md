@@ -556,7 +556,7 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 
 <br/><br/><br/>
 
-## Run the CLI's Tests
+## Tests
 
 ```bash
 # run the integration tests
