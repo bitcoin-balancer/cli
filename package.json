@@ -1,6 +1,6 @@
 {
   "name": "cli",
-  "description": "The CLI is a robust command-line interface designed to streamline the development/management of Balancer's infrastructure and internal operations.",
+  "description": "The cli is a robust command-line interface designed to streamline the development and management of Balancer’s infrastructure and internal operations.",
   "private": false,
   "version": "1.0.4",
   "type": "module",
@@ -24,15 +24,14 @@
   "keywords": [
     "bitcoin",
     "trading",
-    "bitcoin-trading",
+    "dollar-cost-averaging",
+    "dca",
     "strategy",
     "trading-strategy",
-    "bitcoin-trading-strategy",
-    "spot",
-    "spot-market",
-    "bitcoin-spot-market",
-    "automated",
-    "self-hosted"
+    "value-averaging",
+    "open-source",
+    "profit",
+    "investment"
   ],
   "author": "Jesus Graterol",
   "license": "Apache-2.0",

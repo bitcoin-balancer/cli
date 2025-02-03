@@ -1,16 +1,16 @@
-# Balancer CLI
+# `cli`
 
-The CLI is a robust command-line interface designed to streamline the management of Balancer's infrastructure and internal operations.  It empowers you to:
+The `cli` is a robust command-line interface designed to streamline the development and management of Balancer’s infrastructure and internal operations. It enables you to:
 
-* **Automate Infrastructure Tasks:** effortlessly manage the project's infrastructure, including provisioning, scaling, and monitoring
-* **Execute Development Actions:**  run tests, deploy updates, and manage code dependencies with ease
-* **Database Administration:**  back up, restore, and maintain your database efficiently
-* **Secure Remote Access:** interact with the production server through secure SSH connections
+* **Automate infrastructure tasks** – Effortlessly handle provisioning, scaling, and monitoring
+* **Execute development actions** – Run tests, deploy updates, and manage code dependencies with ease
+* **Administer Databases** – Back up, restore, and maintain your database efficiently
+* **Secure Remote Access** – Interact with production servers via secure SSH connections.
 * **And more!**
 
-With its intuitive syntax and comprehensive functionality, the Balancer CLI simplifies complex tasks, saves valuable time, and ensures consistent project management practices.
+With its intuitive syntax and comprehensive functionality, the `cli` simplifies complex workflows, enhances efficiency, and ensures consistent project management.
 
-**Note:** If you're not actively developing Balancer or require only basic infrastructure functionality, it's recommended to use the [`cli-lite`](https://github.com/bitcoin-balancer/cli-lite) instead. 
+**Note:** If you’re not actively developing Balancer or only need basic infrastructure management, consider using [`cli-lite`](https://github.com/bitcoin-balancer/cli-lite) for a more streamlined experience.
 
 
 
