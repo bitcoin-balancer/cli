@@ -5,7 +5,7 @@ The `cli` is a robust command-line interface designed to streamline the developm
 * **Automate infrastructure tasks** – Effortlessly handle provisioning, scaling, and monitoring
 * **Execute development actions** – Run tests, deploy updates, and manage code dependencies with ease
 * **Administer databases** – Back up, restore, and maintain your database efficiently
-* **Secure remote access** – Interact with production servers via secure SSH connections.
+* **Secure remote access** – Interact with production servers via secure SSH connections
 * **And more!**
 
 With its intuitive syntax and comprehensive functionality, the `cli` simplifies complex workflows, enhances efficiency, and ensures consistent project management.
