@@ -1,6 +1,6 @@
 {
   "name": "cli",
-  "description": "The CLI is a robust command-line interface designed to streamline the management of Balancer's infrastructure and internal operations.",
+  "description": "The CLI is a robust command-line interface designed to streamline the development/management of Balancer's infrastructure and internal operations.",
   "private": false,
   "version": "1.0.4",
   "type": "module",

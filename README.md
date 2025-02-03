@@ -10,6 +10,8 @@ The CLI is a robust command-line interface designed to streamline the management
 
 With its intuitive syntax and comprehensive functionality, the Balancer CLI simplifies complex tasks, saves valuable time, and ensures consistent project management practices.
 
+**Note:** If you're not actively developing Balancer or require only basic infrastructure functionality, it's recommended to use the [`cli-lite`](https://github.com/bitcoin-balancer/cli-lite) instead. 
+
 
 
 
@@ -58,11 +60,8 @@ With its intuitive syntax and comprehensive functionality, the Balancer CLI simp
 ## Guides
 
 - [Remote Host Configuration](./docs/remote-host/index.md)
-
 - [Environment Variables](./docs/environment-variables/index.md)
-
 - [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
-
 - [Telegram Integration (Optional)](./docs/telegram/index.md)
 
 
