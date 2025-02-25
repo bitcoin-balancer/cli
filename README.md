@@ -32,7 +32,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 ### Hardware (Remote Host)
 
 - 1 CPU
-- 512 GB Memory
+- 512 MB Memory
 - 10 GB Storage
 
 
