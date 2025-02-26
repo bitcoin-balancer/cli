@@ -31,9 +31,9 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 
 ### Hardware (Remote Host)
 
-- 1 CPU
-- 512 MB Memory
-- 10 GB Storage
+- 1 Shared CPU
+- 1 GB Memory
+- 25 GB Storage (Regular SSD)
 
 
 
