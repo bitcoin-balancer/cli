@@ -178,19 +178,19 @@ docker compose version
 Once `nvm`'s installation is complete, install the version required by Balancer (Node.js `^22.3.0` & npm `^10.8.1`):
 ```bash
 # install the specific version
-nvm install 22.3.0
+nvm install 22.11.0
 
 # activate it
-nvm use 22.3.0
+nvm use 22.11.0
 ```
 
 Finally, verify the installation was successful:
 ```bash
 node --version
-# v22.3.0
+# v22.11.0
 
 npm --version
-# 10.8.1
+# 10.9.0
 ```
 
 ### Troubleshooting
