@@ -61,7 +61,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 
 - [Remote Host Configuration](./docs/remote-host/index.md)
 - [Environment Variables](./docs/environment-variables/index.md)
-- [Cloudflare Tunnel Integration (Optional)](./docs/cloudflare-tunnel/index.md)
+- [Cloudflare Tunnel Integration (Production)](./docs/cloudflare-tunnel/index.md)
 - [Telegram Integration (Optional)](./docs/telegram/index.md)
 
 

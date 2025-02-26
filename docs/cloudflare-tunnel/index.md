@@ -1,6 +1,6 @@
 [< Back](../../README.md#guides)
 
-# Cloudflare Tunnel Integration (Optional)
+# Cloudflare Tunnel Integration (Production)
 
 In order to be able to server Balancer through the Cloudflare Tunnel, you need a domain and must have access to its DNS Management.
 
