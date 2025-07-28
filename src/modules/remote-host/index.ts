@@ -50,10 +50,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
   // the remote host file system's instance
   const __fs = remoteHostFileSystemFactory(__cli, __address, __utils);
 
-
-
-
-
   /* **********************************************************************************************
    *                                       COMMAND EXECUTION                                      *
    ********************************************************************************************** */
@@ -64,9 +60,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param mode?
    * @returns Promise<string | undefined>
    */
-  const __ssh = (args: string[], mode: IExecutionMode = 'inherit'): Promise<string | undefined> => (
-    execute('ssh', __utils.args(args), mode)
-  );
+  const __ssh = (args: string[], mode: IExecutionMode = 'inherit'): Promise<string | undefined> =>
+    execute('ssh', __utils.args(args), mode);
 
   /**
    * Executes a CLI command via SSH on the remote host.
@@ -74,10 +69,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param mode?
    * @returns Promise<string | undefined>
    */
-  const __sshCLI = (args: string[], mode?: IExecutionMode): Promise<string | undefined> => __ssh(
-    [__address, 'cd', __fs.remoteCLIPath(), '&&', ...args],
-    mode,
-  );
+  const __sshCLI = (args: string[], mode?: IExecutionMode): Promise<string | undefined> =>
+    __ssh([__address, 'cd', __fs.remoteCLIPath(), '&&', ...args], mode);
 
   /**
    * Executes a node or npm command in the CLI root directory.
@@ -90,9 +83,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param command
    * @returns Promise<string | undefined>
    */
-  const __node = (command: string): Promise<string | undefined> => __sshCLI(
-    [`bash -i -c "${command}"`],
-  );
+  const __node = (command: string): Promise<string | undefined> =>
+    __sshCLI([`bash -i -c "${command}"`]);
 
   /**
    * Executes a script using Node.js's binary.
@@ -100,13 +92,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @param flags?
    * @returns Promise<string | undefined>
    */
-  const __nodeScript = (name: INodeScriptName, flags?: string): Promise<string | undefined> => (
-    __node(`node ${__fs.remoteScriptPath(name)}${typeof flags === 'string' ? ` ${flags}` : ''}`)
-  );
-
-
-
-
+  const __nodeScript = (name: INodeScriptName, flags?: string): Promise<string | undefined> =>
+    __node(`node ${__fs.remoteScriptPath(name)}${typeof flags === 'string' ? ` ${flags}` : ''}`);
 
   /* **********************************************************************************************
    *                                       SCRIPT EXECUTION                                       *
@@ -124,10 +111,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     return __nodeScript('compose-file');
   };
 
-
-
-
-
   /* **********************************************************************************************
    *                                    DOCKER COMPOSE ACTIONS                                    *
    ********************************************************************************************** */
@@ -136,17 +119,15 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Removes all unused containers, networks and images (both dangling and unused).
    * @returns Promise<string | undefined>
    */
-  const prune = (): Promise<string | undefined> => (
-    __ssh([__address, 'docker', 'system', 'prune', '--all', '--force'])
-  );
+  const prune = (): Promise<string | undefined> =>
+    __ssh([__address, 'docker', 'system', 'prune', '--all', '--force']);
 
   /**
    * Restarts Docker's Systemd service.
    * @returns Promise<string | undefined>
    */
-  const restartDockerService = (): Promise<string | undefined> => (
-    __ssh([__address, 'systemctl', 'restart', 'docker'])
-  );
+  const restartDockerService = (): Promise<string | undefined> =>
+    __ssh([__address, 'systemctl', 'restart', 'docker']);
 
   /**
    * Pulls the latest images and starts the containers. If the variation is provided, it starts the
@@ -160,7 +141,13 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // execute a pull to make sure it's running the latest images
     const pullPayload = await __sshCLI([
-      'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
+      'docker',
+      'compose',
+      'up',
+      '--pull',
+      'always',
+      '--no-build',
+      '--detach',
     ]);
 
     // return the payloads
@@ -185,7 +172,13 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // execute a pull to make sure it's running the latest images
     const pullPayload = await __sshCLI([
-      'docker', 'compose', 'up', '--pull', 'always', '--no-build', '--detach',
+      'docker',
+      'compose',
+      'up',
+      '--pull',
+      'always',
+      '--no-build',
+      '--detach',
     ]);
 
     // return the payloads
@@ -217,10 +210,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     return __sshCLI(['docker', 'compose', 'logs', '-f']);
   };
 
-
-
-
-
   /* **********************************************************************************************
    *                                 DATABASE MANAGEMENT ACTIONS                                  *
    ********************************************************************************************** */
@@ -229,9 +218,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Initializes a psql session in the postgres container.
    * @returns Promise<string | undefined>
    */
-  const psql = (): Promise<string | undefined> => __sshCLI([
-    'docker', 'compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres',
-  ]);
+  const psql = (): Promise<string | undefined> =>
+    __sshCLI(['docker', 'compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres']);
 
   /**
    * Generates a database backup file, pulls it to the local host and performs a clean up once
@@ -248,7 +236,16 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
 
     // generate the backup file
     const backupPayload = await __sshCLI([
-      'docker', 'compose', 'exec', 'postgres', 'pg_dump', '-U', 'postgres', '-f', relativePath, '-Fc',
+      'docker',
+      'compose',
+      'exec',
+      'postgres',
+      'pg_dump',
+      '-U',
+      'postgres',
+      '-f',
+      relativePath,
+      '-Fc',
     ]);
 
     // calculate the absolute path for the volume and the backup file
@@ -285,8 +282,18 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // restore the database
     const relativePath = `/var/lib/pgdata-management/${backupFileName}`;
     const restorePayload = await __sshCLI([
-      'docker', 'compose', 'exec', 'postgres', 'pg_restore', '--clean', '--if-exists',
-      '-U', 'postgres', '-d', 'postgres', relativePath,
+      'docker',
+      'compose',
+      'exec',
+      'postgres',
+      'pg_restore',
+      '--clean',
+      '--if-exists',
+      '-U',
+      'postgres',
+      '-d',
+      'postgres',
+      relativePath,
     ]);
 
     // clean the pgdata-management volume
@@ -295,10 +302,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // finally, return the merge payloads
     return mergePayloads([pushPayload, restorePayload, cleanupPayload]);
   };
-
-
-
-
 
   /* **********************************************************************************************
    *                                    CLI MANAGEMENT ACTIONS                                    *
@@ -313,10 +316,11 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     const rootDirPayload = await __fs.makeDirectory(__fs.remoteCLIPath());
 
     // deploy the source code
-    const deploymentPayloads = await Promise.all(__sourceCode.map((elementPath) => __fs.deploy(
-      __fs.localCLIPath(elementPath),
-      __fs.remoteCLIPath(elementPath),
-    )));
+    const deploymentPayloads = await Promise.all(
+      __sourceCode.map((elementPath) =>
+        __fs.deploy(__fs.localCLIPath(elementPath), __fs.remoteCLIPath(elementPath)),
+      ),
+    );
 
     // install the dependencies
     const dependenciesPayload = await __node('npm ci --omit=dev');
@@ -324,10 +328,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // join all the payloads and return them
     return mergePayloads([rootDirPayload, ...deploymentPayloads, dependenciesPayload]);
   };
-
-
-
-
 
   /* **********************************************************************************************
    *                             ENVIRONMENT VARIABLE ASSETS ACTIONS                              *
@@ -349,9 +349,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     // finally, return the combined payloads
     return mergePayloads(assetsDeploymentPayload);
   };
-
-
-
 
   /* **********************************************************************************************
    *                                         HOST ACTIONS                                         *
@@ -403,13 +400,8 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * Copies the SSH Public Key specified in the config file into the remote server.
    * @returns Promise<string | undefined>
    */
-  const copySSHPublicKey = (): Promise<string | undefined> => (
-    execute('ssh-copy-id', __utils.args([__address]))
-  );
-
-
-
-
+  const copySSHPublicKey = (): Promise<string | undefined> =>
+    execute('ssh-copy-id', __utils.args([__address]));
 
   /* **********************************************************************************************
    *                                         HEALTH CHECK                                         *
@@ -420,13 +412,9 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
    * @throws
    * - if the remote host is not running or is unreachable
    */
-  if (!await __utils.isOnline()) {
+  if (!(await __utils.isOnline())) {
     throw new Error('The remote host is not running or has no access to the Internet.');
   }
-
-
-
-
 
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
@@ -463,10 +451,6 @@ const remoteHostFactory = async (): Promise<IRemoteHost> => {
     copySSHPublicKey,
   });
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

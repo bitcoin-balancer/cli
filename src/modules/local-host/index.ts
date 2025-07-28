@@ -18,10 +18,6 @@ const localHostFactory = (): ILocalHost => {
 
   // ...
 
-
-
-
-
   /* **********************************************************************************************
    *                                    DOCKER COMPOSE ACTIONS                                    *
    ********************************************************************************************** */
@@ -30,9 +26,8 @@ const localHostFactory = (): ILocalHost => {
    * Removes all unused containers, networks and images (both dangling and unused).
    * @returns Promise<string | undefined>
    */
-  const prune = (): Promise<string | undefined> => (
-    execute('docker', ['system', 'prune', '--all', '--force'])
-  );
+  const prune = (): Promise<string | undefined> =>
+    execute('docker', ['system', 'prune', '--all', '--force']);
 
   /**
    * Builds, (re)creates, starts, and attaches to containers for a service based on a chosen mode.
@@ -110,13 +105,8 @@ const localHostFactory = (): ILocalHost => {
    * @param variation
    * @returns Promise<string | undefined>
    */
-  const apiTest = (variation: string): Promise<string | undefined> => (
-    execute('docker', ['compose', 'exec', 'api', 'npm', 'run', `test:${variation}`])
-  );
-
-
-
-
+  const apiTest = (variation: string): Promise<string | undefined> =>
+    execute('docker', ['compose', 'exec', 'api', 'npm', 'run', `test:${variation}`]);
 
   /* **********************************************************************************************
    *                                 DATABASE MANAGEMENT ACTIONS                                  *
@@ -126,12 +116,8 @@ const localHostFactory = (): ILocalHost => {
    * Initializes a psql session in the postgres container.
    * @returns Promise<string | undefined>
    */
-  const psql = (): Promise<string | undefined> => (
-    execute('docker', ['compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres'])
-  );
-
-
-
+  const psql = (): Promise<string | undefined> =>
+    execute('docker', ['compose', 'exec', '-it', 'postgres', 'psql', '-U', 'postgres']);
 
   /* **********************************************************************************************
    *                                    CLI MANAGEMENT ACTIONS                                    *
@@ -142,10 +128,6 @@ const localHostFactory = (): ILocalHost => {
    * @returns Promise<string | undefined>
    */
   const buildCLI = (): Promise<string | undefined> => execute('npm', ['run', 'build']);
-
-
-
-
 
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
@@ -171,10 +153,6 @@ const localHostFactory = (): ILocalHost => {
     buildCLI,
   });
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

@@ -1,5 +1,3 @@
-
-
 /* ************************************************************************************************
  *                                             TYPES                                              *
  ************************************************************************************************ */
@@ -17,15 +15,10 @@ type IExecutionMode = 'overlapped' | 'inherit' | 'pipe' | 'ignore';
  */
 type IExectutionOptions = {
   // the standard input-output header that will be used in the execution
-  stdio: IExecutionMode
+  stdio: IExecutionMode;
 };
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export type {
-  IExecutionMode,
-  IExectutionOptions,
-};
+export type { IExecutionMode, IExectutionOptions };

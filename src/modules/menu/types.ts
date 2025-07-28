@@ -28,17 +28,10 @@ type ICategoryMenuItem = {
   description: string;
 
   // the list of actions in the category
-  value: (IActionMenuItem | Separator)[]
+  value: (IActionMenuItem | Separator)[];
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  type IActionMenuItem,
-  type ICategoryMenuItem,
-};
+export { type IActionMenuItem, type ICategoryMenuItem };

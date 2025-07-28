@@ -1,5 +1,3 @@
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -21,27 +19,27 @@ const canGenerateComposeFile = (
 ): void => {
   // ensure both modes aren't enabled at the same time
   if (testMode && restoreMode) {
-    throw new Error('The compose.yaml file cannot be generated because TEST_MODE and RESTORE_MODE cannot be enabled at the same time.');
+    throw new Error(
+      'The compose.yaml file cannot be generated because TEST_MODE and RESTORE_MODE cannot be enabled at the same time.',
+    );
   }
 
   // ensure testMode is not enabled during a production execution
   if (isProduction && testMode) {
-    throw new Error('The compose.yaml file cannot be generated because TEST_MODE cannot be enabled when running in production.');
+    throw new Error(
+      'The compose.yaml file cannot be generated because TEST_MODE cannot be enabled when running in production.',
+    );
   }
 
   // ensure restoreMode only runs in production
   if (!isProduction && restoreMode) {
-    throw new Error('The compose.yaml file cannot be generated because RESTORE_MODE can only be enabled when running in production.');
+    throw new Error(
+      'The compose.yaml file cannot be generated because RESTORE_MODE can only be enabled when running in production.',
+    );
   }
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  canGenerateComposeFile,
-};
+export { canGenerateComposeFile };

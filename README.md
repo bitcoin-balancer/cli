@@ -77,6 +77,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>connect</code></summary>
   <br/>
+  
   Establishes a SSH Connection with the remote host.
 
   ```bash
@@ -97,6 +98,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>reboot</code></summary>
   <br/>
+
   Reboots the remote host after stopping containers and removing containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -107,6 +109,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>shutdown</code></summary>
   <br/>
+
   Shuts down the remote host after stopping containers and removing containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -117,6 +120,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>ssh-copy-id</code></summary>
   <br/>
+
   Copies the SSH Public Key specified in the config file into the remote server.
 
   ```bash
@@ -136,6 +140,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>up</code></summary>
   <br/>
+
   Builds, (re)creates, starts, and attaches to containers for a service. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
 
   <br/>
@@ -162,6 +167,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>build-up</code></summary>
   <br/>
+
   Builds all the images and starts the containers. An optional variation can be provided in order to generate the custom <code>compose.yaml</code> file and start the containers in the chosen mode.
 
   <br/>
@@ -202,6 +208,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>prune-build-push</code></summary>
   <br/>
+
   Removes all unused containers, networks and images (both dangling and unused).
 
   ```bash
@@ -220,6 +227,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>down</code></summary>
   <br/>
+
   Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -231,6 +239,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>down-build-up</code></summary>
   <br/>
+
   Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -255,6 +264,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>restart</code></summary>
   <br/>
+
   Restarts all stopped and running services.
 
   ```bash
@@ -266,6 +276,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>logs</code></summary>
   <br/>
+
   Displays log output from all services. If a variation is provided, it narrows down the logs to a specific service.
 
   ```bash
@@ -292,6 +303,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>prune</code></summary>
   <br/>
+
   Removes all unused containers, networks and images (both dangling and unused).
 
   ```bash
@@ -312,6 +324,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>up:test-mode</code></summary>
   <br/>
+
   Builds, (re)creates, starts, and attaches to containers for a service with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
   
   ```bash
@@ -324,6 +337,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>build-up:test-mode</code></summary>
   <br/>
+
   Builds all the images and starts the containers with <code>TEST_MODE</code> enabled (used to run unit, integration or benchmark tests locally):
 
   ```bash
@@ -336,6 +350,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>down</code></summary>
   <br/>
+
   Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -347,6 +362,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>down-build-up:test-mode</code></summary>
   <br/>
+
   Stops containers and removes containers, networks, volumes, and images created by <code>up</code>.
 
   ```bash
@@ -367,6 +383,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>api-test:$type</code></summary>
   <br/>
+
   Runs the automated tests on the api service for the chosen variation.
 
   ```bash
@@ -394,6 +411,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>build-cli</code></summary>
   <br/>
+
   Executes the script to generate a build of the CLI straight from the source code.
 
   ```bash
@@ -404,6 +422,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>build-deploy-cli</code></summary>
   <br/>
+
   Deploys the CLI from its source in the local host to the remote host.
 
   Firstly, it creates the root directory (if it doesn't already exist):
@@ -433,6 +452,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>psql</code></summary>
   <br/>
+
   Start the terminal-based front-end to PostgreSQL
 
   ```bash
@@ -444,6 +464,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>backup-db</code></summary>
   <br/>
+
   Generates a database backup file, pulls it to the local host and performs a clean up once complete.
 
   <br/>
@@ -474,6 +495,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>restore-db</code></summary>
   <br/>
+  
   Restores a chosen backup file after cleaning the current state of the database and performs a clean up once complete.
 
   <br/>
@@ -521,6 +543,7 @@ With its intuitive syntax and comprehensive functionality, the `cli` simplifies 
 <details>
   <summary><code>deploy-envvar-assets</code></summary>
   <br/>
+  
   Deploys the environment variable assets to the remote host from a custom source path.
 
   **Note:** assets are generated by the <code>generate-envvar-assets</code> action.

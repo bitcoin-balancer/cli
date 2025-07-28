@@ -9,25 +9,20 @@ import { isDirectory, isFile } from 'fs-utils-sync';
  * @param destPath
  * @returns boolean | string
  */
-const isDatabaseBackupDestPathValid = (destPath: string): boolean | string => (
-  isDirectory(destPath) ? true : `The path '${destPath}' is not a valid directory.`
-);
+const isDatabaseBackupDestPathValid = (destPath: string): boolean | string =>
+  isDirectory(destPath) ? true : `The path '${destPath}' is not a valid directory.`;
 
 /**
  * Verifies if a source path is a valid database backup file.
  * @param srcPath
  * @returns boolean | string
  */
-const isDatabaseBackupSrcPathValid = (srcPath: string): boolean | string => (
-  isFile(srcPath) && /^.+.dump$/.test(srcPath) ? true : `The path '${srcPath}' is not a valid backup file`
-);
-
-
+const isDatabaseBackupSrcPathValid = (srcPath: string): boolean | string =>
+  isFile(srcPath) && /^.+.dump$/.test(srcPath)
+    ? true
+    : `The path '${srcPath}' is not a valid backup file`;
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  isDatabaseBackupDestPathValid,
-  isDatabaseBackupSrcPathValid,
-};
+export { isDatabaseBackupDestPathValid, isDatabaseBackupSrcPathValid };

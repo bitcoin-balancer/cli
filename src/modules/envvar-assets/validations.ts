@@ -12,11 +12,7 @@ import { isFile, isDirectory, getDirectoryElements } from 'fs-utils-sync';
  * @returns boolean | string
  */
 const isSrcPathValid = (srcPath: string): boolean | string => {
-  if (
-    isStringValid(srcPath)
-    && /.json$/.test(srcPath)
-    && isFile(srcPath)
-  ) {
+  if (isStringValid(srcPath) && /.json$/.test(srcPath) && isFile(srcPath)) {
     return true;
   }
   return `The path '${srcPath}' is not a valid source file.`;
@@ -28,10 +24,7 @@ const isSrcPathValid = (srcPath: string): boolean | string => {
  * @returns boolean | string
  */
 const isDestPathValid = (destPath: string): boolean | string => {
-  if (
-    isStringValid(destPath, 1)
-    && isDirectory(destPath)
-  ) {
+  if (isStringValid(destPath, 1) && isDirectory(destPath)) {
     const { files, directories } = getDirectoryElements(destPath);
     return files.length === 0 && directories.length === 0
       ? true
@@ -48,28 +41,18 @@ const isDestPathValid = (destPath: string): boolean | string => {
  */
 const isSrcPathValidForDeployment = (srcPath: string): boolean | string => {
   if (
-    isStringValid(srcPath, 1)
-    && isDirectory(srcPath)
-    && isFile(normalize(`${srcPath}/.env`))
-    && isDirectory(normalize(`${srcPath}/secrets`))
+    isStringValid(srcPath, 1) &&
+    isDirectory(srcPath) &&
+    isFile(normalize(`${srcPath}/.env`)) &&
+    isDirectory(normalize(`${srcPath}/secrets`))
   ) {
     const { files } = getDirectoryElements(`${srcPath}/secrets`);
-    return files.length > 0
-      ? true
-      : `The secrets directory '${srcPath}/secrets' is empty.`;
+    return files.length > 0 ? true : `The secrets directory '${srcPath}/secrets' is empty.`;
   }
   return `The path '${srcPath}' is invalid. It must contain the .env file and the secrets directory.`;
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  isSrcPathValid,
-  isDestPathValid,
-  isSrcPathValidForDeployment,
-};
+export { isSrcPathValid, isDestPathValid, isSrcPathValidForDeployment };
