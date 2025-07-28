@@ -71,13 +71,7 @@ const generateComposeFile = ({
   writeTextFile('compose.yaml', _);
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  generateComposeFile,
-};
+export { generateComposeFile };

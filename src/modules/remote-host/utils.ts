@@ -2,7 +2,6 @@ import { IRemoteHostServerConfig } from '../shared/utils/types.js';
 import { execute } from '../shared/command/index.js';
 import { IRemoteHostUtils } from './types.js';
 
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -27,10 +26,6 @@ const remoteHostUtilsFactory = (
 
   // the remote host server's configuration
   const __server = server;
-
-
-
-
 
   /* **********************************************************************************************
    *                                            ACTIONS                                           *
@@ -62,10 +57,6 @@ const remoteHostUtilsFactory = (
    */
   const generateDatabaseBackupName = (): string => `${Date.now()}.dump`;
 
-
-
-
-
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
    ********************************************************************************************** */
@@ -80,13 +71,7 @@ const remoteHostUtilsFactory = (
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  remoteHostUtilsFactory,
-};
+export { remoteHostUtilsFactory };

@@ -27,9 +27,8 @@ const readPackageFile = (): IPackageFile => PackageFileSchema.parse(readJSONFile
  * @throws
  * - if the file's schema is invalid or the file doesn't exist
  */
-const readRemoteHostConfigFile = (): IRemoteHostConfig => (
-  RemoteHostConfigSchema.parse(readJSONFile('remote-host.config.json'))
-);
+const readRemoteHostConfigFile = (): IRemoteHostConfig =>
+  RemoteHostConfigSchema.parse(readJSONFile('remote-host.config.json'));
 
 /**
  * Retrieves the list of secrets located in the secrets directory.
@@ -61,10 +60,6 @@ const getEnvironmentVariableInsights = (): IEnvironmentVariableInsights => {
   };
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         ACTION HELPERS                                         *
  ************************************************************************************************ */
@@ -91,22 +86,15 @@ const decodeMenuAction = (action: string): IDecodedMenuAction => {
  */
 const mergePayloads = (payloads: (string | undefined)[]): string => {
   if (payloads.length) {
-    return <string>payloads.reduce(
-      (previous, current) => {
-        if (typeof current === 'string' && current.length) {
-          return `${previous}\n${current}`;
-        }
-        return previous;
-      },
-      '',
-    );
+    return <string>payloads.reduce((previous, current) => {
+      if (typeof current === 'string' && current.length) {
+        return `${previous}\n${current}`;
+      }
+      return previous;
+    }, '');
   }
   return '';
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

@@ -12,10 +12,6 @@ vi.mock('fs-utils-sync', () => ({
   getDirectoryElements: vi.fn(),
 }));
 
-
-
-
-
 /* ************************************************************************************************
  *                                            HELPERS                                             *
  ************************************************************************************************ */
@@ -35,10 +31,6 @@ const mockGetDirectoryElements = (files: string[]) => {
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                             TESTS                                              *
  ************************************************************************************************ */
@@ -54,10 +46,6 @@ describe('decodeMenuAction', () => {
     expect(decodeMenuAction(a)).toEqual(expected);
   });
 });
-
-
-
-
 
 describe('getEnvironmentVariableInsights', () => {
   afterEach(() => {
@@ -90,7 +78,12 @@ describe('getEnvironmentVariableInsights', () => {
 
   test('can put together the insights for a production .env file w/ cloudflared token', () => {
     mockReadTextFile('NODE_ENV=production\nTUNNEL_TOKEN=/run/secrets/TUNNEL_TOKEN');
-    mockGetDirectoryElements(['POSTGRES_PASSWORD_FILE.txt', 'ROOT_ACCOUNT.txt', 'TELEGRAM.txt', 'TUNNEL_TOKEN.txt']);
+    mockGetDirectoryElements([
+      'POSTGRES_PASSWORD_FILE.txt',
+      'ROOT_ACCOUNT.txt',
+      'TELEGRAM.txt',
+      'TUNNEL_TOKEN.txt',
+    ]);
     expect(getEnvironmentVariableInsights()).toStrictEqual({
       isProduction: true,
       hasTunnelToken: true,

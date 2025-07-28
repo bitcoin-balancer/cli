@@ -27,48 +27,46 @@ const execute = (
   command: string,
   args: string[],
   mode: IExecutionMode = 'inherit',
-): Promise<string | undefined> => new Promise((resolve, reject) => {
-  // init the options based on the mode
-  const options = __getExectutionOptions(mode);
+): Promise<string | undefined> =>
+  new Promise((resolve, reject) => {
+    // init the options based on the mode
+    const options = __getExectutionOptions(mode);
 
-  // start the process
-  const proc = spawn(command, args, options);
+    // start the process
+    const proc = spawn(command, args, options);
 
-  // init the data
-  let data = '';
+    // init the data
+    let data = '';
 
-  // subscribe to the stdout event if available
-  if (proc.stdout) {
-    proc.stdout.on('data', (stdoutData) => {
-      data += stdoutData;
-    });
-  }
-
-  // subscribe to the stderr event if available
-  if (proc.stderr) {
-    proc.stderr.on('data', (stderrData) => {
-      data += stderrData;
-    });
-  }
-
-  // subscribe to the error event
-  proc.on('error', (error) => {
-    reject(error);
-  });
-
-  // subscribe to the close event
-  proc.on('close', (code) => {
-    // if the process didn't exit with status 0 it was unsuccessful
-    if (code === 0) {
-      resolve(data.length > 0 ? data : undefined);
-    } else {
-      reject(new Error(`The ${command} process exited with the error code: ${code}`));
+    // subscribe to the stdout event if available
+    if (proc.stdout) {
+      proc.stdout.on('data', (stdoutData) => {
+        data += stdoutData;
+      });
     }
+
+    // subscribe to the stderr event if available
+    if (proc.stderr) {
+      proc.stderr.on('data', (stderrData) => {
+        data += stderrData;
+      });
+    }
+
+    // subscribe to the error event
+    proc.on('error', (error) => {
+      reject(error);
+    });
+
+    // subscribe to the close event
+    proc.on('close', (code) => {
+      // if the process didn't exit with status 0 it was unsuccessful
+      if (code === 0) {
+        resolve(data.length > 0 ? data : undefined);
+      } else {
+        reject(new Error(`The ${command} process exited with the error code: ${code}`));
+      }
+    });
   });
-});
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

@@ -27,10 +27,6 @@ const PackageFileSchema = z.object({
 });
 type IPackageFile = z.infer<typeof PackageFileSchema>;
 
-
-
-
-
 /* ************************************************************************************************
  *                                              HOST                                              *
  ************************************************************************************************ */
@@ -64,10 +60,6 @@ const RemoteHostConfigSchema = z.object({
 });
 type IRemoteHostConfig = z.infer<typeof RemoteHostConfigSchema>;
 
-
-
-
-
 /* ************************************************************************************************
  *                                      ENVIRONMENT VARIABLES                                     *
  ************************************************************************************************ */
@@ -87,10 +79,6 @@ type IEnvironmentVariableInsights = {
   secrets: string[];
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                              MENU                                              *
  ************************************************************************************************ */
@@ -102,15 +90,11 @@ type IEnvironmentVariableInsights = {
  */
 type IDecodedMenuAction = {
   // the id of the action that will be executed
-  id: string,
+  id: string;
 
   // optional variation of an action
-  variation?: string,
+  variation?: string;
 };
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

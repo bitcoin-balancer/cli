@@ -54,16 +54,19 @@ const MENU = [
       new Separator(),
       {
         value: 'prune-build-push',
-        description: 'Removes all unused containers, networks and images (both dangling and unused). Then, it builds all the images and pushes them to the registry (Docker Hub)',
+        description:
+          'Removes all unused containers, networks and images (both dangling and unused). Then, it builds all the images and pushes them to the registry (Docker Hub)',
       },
       new Separator(),
       {
         value: 'down',
-        description: 'Stops containers and removes containers, networks, volumes, and images created by up',
+        description:
+          'Stops containers and removes containers, networks, volumes, and images created by up',
       },
       {
         value: 'down-build-up',
-        description: 'Stops containers and removes containers, networks, volumes, and images created by up. Afterwards, it builds all the images and starts the containers',
+        description:
+          'Stops containers and removes containers, networks, volumes, and images created by up. Afterwards, it builds all the images and starts the containers',
       },
       {
         value: 'restart',
@@ -113,11 +116,13 @@ const MENU = [
       new Separator(),
       {
         value: 'down',
-        description: 'Stops containers and removes containers, networks, volumes, and images created by up',
+        description:
+          'Stops containers and removes containers, networks, volumes, and images created by up',
       },
       {
         value: 'down-build-up:test-mode',
-        description: 'Stops containers and removes containers, networks, volumes, and images created by up. Afterwards, it builds all the images and starts the containers in TEST_MODE',
+        description:
+          'Stops containers and removes containers, networks, volumes, and images created by up. Afterwards, it builds all the images and starts the containers in TEST_MODE',
       },
       new Separator(),
       {
@@ -144,7 +149,7 @@ const MENU = [
       },
       {
         value: 'build-deploy-cli',
-        description: 'Builds and deploys the CLI\'s source code to the remote host',
+        description: "Builds and deploys the CLI's source code to the remote host",
       },
     ],
   },
@@ -182,9 +187,6 @@ const MENU = [
   },
 ];
 
-
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
@@ -211,13 +213,7 @@ const displayMenu = async (): Promise<string> => {
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  displayMenu,
-};
+export { displayMenu };

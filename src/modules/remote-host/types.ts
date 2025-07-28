@@ -1,5 +1,3 @@
-
-
 /* ************************************************************************************************
  *                                             TYPES                                              *
  ************************************************************************************************ */
@@ -87,15 +85,7 @@ type IRemoteHost = {
   copySSHPublicKey: () => Promise<string | undefined>;
 };
 
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export type {
-  INodeScriptName,
-  IVolumeName,
-  IRemoteHostUtils,
-  IRemoteHostFileSystem,
-  IRemoteHost,
-};
+export type { INodeScriptName, IVolumeName, IRemoteHostUtils, IRemoteHostFileSystem, IRemoteHost };

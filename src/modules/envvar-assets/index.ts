@@ -18,7 +18,7 @@ const __readSourceFile = (src: string): ISourceFile => SourceFileSchema.parse(re
  * @param source
  * @returns { env: string, secrets: IKeyValObj[] }
  */
-const __processSourceFile = (source: ISourceFile): { env: string, secrets: IKeyValObj[] } => {
+const __processSourceFile = (source: ISourceFile): { env: string; secrets: IKeyValObj[] } => {
   // init values
   let env = '';
   const secrets: IKeyValObj[] = [];
@@ -41,14 +41,9 @@ const __processSourceFile = (source: ISourceFile): { env: string, secrets: IKeyV
   return { env, secrets };
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
  ************************************************************************************************ */
-
 
 /**
  * Generates the environment variable assets based on a source file.
@@ -71,9 +66,6 @@ const generate = (srcPath: string, destPath: string): void => {
   // copy the source file
   copyFile(srcPath, `${destPath}/source.json`);
 };
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *

@@ -1,5 +1,3 @@
-
-
 /* ************************************************************************************************
  *                                             TYPES                                              *
  ************************************************************************************************ */
@@ -18,7 +16,7 @@ type ILocalHost = {
   buildUp: (variation: string | undefined) => Promise<string | undefined>;
   buildAndPushImages: () => Promise<string | undefined>;
   down: () => Promise<string | undefined>;
-  restart:() => Promise<string | undefined>;
+  restart: () => Promise<string | undefined>;
   logs: (variation: string | undefined) => Promise<string | undefined>;
   apiTest: (variation: string) => Promise<string | undefined>;
 
@@ -29,13 +27,7 @@ type ILocalHost = {
   buildCLI: () => Promise<string | undefined>;
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export type {
-  ILocalHost,
-};
+export type { ILocalHost };

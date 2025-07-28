@@ -1,11 +1,6 @@
 import { isFile } from 'fs-utils-sync';
 import { execute } from '../shared/command/index.js';
-import {
-  INodeScriptName,
-  IVolumeName,
-  IRemoteHostFileSystem,
-  IRemoteHostUtils,
-} from './types.js';
+import { INodeScriptName, IVolumeName, IRemoteHostFileSystem, IRemoteHostUtils } from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -37,10 +32,6 @@ const remoteHostFileSystemFactory = (
   // the remote host utilities' instance
   const __utils = utils;
 
-
-
-
-
   /* **********************************************************************************************
    *                                            HELPERS                                           *
    ********************************************************************************************** */
@@ -51,9 +42,8 @@ const remoteHostFileSystemFactory = (
    * @param elementPath?
    * @returns string
    */
-  const localCLIPath = (elementPath?: string): string => (
-    `${__cli}${typeof elementPath === 'string' ? `/${elementPath}` : ''}`
-  );
+  const localCLIPath = (elementPath?: string): string =>
+    `${__cli}${typeof elementPath === 'string' ? `/${elementPath}` : ''}`;
 
   /**
    * Builds the absolute path for a CLI's element in the remote host. If the element's path is not
@@ -61,9 +51,8 @@ const remoteHostFileSystemFactory = (
    * @param elementPath?
    * @returns string
    */
-  const remoteCLIPath = (elementPath?: string): string => (
-    `cli${typeof elementPath === 'string' ? `/${elementPath}` : ''}`
-  );
+  const remoteCLIPath = (elementPath?: string): string =>
+    `cli${typeof elementPath === 'string' ? `/${elementPath}` : ''}`;
 
   /**
    * Builds the absolute path for a CLI script in the remote.
@@ -71,7 +60,6 @@ const remoteHostFileSystemFactory = (
    * @returns string
    */
   const remoteScriptPath = (name: INodeScriptName): string => `dist/actions/scripts/${name}.js`;
-
 
   /**
    * Retrieves the remote absolute path for a volume based on a name.
@@ -84,7 +72,15 @@ const remoteHostFileSystemFactory = (
     // retrieve the mount path
     const volPath = await execute(
       'ssh',
-      __utils.args([__address, 'docker', 'volume', 'inspect', '--format', "'{{ .Mountpoint }}'", name]),
+      __utils.args([
+        __address,
+        'docker',
+        'volume',
+        'inspect',
+        '--format',
+        "'{{ .Mountpoint }}'",
+        name,
+      ]),
       'pipe',
     );
     if (typeof volPath !== 'string' || !volPath.length) {
@@ -92,10 +88,6 @@ const remoteHostFileSystemFactory = (
     }
     return volPath.replace(/(\r\n|\n|\r)/gm, '');
   };
-
-
-
-
 
   /* **********************************************************************************************
    *                                            ACTIONS                                           *
@@ -107,9 +99,8 @@ const remoteHostFileSystemFactory = (
    * @param destPath
    * @returns Promise<string | undefined>
    */
-  const pushFile = (srcPath: string, destPath: string): Promise<string | undefined> => (
-    execute('scp', __utils.args([srcPath, `${__address}:${destPath}`]))
-  );
+  const pushFile = (srcPath: string, destPath: string): Promise<string | undefined> =>
+    execute('scp', __utils.args([srcPath, `${__address}:${destPath}`]));
 
   /**
    * Pulls a file from the remote host to the local host.
@@ -117,27 +108,24 @@ const remoteHostFileSystemFactory = (
    * @param destPath
    * @returns Promise<string | undefined>
    */
-  const pullFile = (srcPath: string, destPath: string): Promise<string | undefined> => (
-    execute('scp', __utils.args([`${__address}:${srcPath}`, destPath]))
-  );
+  const pullFile = (srcPath: string, destPath: string): Promise<string | undefined> =>
+    execute('scp', __utils.args([`${__address}:${srcPath}`, destPath]));
 
   /**
    * Removes a file from the remote host.
    * @param filePath
    * @returns Promise<string | undefined>
    */
-  const removeFile = (filePath: string): Promise<string | undefined> => (
-    execute('ssh', __utils.args([__address, 'rm', '-f', filePath]))
-  );
+  const removeFile = (filePath: string): Promise<string | undefined> =>
+    execute('ssh', __utils.args([__address, 'rm', '-f', filePath]));
 
   /**
    * Creates a directory in the remote host.
    * @param dirPath
    * @returns Promise<string | undefined>
    */
-  const makeDirectory = (dirPath: string): Promise<string | undefined> => (
-    execute('ssh', __utils.args([__address, 'mkdir', '-p', dirPath]))
-  );
+  const makeDirectory = (dirPath: string): Promise<string | undefined> =>
+    execute('ssh', __utils.args([__address, 'mkdir', '-p', dirPath]));
 
   /**
    * Pushes a directory and its contents from the local host to the remote host.
@@ -145,22 +133,16 @@ const remoteHostFileSystemFactory = (
    * @param destPath
    * @returns Promise<string | undefined>
    */
-  const pushDirectory = (srcPath: string, destPath: string): Promise<string | undefined> => (
-    execute('scp', __utils.args(['-r', srcPath, `${__address}:${destPath}`]))
-  );
+  const pushDirectory = (srcPath: string, destPath: string): Promise<string | undefined> =>
+    execute('scp', __utils.args(['-r', srcPath, `${__address}:${destPath}`]));
 
   /**
    * Removes a directory from the remote host.
    * @param dirPath
    * @returns Promise<string | undefined>
    */
-  const removeDirectory = (dirPath: string): Promise<string | undefined> => (
-    execute('ssh', __utils.args([__address, 'rm', '-r', '-f', dirPath]))
-  );
-
-
-
-
+  const removeDirectory = (dirPath: string): Promise<string | undefined> =>
+    execute('ssh', __utils.args([__address, 'rm', '-r', '-f', dirPath]));
 
   /* **********************************************************************************************
    *                                      DEPLOYMENT HELPERS                                      *
@@ -205,15 +187,10 @@ const remoteHostFileSystemFactory = (
    * @param remotePath
    * @returns Promise<string | undefined>
    */
-  const deploy = (localPath: string, remotePath: string): Promise<string | undefined> => (
+  const deploy = (localPath: string, remotePath: string): Promise<string | undefined> =>
     isFile(localPath)
       ? __deployFile(localPath, remotePath)
-      : __deployDirectory(localPath, remotePath)
-  );
-
-
-
-
+      : __deployDirectory(localPath, remotePath);
 
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
@@ -241,13 +218,7 @@ const remoteHostFileSystemFactory = (
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  remoteHostFileSystemFactory,
-};
+export { remoteHostFileSystemFactory };
