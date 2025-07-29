@@ -2,7 +2,7 @@
   "name": "cli",
   "description": "The cli is a robust command-line interface designed to streamline the development and management of Balancer’s infrastructure and internal operations.",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
