@@ -16,7 +16,7 @@ Once the bot is created, save the **`token`** and proceed to create a new Telegr
 The final step is to retrieve the Chat's ID as it is one of the requirements for the bot to be able to send messages. For some reason, there isn't a straight forward way of doing this, so these are the current steps:
 
 1) Make sure you have added the bot as a member in the group
-2) Send a few messages to the group from your account
+2) Send a few messages to the group from your account and one executing this command `/start@ExampleBot`
 3) Send a `GET` Request to this URL: `https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates`
 
 Example: `https://api.telegram.org/bot123456789:jbd78sadvbdy63d37gda37bd8/getUpdates`
