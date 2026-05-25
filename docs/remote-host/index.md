@@ -238,10 +238,10 @@ network:
       addresses:
         - 172.16.20.254/24 # the ip you wish to set
       nameservers:
-        addresses: [8.8.8.8,8.8.8.4] # Google's DNS Servers
+        addresses: [8.8.8.8,8.8.4.4] # Google's DNS Servers
       routes:
         - to: default
-          via: 8.8.8.8
+          via: 172.16.20.1
 ```
 
 4. Finally, apply the changes:
